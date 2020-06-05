@@ -1,44 +1,62 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# client
 
-## Available Scripts
+## Prerequisites
 
-In the project directory, you can run:
+You need Node.js for `npm` package manager installed on your machine for this project.
 
-### `npm start`
+NPM (Node Package Manager) is installed when you install Node.js
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- [Install Node.js on your machine](https://nodejs.org/en/download/)
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Setup the project
 
-### `npm test`
+The following command allow you to install all the dependencies needed in order to run the project on your machine exactly the way it is intended to.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+npm install
+```
 
-### `npm run build`
+## Compile and run the project for **development**
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The following command allow you to compile the project and run the server to host your application with the **hot-reloads**.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+_**Hot-Reload** is a feature that allows you to see the changes in your application without needing to restart or refresh._
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+npm start
+```
 
-### `npm run eject`
+## Compiles and minifies for **production**
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+The following command allow you to compile a production build which is optimized for deployment.
+`
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
+npm run build
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Format files
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+**I highly recommend installing [ESLint](https://eslint.org/) & [Prettier](https://prettier.io/) extensions for your text editor if available so that your code can formato, lint and fix linting errors(if possible) on save itself in one go. But if you wanna format, lint and fix linting errors manually using CLI then follow the below commands.**
 
-## Learn More
+The following command allow you to make sure there are no linting issues in the project files.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```
+npm run format
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Lint files
+
+The following command allow you to make sure there are no linting issues in the project files.
+
+```
+npm run lint
+```
+
+## Fix lint error
+
+The following command allow you to make sure there are no linting issues in the project files.
+
+```
+npm run fix
+```
