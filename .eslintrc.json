@@ -2,7 +2,7 @@
   "extends": ["react-app"],
   "rules": {
     "import/extensions": [
-      "never",
+      0,
       "ignorePackages",
       {
         "js": "never",

@@ -24,7 +24,7 @@
     "eject": "react-scripts eject",
     "format": "prettier --config .prettierrc 'src/**/*.ts' 'src/**/*.tsx'  --write",
     "lint": "eslint  --ext .tsx,.ts . ",
-    "fix": "eslint  --fix --ext .tsx,.ts . "
+    "lint:fix": "eslint  --fix --ext .tsx,.ts . "
   },
   "husky": {
     "hooks": {
@@ -35,11 +35,7 @@
     "extends": "react-app"
   },
   "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
+    "production": [">0.2%", "not dead", "not op_mini all"],
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
