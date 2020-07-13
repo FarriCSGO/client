@@ -1,7 +1,7 @@
 import React from "react";
 
-const Home = (props: any) => {
-  return <h1 style={{ textAlign: "center" }}>Farri Home Page</h1>;
+const Home = () => {
+  return <h1 style={{ textAlign: "center" }}>Welcome to Farri</h1>;
 };
 
 export default Home;
