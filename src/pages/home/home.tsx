@@ -20,14 +20,14 @@ const Home = () => {
 
 const HomeContainer = styled.div`
   height: 100vh;
-  max-width: 1200px;
+  max-width: 75rem;
   margin: 0 auto;
 `;
 
 const Title = styled.h1`
   font-style: normal;
   font-weight: bold;
-  font-size: 32px;
+  font-size: 2rem;
   text-align: center;
   color: #0a0a0a;
 `;

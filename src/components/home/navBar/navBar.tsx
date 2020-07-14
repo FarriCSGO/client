@@ -60,6 +60,12 @@ const MainWrapper = styled.div`
 
 const GithubLinkWrapper = styled.div`
   display: flex;
+  height: fit-content;
+  align-self: center;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const Text = styled.p`
@@ -75,6 +81,10 @@ const SVG = styled.i`
 
 const ToggleMode = styled.i`
   align-self: center;
+
+  &:hover {
+    cursor: pointer;
+  }
 
   svg:hover {
     stroke: ${(props) => props.theme.colors.orange};
