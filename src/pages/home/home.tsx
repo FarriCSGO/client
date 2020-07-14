@@ -22,6 +22,8 @@ const HomeContainer = styled.div`
   height: 100vh;
   max-width: 75rem;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
 `;
 
 const Title = styled.h1`

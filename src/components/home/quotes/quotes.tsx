@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import Axios from "../../../utils/Axios";
 
 import LoadingAnimation from "../../ui/loadingAnimation/loadingAnimation";
+import QuotesData from "../../../data/quotesByPros.json";
 
 interface IState {
   loading: boolean;
@@ -21,14 +21,10 @@ class Quotes extends React.Component {
 
   componentDidMount = async () => {
     const randomNumber: number = Math.floor(Math.random() * 3);
+    const Quote: string = QuotesData.quotes[randomNumber].quote;
+    const Person: string = QuotesData.quotes[randomNumber].person;
 
-    Axios.get("/api/quotesByPros")
-      .then((response) => {
-        const Quote: string = response.data.quotes[randomNumber].quote;
-        const Person: string = response.data.quotes[randomNumber].person;
-        this.setState({ loading: false, quote: Quote, person: Person });
-      })
-      .catch((err) => console.error(err));
+    this.setState({ loading: false, quote: Quote, person: Person });
   };
 
   render() {
@@ -47,7 +43,7 @@ class Quotes extends React.Component {
   }
 }
 
-const MainWrapper = styled.section`
+const MainWrapper = styled.div`
   height: 10rem;
   display: block;
   text-align: center;
