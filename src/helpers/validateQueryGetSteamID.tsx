@@ -8,6 +8,7 @@ const getSteamID64 = async (CUSTOM_ID: string): Promise<string | void> => {
   return steamID64;
 };
 
+// TODO: BRUH YOU GOTTA FIX THIS MESS DOWN BELOW, THERE MUST BE A BETTER WAY!!
 const validateQueryGetSteamID = async (
   queryText: string
 ): Promise<string | boolean> => {
