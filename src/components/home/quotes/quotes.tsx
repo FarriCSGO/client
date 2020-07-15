@@ -1,11 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
-import LoadingAnimation from "../../ui/loadingAnimation/loadingAnimation";
 import QuotesData from "../../../data/quotesByPros.json";
 
 interface IState {
-  loading: boolean;
   quote: string;
   person: string;
   error: boolean;
@@ -13,33 +11,28 @@ interface IState {
 
 class Quotes extends React.Component {
   state: IState = {
-    loading: true,
     quote: "",
     person: "",
     error: false
   };
 
   componentDidMount = async () => {
-    const randomNumber: number = Math.floor(Math.random() * 3);
+    const randomNumber: number = Math.floor(Math.random() * 22);
     const Quote: string = QuotesData.quotes[randomNumber].quote;
     const Person: string = QuotesData.quotes[randomNumber].person;
 
-    this.setState({ loading: false, quote: Quote, person: Person });
+    this.setState({ quote: Quote, person: Person });
   };
 
   render() {
-    let content = <LoadingAnimation />;
-
-    if (this.state.loading === false) {
-      content = (
-        <div>
+    return (
+      <MainWrapper>
+        <QuoteWrapper>
           <Quote>"{this.state.quote}"</Quote>
           <Person>{this.state.person}</Person>
-        </div>
-      );
-    }
-
-    return <MainWrapper>{content}</MainWrapper>;
+        </QuoteWrapper>
+      </MainWrapper>
+    );
   }
 }
 
@@ -49,14 +42,23 @@ const MainWrapper = styled.div`
   text-align: center;
 `;
 
+const QuoteWrapper = styled.div`
+  padding-top: 2rem;
+  display: inline-block;
+  width: 50rem;
+  height: 100%;
+`;
+
 const Quote = styled.h2`
   font-size: 1.3rem;
   font-weight: normal;
+  margin: 0;
 `;
 
 const Person = styled.h3`
   font-size: 1rem;
   font-weight: bold;
+  margin-top: 1rem;
 `;
 
 export default Quotes;

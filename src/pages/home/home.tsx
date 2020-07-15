@@ -39,6 +39,7 @@ const SearchBoxContainer = styled.main`
   align-self: center;
   display: flex;
   flex-direction: column;
+  width: 100%;
 `;
 
 export default Home;

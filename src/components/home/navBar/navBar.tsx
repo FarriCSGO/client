@@ -27,7 +27,11 @@ const navBar = () => {
         </svg>
       </ToggleMode>
 
-      <GithubLinkWrapper>
+      <GithubLinkWrapper
+        href="https://github.com/FarriCSGO"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <Text>Github</Text>
         <SVG>
           <svg
@@ -58,13 +62,33 @@ const MainWrapper = styled.div`
 }
 `;
 
-const GithubLinkWrapper = styled.div`
+const GithubLinkWrapper = styled.a`
   display: flex;
   height: fit-content;
   align-self: center;
 
+  &:link {
+    text-decoration: none;
+  }
+
+  &:visited {
+    text-decoration: none;
+    color: ${(props) => props.theme.colors.dark};
+  }
+
+  &:hover {
+    text-decoration: none;
+    color: ${(props) => props.theme.colors.dark};
+  }
+
+  &:active {
+    text-decoration: none;
+    color: ${(props) => props.theme.colors.dark};
+  }
+
   &:hover {
     cursor: pointer;
+    color: ${(props) => props.theme.colors.dark};
   }
 `;
 
@@ -73,6 +97,7 @@ const Text = styled.p`
   font-size: 1.5rem;
   margin: 0;
   align-self: center;
+  color: ${(props) => props.theme.colors.dark};
 `;
 
 const SVG = styled.i`

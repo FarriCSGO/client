@@ -2,13 +2,13 @@ import React from "react";
 import styled from "styled-components";
 
 const TextBox = styled.input`
-  width: 50rem;
-  height: 4.25rem;
+  width: 40rem;
+  height: 3.25rem;
   background: #ffffff;
   border: 0.1875rem solid ${(props) => props.theme.colors.orange};
   border-radius: 3.125rem;
   margin: 0 auto;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-style: normal;
   font-weight: normal;
   padding-left: 1.5rem;
