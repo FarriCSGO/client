@@ -1,7 +1,9 @@
 import React from "react";
 
-const Design = (props: any) => {
-  return <h1>Test UI Designs here</h1>;
+import classes from "./design.module.css";
+
+const Design = () => {
+  return <span className={classes.tooltiptext}>Tooltip text</span>;
 };
 
 export default Design;

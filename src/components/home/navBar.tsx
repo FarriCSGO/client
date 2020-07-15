@@ -9,7 +9,7 @@ const navBar = () => {
   return (
     <MainWrapper>
       <ToggleMode onClick={showAlert}>
-        <svg
+        {/* <svg
           xmlns="http://www.w3.org/2000/svg"
           className="icon icon-tabler icon-tabler-sun"
           width="40"
@@ -24,10 +24,14 @@ const navBar = () => {
           <path stroke="none" d="M0 0h24v24H0z" />
           <circle cx="12" cy="12" r="4" />
           <path d="M3 12h1M12 3v1M20 12h1M12 20v1M5.6 5.6l.7 .7M18.4 5.6l-.7 .7M17.7 17.7l.7 .7M6.3 17.7l-.7 .7" />
-        </svg>
+        </svg> */}
       </ToggleMode>
 
-      <GithubLinkWrapper>
+      <GithubLinkWrapper
+        href="https://github.com/FarriCSGO"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <Text>Github</Text>
         <SVG>
           <svg
@@ -58,13 +62,34 @@ const MainWrapper = styled.div`
 }
 `;
 
-const GithubLinkWrapper = styled.div`
+const GithubLinkWrapper = styled.a`
   display: flex;
   height: fit-content;
   align-self: center;
+  margin-right: 2rem;
+
+  &:link {
+    text-decoration: none;
+  }
+
+  &:visited {
+    text-decoration: none;
+    color: ${(props) => props.theme.colors.dark};
+  }
+
+  &:hover {
+    text-decoration: none;
+    color: ${(props) => props.theme.colors.dark};
+  }
+
+  &:active {
+    text-decoration: none;
+    color: ${(props) => props.theme.colors.dark};
+  }
 
   &:hover {
     cursor: pointer;
+    color: ${(props) => props.theme.colors.dark};
   }
 `;
 
@@ -73,6 +98,7 @@ const Text = styled.p`
   font-size: 1.5rem;
   margin: 0;
   align-self: center;
+  color: ${(props) => props.theme.colors.dark};
 `;
 
 const SVG = styled.i`
