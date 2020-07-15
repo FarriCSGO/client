@@ -58,7 +58,6 @@ const Quote = styled.h2`
 const Person = styled.h3`
   font-size: 1rem;
   font-weight: bold;
-  padding-right: 3rem;
 `;
 
 export default Quotes;
