@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
-import Quotes from "../../components/home/quotes/quotes";
-import NavBar from "../../components/home/navBar/navBar";
-import SearchTextBox from "../../components/ui/searchTextBox/searchTextBox";
+import Quotes from "../../components/home/quotes";
+import NavBar from "../../components/home/navBar";
+import SearchForm from "../../components/home/searchForm";
 
 const Home = () => {
   return (
@@ -12,7 +12,7 @@ const Home = () => {
       <Quotes />
       <SearchBoxContainer>
         <Title>Counter-Strike: Global Offensive Statistics Tool</Title>
-        <SearchTextBox />
+        <SearchForm />
       </SearchBoxContainer>
     </HomeContainer>
   );

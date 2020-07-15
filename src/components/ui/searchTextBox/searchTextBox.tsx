@@ -1,6 +1,17 @@
 import React from "react";
 import styled from "styled-components";
 
+const searchTextBox = (props: any) => {
+  return (
+    <TextBox
+      type="text"
+      placeholder="STEAM ID / STEAM PROFILE / MATCH SHARE CODE"
+      autoFocus
+      {...props}
+    />
+  );
+};
+
 const TextBox = styled.input`
   width: 40rem;
   height: 3.25rem;
@@ -22,17 +33,4 @@ const TextBox = styled.input`
     outline: none;
   }
 `;
-
-const searchTextBox = () => {
-  return (
-    <>
-      <TextBox
-        type="text"
-        placeholder="STEAM ID / STEAM PROFILE / MATCH SHARE CODE"
-        autoFocus
-      />
-    </>
-  );
-};
-
 export default searchTextBox;
