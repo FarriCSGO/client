@@ -36,6 +36,9 @@ const validateQueryGetSteamID = async (
         if (slicedPathName.endsWith("/")) {
           const customID = slicedPathName.slice(0, -1);
           CUSTOM_ID = customID;
+          // "http://steamcommunity.com/id/stonecoldman/a/aa/", those extra "/"
+          if (CUSTOM_ID.includes("/")) return false;
+
           STEAM_ID_64 = getSteamID64(CUSTOM_ID);
 
           return STEAM_ID_64;
@@ -61,6 +64,10 @@ const validateQueryGetSteamID = async (
       if (slicedQuery.endsWith("/")) {
         const customID = slicedQuery.slice(0, -1);
         CUSTOM_ID = customID;
+
+        // "steamcommunity.com/id/stonecoldman/a/aa/", those extra "/"
+        if (CUSTOM_ID.includes("/")) return false;
+
         STEAM_ID_64 = getSteamID64(CUSTOM_ID);
         return STEAM_ID_64;
       } else if (slicedQuery.includes("/")) {
@@ -89,59 +96,58 @@ const validateQueryGetSteamID = async (
         const pathName = parse.pathname;
 
         // slice "/profiles/"
-        const slicedPathName = pathName.slice(10);
+        let slicedPathName = pathName.slice(10);
 
-        // steamID64 string is of length 17
-        if (slicedPathName.length === 17) {
-          if (slicedPathName.endsWith("/")) {
-            // Sometimes the user might enter search query like "/profiles/712../",
-            // so we are triming the last "/" otherwise return without trimming
+        if (slicedPathName.endsWith("/")) {
+          // Sometimes the user might enter search query like "/profiles/",
+          // so we are triming the last "/" otherwise return without trimming
+          slicedPathName = slicedPathName.slice(0, -1);
+        }
 
-            STEAM_ID_64 = slicedPathName.slice(0, -1);
-            return STEAM_ID_64;
-          } else if (slicedPathName.includes("/")) {
-            // Errors like "steamcommunity.com/profiles/797123.../.."
-            return false;
-          } else {
-            STEAM_ID_64 = slicedPathName;
-            return STEAM_ID_64;
-          }
-        } else return false; // steamID64 string length is not 17
-      }
+        // steamID64 string is of length 17 and starts with "765611"
+        if (
+          slicedPathName.startsWith("765611") &&
+          slicedPathName.length === 17
+        ) {
+          STEAM_ID_64 = slicedPathName;
+          return STEAM_ID_64;
+        } else if (slicedPathName.includes("/")) {
+          // Errors like "steamcommunity.com/profiles/797123.../.."
+          return false;
+        }
+      } else return false; // steamID64 length not 17 & not start with "765611"
     } catch (error) {
       // Slice "steamcommunity.com/profiles/"
-      const slicedQuery = queryText.slice(28);
-      console.log(slicedQuery);
+      let slicedQuery = queryText.slice(28);
 
-      // Sometimes the user might enter search query like "/profiles/723.../",
-      // so we are triming the last "/" otherwise return without trimming
-
-      // steamID64 string is of length 17
-      if (slicedQuery.length === 17) {
-        if (slicedQuery.endsWith("/")) {
-          const STEAM_ID_64 = slicedQuery.slice(0, -1);
-          return STEAM_ID_64;
-        } else if (slicedQuery.includes("/")) {
-          // Errors like "steamcommunity.com/id/exampleCustomID/a"
-          return false;
-        } else {
-          const STEAM_ID_64 = slicedQuery;
-          return STEAM_ID_64;
-        }
+      if (slicedQuery.endsWith("/")) {
+        // Sometimes the user might enter search query like "/profiles/",
+        // so we are triming the last "/" otherwise return without trimming
+        slicedQuery = slicedQuery.slice(0, -1);
       }
+
+      // steamID64 string is of length 17 and starts with "765611"
+      if (slicedQuery.startsWith("765611") && slicedQuery.length === 17) {
+        STEAM_ID_64 = slicedQuery;
+        return STEAM_ID_64;
+      } else if (slicedQuery.includes("/")) {
+        // Errors like "steamcommunity.com/profiles/797123.../.."
+        return false;
+      } else return false; // steamID64 length not 17 & not start with "765611"
     }
   }
 
   if (queryText.startsWith("765611") && queryText.length === 17) {
+    // This if block is executed if the user enters the steamID64
     STEAM_ID_64 = queryText;
 
-    // Validate if the given query is a valid steam id
+    // Validate if the given steamDI64 by the user is a valid steam id
     const validSteamID = await API.validateSteamID64(STEAM_ID_64);
 
     if (validSteamID === STEAM_ID_64) {
       return STEAM_ID_64;
     } else {
-      return false;
+      return false; // Invalid steamID64 was given by the user
     }
   }
 
