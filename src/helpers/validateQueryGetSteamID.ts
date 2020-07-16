@@ -2,8 +2,8 @@ import { api } from "../utils/api";
 
 const API = new api();
 
-const getSteamID64 = (custom_id: string): string | Promise<string> => {
-  const steamID64 = API.getSteamID64(custom_id);
+const getSteamID64 = async (custom_id: string): Promise<string> => {
+  const steamID64 = await API.getSteamID64(custom_id);
   return steamID64;
 };
 
@@ -105,7 +105,15 @@ const validateQueryGetSteamID = async (
           slicedPathName.length === 17
         ) {
           steamID64 = slicedPathName;
-          return steamID64;
+
+          // Validate if the given steamDI64 by the user is a valid steam id
+          const validSteamID = await API.validateSteamID64(steamID64);
+
+          if (validSteamID === steamID64) {
+            return steamID64;
+          } else {
+            return false; // Invalid steamID64 was given by the user
+          }
         } else if (slicedPathName.includes("/")) {
           // Errors like "steamcommunity.com/profiles/797123.../.."
           return false;
@@ -124,7 +132,15 @@ const validateQueryGetSteamID = async (
       // steamID64 string is of length 17 and starts with "765611"
       if (slicedQuery.startsWith("765611") && slicedQuery.length === 17) {
         steamID64 = slicedQuery;
-        return steamID64;
+
+        // Validate if the given steamDI64 by the user is a valid steam id
+        const validSteamID = await API.validateSteamID64(steamID64);
+
+        if (validSteamID === steamID64) {
+          return steamID64;
+        } else {
+          return false; // Invalid steamID64 was given by the user
+        }
       } else if (slicedQuery.includes("/")) {
         // Errors like "steamcommunity.com/profiles/797123.../.."
         return false;
@@ -148,7 +164,8 @@ const validateQueryGetSteamID = async (
 
   // The last case can be that the user has entered its CUSTOM_URL that looks
   // like steamcommunity.com/id/{CUSTOM_URL}
-  steamID64 = getSteamID64(queryText);
+  steamID64 = await getSteamID64(queryText);
+  console.log("LMAO", steamID64);
   return steamID64;
 };
 
