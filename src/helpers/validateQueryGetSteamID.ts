@@ -2,9 +2,8 @@ import { api } from "../utils/api";
 
 const API = new api();
 
-const getSteamID64 = async (CUSTOM_ID: string): Promise<string | void> => {
-  const steamID64 = API.getSteamID64(CUSTOM_ID);
-
+const getSteamID64 = (custom_id: string): string | Promise<string> => {
+  const steamID64 = API.getSteamID64(custom_id);
   return steamID64;
 };
 
@@ -12,8 +11,8 @@ const getSteamID64 = async (CUSTOM_ID: string): Promise<string | void> => {
 const validateQueryGetSteamID = async (
   queryText: string
 ): Promise<string | boolean> => {
-  let CUSTOM_ID: string;
-  let STEAM_ID_64: any;
+  let customID: string;
+  let steamID64: string | Promise<string>;
 
   // Search query that look like "https://steamcommunity.com/id/..."
   if (queryText.includes("steamcommunity.com/id/")) {
@@ -34,22 +33,20 @@ const validateQueryGetSteamID = async (
         // Sometimes the user might enter search query like "/id/stonecoldman/",
         // so we are triming the last "/" otherwise return without trimming
         if (slicedPathName.endsWith("/")) {
-          const customID = slicedPathName.slice(0, -1);
-          CUSTOM_ID = customID;
+          customID = slicedPathName.slice(0, -1);
           // "http://steamcommunity.com/id/stonecoldman/a/aa/", those extra "/"
-          if (CUSTOM_ID.includes("/")) return false;
+          if (customID.includes("/")) return false;
 
-          STEAM_ID_64 = getSteamID64(CUSTOM_ID);
+          steamID64 = getSteamID64(customID);
 
-          return STEAM_ID_64;
+          return steamID64;
         } else if (slicedPathName.includes("/")) {
           // Errors like "https://steamcommunity.com/id/exampleCustomID/a"
           return false;
         } else {
-          const customID = slicedPathName;
-          CUSTOM_ID = customID;
-          STEAM_ID_64 = getSteamID64(CUSTOM_ID);
-          return STEAM_ID_64;
+          customID = slicedPathName;
+          steamID64 = getSteamID64(customID);
+          return steamID64;
         }
       } else {
         // Invalid HTTP protocol
@@ -62,22 +59,20 @@ const validateQueryGetSteamID = async (
       // Sometimes the user might enter search query like "/id/stonecoldman/",
       // so we are triming the last "/" otherwise return without trimming
       if (slicedQuery.endsWith("/")) {
-        const customID = slicedQuery.slice(0, -1);
-        CUSTOM_ID = customID;
+        customID = slicedQuery.slice(0, -1);
 
         // "steamcommunity.com/id/stonecoldman/a/aa/", those extra "/"
-        if (CUSTOM_ID.includes("/")) return false;
+        if (customID.includes("/")) return false;
 
-        STEAM_ID_64 = getSteamID64(CUSTOM_ID);
-        return STEAM_ID_64;
+        steamID64 = getSteamID64(customID);
+        return steamID64;
       } else if (slicedQuery.includes("/")) {
         // Errors like "steamcommunity.com/id/exampleCustomID/a"
         return false;
       } else {
-        const customID = slicedQuery;
-        CUSTOM_ID = customID;
-        STEAM_ID_64 = getSteamID64(CUSTOM_ID);
-        return STEAM_ID_64;
+        customID = slicedQuery;
+        steamID64 = getSteamID64(customID);
+        return steamID64;
       }
     }
   }
@@ -86,7 +81,7 @@ const validateQueryGetSteamID = async (
   if (queryText.includes("steamcommunity.com/profiles/")) {
     // Try block is used to check that if `queryText` contains "https://"
     // (protocol) or not. Catch block is executed for query like
-    // "steamcommunity.com/id/stonecoldman" and try block for query like
+    // "steamcommunity.com/profiles/71892379812739123..." and try block for query like
     // "https://steamcommunity.com/profiles/71892379812739123..."
     try {
       const parse = new URL(queryText);
@@ -109,8 +104,8 @@ const validateQueryGetSteamID = async (
           slicedPathName.startsWith("765611") &&
           slicedPathName.length === 17
         ) {
-          STEAM_ID_64 = slicedPathName;
-          return STEAM_ID_64;
+          steamID64 = slicedPathName;
+          return steamID64;
         } else if (slicedPathName.includes("/")) {
           // Errors like "steamcommunity.com/profiles/797123.../.."
           return false;
@@ -128,8 +123,8 @@ const validateQueryGetSteamID = async (
 
       // steamID64 string is of length 17 and starts with "765611"
       if (slicedQuery.startsWith("765611") && slicedQuery.length === 17) {
-        STEAM_ID_64 = slicedQuery;
-        return STEAM_ID_64;
+        steamID64 = slicedQuery;
+        return steamID64;
       } else if (slicedQuery.includes("/")) {
         // Errors like "steamcommunity.com/profiles/797123.../.."
         return false;
@@ -139,13 +134,13 @@ const validateQueryGetSteamID = async (
 
   if (queryText.startsWith("765611") && queryText.length === 17) {
     // This if block is executed if the user enters the steamID64
-    STEAM_ID_64 = queryText;
+    steamID64 = queryText;
 
     // Validate if the given steamDI64 by the user is a valid steam id
-    const validSteamID = await API.validateSteamID64(STEAM_ID_64);
+    const validSteamID = await API.validateSteamID64(steamID64);
 
-    if (validSteamID === STEAM_ID_64) {
-      return STEAM_ID_64;
+    if (validSteamID === steamID64) {
+      return steamID64;
     } else {
       return false; // Invalid steamID64 was given by the user
     }
@@ -153,8 +148,8 @@ const validateQueryGetSteamID = async (
 
   // The last case can be that the user has entered its CUSTOM_URL that looks
   // like steamcommunity.com/id/{CUSTOM_URL}
-  STEAM_ID_64 = getSteamID64(queryText);
-  return STEAM_ID_64;
+  steamID64 = getSteamID64(queryText);
+  return steamID64;
 };
 
 export default validateQueryGetSteamID;
