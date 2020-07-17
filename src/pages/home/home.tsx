@@ -7,7 +7,7 @@ import SearchForm from "../../components/home/searchForm";
 
 const Home = () => {
   return (
-    <HomeContainer>
+    <PageContainer>
       <NavBar />
       <Quotes />
       <SearchBoxContainer>
@@ -15,11 +15,11 @@ const Home = () => {
         <MobileTitle>CSGO Statistics Tool</MobileTitle>
         <SearchForm />
       </SearchBoxContainer>
-    </HomeContainer>
+    </PageContainer>
   );
 };
 
-const HomeContainer = styled.div`
+const PageContainer = styled.div`
   height: 100vh;
   max-width: 100vw;
   margin: 0 auto;
