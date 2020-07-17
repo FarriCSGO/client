@@ -3,6 +3,7 @@ import { api } from "../utils/api";
 const API = new api();
 
 const getSteamID64 = async (custom_id: string): Promise<any> => {
+  // TODO: Use RegEx instead so that you can check for all the special chars
   if (
     custom_id.includes("/") ||
     custom_id.includes(".") ||

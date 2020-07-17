@@ -11,7 +11,8 @@ const Home = () => {
       <NavBar />
       <Quotes />
       <SearchBoxContainer>
-        <Title>Counter-Strike: Global Offensive Statistics Tool</Title>
+        <Title>Counter-Strike Global Offensive Statistics Tool</Title>
+        <MobileTitle>CSGO Statistics Tool</MobileTitle>
         <SearchForm />
       </SearchBoxContainer>
     </HomeContainer>
@@ -20,18 +21,11 @@ const Home = () => {
 
 const HomeContainer = styled.div`
   height: 100vh;
-  max-width: 75rem;
+  max-width: 100vw;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-`;
-
-const Title = styled.h1`
-  font-style: normal;
-  font-weight: bold;
-  font-size: 2rem;
-  text-align: center;
-  color: #0a0a0a;
+  overflow: hidden;
 `;
 
 const SearchBoxContainer = styled.main`
@@ -39,7 +33,33 @@ const SearchBoxContainer = styled.main`
   align-self: center;
   display: flex;
   flex-direction: column;
-  width: 100%;
+  padding: 1rem;
+`;
+
+const Title = styled.h1`
+  font-style: normal;
+  font-weight: bold;
+  font-size: 2rem;
+  text-align: center;
+  color: ${(props) => props.theme.colors.dark};
+
+  @media ${(props) => props.theme.size.small} {
+    font-size: 1rem;
+    display: none;
+  }
+
+  @media ${(props) => props.theme.size.medium} {
+    font-size: 1.5rem;
+  }
+`;
+
+const MobileTitle = styled.h1`
+  font-size: 1.25rem;
+  display: none;
+
+  @media ${(props) => props.theme.size.small} {
+    display: inline-block;
+  }
 `;
 
 export default Home;

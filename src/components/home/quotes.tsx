@@ -38,26 +38,39 @@ class Quotes extends React.Component {
 
 const MainWrapper = styled.div`
   height: 10rem;
-  display: block;
   text-align: center;
+  padding: 1rem;
+
+  @media ${(props) => props.theme.size.small} {
+    height: 7.5rem;
+  }
 `;
 
 const QuoteWrapper = styled.div`
   padding-top: 2rem;
   display: inline-block;
-  width: 50rem;
   height: 100%;
+  max-width: 55rem;
 `;
 
 const Quote = styled.h2`
   font-size: 1.3rem;
   font-weight: normal;
   margin: 0;
+
+  @media ${(props) => props.theme.size.small} {
+    font-size: 1rem;
+  }
 `;
 
 const Person = styled.h3`
   font-size: 1rem;
   font-weight: bold;
+
+  @media ${(props) => props.theme.size.small} {
+    font-size: 0.75rem;
+  }
+}
 `;
 
 export default Quotes;
