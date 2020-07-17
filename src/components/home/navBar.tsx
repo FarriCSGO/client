@@ -68,6 +68,20 @@ const GithubLinkWrapper = styled.a`
   align-self: center;
   margin-right: 2rem;
 
+  @media ${(props) => props.theme.size.small} {
+    svg {
+      height: 32px;
+    }
+  }
+
+  @media ${(props) => props.theme.size.small} {
+    margin-right: 0.2rem;
+  }
+
+  @media ${(props) => props.theme.size.medium} {
+    margin-right: 0.2rem;
+  }
+
   &:link {
     text-decoration: none;
   }
@@ -99,6 +113,11 @@ const Text = styled.p`
   margin: 0;
   align-self: center;
   color: ${(props) => props.theme.colors.dark};
+
+  @media ${(props) => props.theme.size.small} {
+    font-size: 1.2rem;
+    margin-right: -0.25rem;
+  }
 `;
 
 const SVG = styled.i`

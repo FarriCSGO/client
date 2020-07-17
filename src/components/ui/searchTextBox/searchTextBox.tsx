@@ -5,7 +5,7 @@ const searchTextBox = (props: any) => {
   return (
     <TextBox
       type="text"
-      placeholder="STEAM ID / STEAM PROFILE / MATCH SHARE CODE"
+      placeholder="STEAM ID / STEAM PROFILE"
       autoFocus
       {...props}
     />
@@ -25,6 +25,22 @@ const TextBox = styled.input`
   padding-left: 1.5rem;
   color: #0a0a0a;
 
+  @media ${(props) => props.theme.size.small} {
+    width: 90vw;
+    height: 2.5rem;
+    border: 0.1rem solid ${(props) => props.theme.colors.orange};
+    font-size: 0.85rem;
+    padding-left: 1rem;
+  }
+
+  @media ${(props) => props.theme.size.medium} {
+    width: 30rem;
+    height: 2.5rem;
+    border: 0.1rem solid ${(props) => props.theme.colors.orange};
+    font-size: 0.85rem;
+    padding-left: 1rem;
+  }
+
   &::placeholder {
     color: #999;
   }
@@ -33,4 +49,5 @@ const TextBox = styled.input`
     outline: none;
   }
 `;
+
 export default searchTextBox;
