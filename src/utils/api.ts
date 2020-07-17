@@ -20,8 +20,19 @@ export class api {
         `/api/userSteamDetails/profiles/${steamID64}`
       );
       const steamID = response.data.steamID64;
-      console.log("VALIDATING...", steamID);
       return steamID;
+    } catch (error) {
+      throw new Error(error);
+    }
+  };
+
+  getUserSteamDetails = async (steamID64: string) => {
+    try {
+      const response = await Axios.get(
+        `/api/userSteamDetails/profiles/${steamID64}`
+      );
+
+      return response.data;
     } catch (error) {
       throw new Error(error);
     }

@@ -30,25 +30,19 @@ const validateQueryGetSteamID = async (
   if (queryText.includes("steamcommunity.com")) {
     // Search query that look like "https://steamcommunity.com/id/..."
     if (queryText.includes("steamcommunity.com/id/")) {
-      // Try block is used to check that if `queryText` contains "https://"
-      // (protocol) or not. Catch block is executed for query like
-      // "steamcommunity.com/id/stonecoldman" and try block for query like
-      // "https://steamcommunity.com/id/stonecoldman"
+      // Try block if http protocol is in the query else catch block executes.
       try {
         const parse = new URL(queryText);
 
-        // Validate the protocol, return false if not a valid HTTP protocol.
         if (parse.protocol === "http:" || parse.protocol === "https:") {
           const pathName = parse.pathname;
 
           // Slice "/id/"
           const slicedPathName = pathName.slice(4);
 
-          // Sometimes the user might enter search query like "/id/stonecoldman/",
-          // so we are triming the last "/" otherwise return without trimming
+          // triming the last "/"
           if (slicedPathName.endsWith("/")) {
             customID = slicedPathName.slice(0, -1);
-            // "http://steamcommunity.com/id/stonecoldman/a/aa/", those extra "/"
             steamID64 = getSteamID64(customID);
 
             return steamID64;
@@ -65,8 +59,6 @@ const validateQueryGetSteamID = async (
         // Slice "steamcommunity.com/id/"
         const slicedQuery = queryText.slice(22);
 
-        // Sometimes the user might enter search query like "/id/stonecoldman/",
-        // so we are triming the last "/" otherwise return without trimming
         if (slicedQuery.endsWith("/")) {
           customID = slicedQuery.slice(0, -1);
 
@@ -82,14 +74,10 @@ const validateQueryGetSteamID = async (
 
     // Search query that look like "https://steamcommunity.com/profiles/..."
     if (queryText.includes("steamcommunity.com/profiles/")) {
-      // Try block is used to check that if `queryText` contains "https://"
-      // (protocol) or not. Catch block is executed for query like
-      // "steamcommunity.com/profiles/71892379812739123..." and try block for query like
-      // "https://steamcommunity.com/profiles/71892379812739123..."
+      // Try block if http protocol is in the query else catch block executes.
       try {
         const parse = new URL(queryText);
 
-        // Validate the protocol, return false if not a valid HTTP protocol.
         if (parse.protocol === "http:" || parse.protocol === "https:") {
           const pathName = parse.pathname;
 
@@ -97,8 +85,6 @@ const validateQueryGetSteamID = async (
           let slicedPathName = pathName.slice(10);
 
           if (slicedPathName.endsWith("/")) {
-            // Sometimes the user might enter search query like "/profiles/",
-            // so we are triming the last "/" otherwise return without trimming
             slicedPathName = slicedPathName.slice(0, -1);
           }
 
@@ -109,7 +95,6 @@ const validateQueryGetSteamID = async (
           ) {
             steamID64 = slicedPathName;
 
-            // Validate if the given steamDI64 by the user is a valid steam id
             const validSteamID = await API.validateSteamID64(steamID64);
 
             if (validSteamID === steamID64) {
@@ -124,8 +109,6 @@ const validateQueryGetSteamID = async (
         let slicedQuery = queryText.slice(28);
 
         if (slicedQuery.endsWith("/")) {
-          // Sometimes the user might enter search query like "/profiles/",
-          // so we are triming the last "/" otherwise return without trimming
           slicedQuery = slicedQuery.slice(0, -1);
         }
 
@@ -149,21 +132,23 @@ const validateQueryGetSteamID = async (
   }
 
   if (queryText.startsWith("765611") && queryText.length === 17) {
-    // This if block is executed if the user enters the steamID64
     steamID64 = queryText;
 
-    // Validate if the given steamDI64 by the user is a valid steam id
     const validSteamID = await API.validateSteamID64(steamID64);
 
     if (validSteamID === steamID64) {
       return steamID64;
     } else {
-      return false; // Invalid steamID64 was given by the user
+      return false;
     }
   }
 
   // The last case can be that the user has entered its CUSTOM_URL that looks
   // like steamcommunity.com/id/{CUSTOM_URL}
+
+  // Spaces in the search query are invalid
+  if (queryText.includes(" ")) return false;
+
   try {
     steamID64 = await getSteamID64(queryText);
     return steamID64;
