@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import QuotesData from "../../data/quotesByPros.json";
+import QuotesData from "../../../data/quotesByPros.json";
 
 interface IState {
   quote: string;

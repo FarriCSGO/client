@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
-import Quotes from "../../components/home/quotes";
-import NavBar from "../../components/home/navBar";
-import SearchForm from "../../components/home/searchForm";
+import Quotes from "../../components/pages/home/Quotes";
+import NavBar from "../../components/pages/home/NavBar";
+import SearchForm from "../../components/pages/home/SearchForm";
 
 const Home = () => {
   return (

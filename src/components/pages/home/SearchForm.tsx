@@ -1,9 +1,9 @@
 import React from "react";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 
-import SearchTextBox from "../../ui/searchTextBox/searchTextBox";
+import SearchTextBox from "../../../ui/searchTextBox/searchTextBox";
 
-import getSteamID64 from "../../helpers/getSteamID64";
+import getSteamID64 from "../../../helpers/getSteamID64";
 
 interface IState {
   queryText: string;
