@@ -6,11 +6,13 @@ import UserSteamDetailsCard from "../../components/core/dashboard/SteamDetailsCa
 
 type TParams = { steamID: string };
 
-const Dashboard = ({ match }: RouteComponentProps<TParams>) => {
+const DashboardPresenter = ({ match }: RouteComponentProps<TParams>) => {
   const steamID: string = match.params.steamID;
 
   // FIXME: If a user directly go to a dashboard/steamID64 URL with an invalid
-  // steamID64, the APP CRASHES.
+  // steamID64, the APP CRASHES. We should seperate the logic to Container
+  // NOTE: The app crashes because an invalid steamID is passed down to
+  // <UerSteamDetailsCard /> component.
   return (
     <PageContainer>
       <Heading>YOU'RE A BOT MATE</Heading>
@@ -67,4 +69,4 @@ const HomeButton = styled.button`
   }
 `;
 
-export default Dashboard;
+export default DashboardPresenter;

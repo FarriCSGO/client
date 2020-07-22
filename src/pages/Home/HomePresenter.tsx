@@ -5,7 +5,7 @@ import Quotes from "../../components/core/home/Quotes";
 import NavBar from "../../components/core/home/NavBar";
 import SearchForm from "../../components/core/home/SearchForm";
 
-const Home = () => {
+const HomePresenter = () => {
   return (
     <PageContainer>
       <NavBar />
@@ -62,4 +62,4 @@ const MobileTitle = styled.h1`
   }
 `;
 
-export default Home;
+export default HomePresenter;
