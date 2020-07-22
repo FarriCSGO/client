@@ -1,6 +1,6 @@
-import { getSteamID, validateSteamID } from "../utils/API";
+import { getSteamID as getID, validateSteamID } from "../utils/api";
 
-const getSteamID64 = async (custom_id: string): Promise<any> => {
+const getSteamID = async (custom_id: string): Promise<any> => {
   // TODO: Use RegEx instead so that you can check for all the special chars
   if (
     custom_id.includes("/") ||
@@ -11,7 +11,7 @@ const getSteamID64 = async (custom_id: string): Promise<any> => {
   }
 
   try {
-    const steamID64 = await getSteamID(custom_id);
+    const steamID64 = await getID(custom_id);
     return steamID64;
   } catch (err) {
     throw new Error(err);
@@ -19,7 +19,7 @@ const getSteamID64 = async (custom_id: string): Promise<any> => {
 };
 
 // TODO: BRUH YOU GOTTA FIX THIS MESS DOWN BELOW, THERE MUST BE A BETTER WAY!!
-const validateQueryGetSteamID = async (
+const parseSearchQuery = async (
   queryText: string
 ): Promise<string | boolean> => {
   let customID: string;
@@ -41,12 +41,12 @@ const validateQueryGetSteamID = async (
           // triming the last "/"
           if (slicedPathName.endsWith("/")) {
             customID = slicedPathName.slice(0, -1);
-            steamID64 = getSteamID64(customID);
+            steamID64 = getSteamID(customID);
 
             return steamID64;
           } else {
             customID = slicedPathName;
-            steamID64 = getSteamID64(customID);
+            steamID64 = getSteamID(customID);
             return steamID64;
           }
         } else {
@@ -60,11 +60,11 @@ const validateQueryGetSteamID = async (
         if (slicedQuery.endsWith("/")) {
           customID = slicedQuery.slice(0, -1);
 
-          steamID64 = getSteamID64(customID);
+          steamID64 = getSteamID(customID);
           return steamID64;
         } else {
           customID = slicedQuery;
-          steamID64 = getSteamID64(customID);
+          steamID64 = getSteamID(customID);
           return steamID64;
         }
       }
@@ -148,11 +148,11 @@ const validateQueryGetSteamID = async (
   if (queryText.includes(" ")) return false;
 
   try {
-    steamID64 = await getSteamID64(queryText);
+    steamID64 = await getSteamID(queryText);
     return steamID64;
   } catch (err) {
     throw new Error(err);
   }
 };
 
-export default validateQueryGetSteamID;
+export default parseSearchQuery;

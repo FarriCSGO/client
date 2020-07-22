@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getUserSteamDetails } from "../../../utils/API";
+import { getUserSteamDetails } from "../../../utils/api";
 
 import Card from "../../ui/Card/SteamDetailsCard";
 
