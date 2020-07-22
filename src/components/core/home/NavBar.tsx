@@ -59,7 +59,6 @@ const MainWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   height: 5rem;
-}
 `;
 
 const GithubLinkWrapper = styled.a`

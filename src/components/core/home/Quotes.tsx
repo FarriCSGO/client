@@ -60,7 +60,6 @@ const Person = styled.h3`
   @media ${(props) => props.theme.size.small} {
     font-size: 0.75rem;
   }
-}
 `;
 
 export default Quotes;
