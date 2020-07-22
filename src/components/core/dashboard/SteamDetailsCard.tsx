@@ -1,15 +1,15 @@
 import React from "react";
 import styled from "styled-components";
-import { api } from "../../../utils/api";
 
 import Loading from "../../ui/Animation/Loading";
+
+import API from "../../../utils/API";
 
 interface IProps {
   steamID64: string;
 }
 
 interface IState {
-  API: any;
   loading: boolean;
   name: string;
   avatarURL: string;
@@ -21,7 +21,6 @@ class UserSteamDetailsCard extends React.Component<IProps, IState> {
   constructor(props: IProps) {
     super(props);
     this.state = {
-      API: new api(),
       loading: true,
       name: "",
       avatarURL: "",
@@ -31,7 +30,7 @@ class UserSteamDetailsCard extends React.Component<IProps, IState> {
   }
 
   componentDidMount = async () => {
-    const data = await this.state.API.getUserSteamDetails(this.props.steamID64);
+    const data = await API.getUserSteamDetails(this.props.steamID64);
 
     // TODO: Make a function to set the data instead of doing it here.
     this.setState({ name: data.name });

@@ -2,7 +2,7 @@
 
 import Axios from "../utils/Axios";
 
-export class api {
+class api {
   getSteamID64 = async (profileID: string): Promise<string> => {
     try {
       const response = await Axios.get(`/api/steamID64/${profileID}`);
@@ -38,3 +38,5 @@ export class api {
     }
   };
 }
+
+export default new api();

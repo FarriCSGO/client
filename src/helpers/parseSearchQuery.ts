@@ -1,6 +1,4 @@
-import { api } from "../utils/api";
-
-const API = new api();
+import API from "../utils/API";
 
 const getSteamID64 = async (custom_id: string): Promise<any> => {
   // TODO: Use RegEx instead so that you can check for all the special chars
