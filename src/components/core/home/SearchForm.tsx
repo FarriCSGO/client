@@ -1,9 +1,9 @@
 import React from "react";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 
-import SearchTextBox from "../../../ui/searchTextBox/searchTextBox";
+import SearchTextBox from "../../ui/SearchTextBox/SearchTextBox";
 
-import getSteamID64 from "../../../helpers/getSteamID64";
+import getSteamID from "../../../helpers/getSteamID";
 
 interface IState {
   queryText: string;
@@ -20,7 +20,7 @@ class searchForm extends React.Component<RouteComponentProps> {
     const queryText: string = this.state.queryText;
 
     try {
-      const steamID64 = await getSteamID64(queryText);
+      const steamID64 = await getSteamID(queryText);
 
       if (steamID64 === false) {
         // THIS MEANS THE "INVALID SEARCH" ALERT WAS SHOWN TO USER

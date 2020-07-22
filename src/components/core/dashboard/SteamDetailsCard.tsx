@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { api } from "../../../utils/api";
 
-import LoadingAnimation from "../../../ui/loadingAnimation/loadingAnimation";
+import Loading from "../../ui/Animation/Loading";
 
 interface IProps {
   steamID64: string;
@@ -58,7 +58,7 @@ class UserSteamDetailsCard extends React.Component<IProps, IState> {
       return (
         <CardContainer>
           <AnimationDiv>
-            <LoadingAnimation />
+            <Loading />
           </AnimationDiv>
         </CardContainer>
       );
