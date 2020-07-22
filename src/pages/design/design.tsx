@@ -1,9 +1,7 @@
 import React from "react";
 
-import classes from "./design.module.css";
-
 const Design = () => {
-  return <span className={classes.tooltiptext}>Tooltip text</span>;
+  return <h1> DESIGN </h1>;
 };
 
 export default Design;

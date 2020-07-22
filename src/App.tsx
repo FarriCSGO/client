@@ -13,7 +13,7 @@ const App = () => {
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/design" component={Design} />
-          <Route path="/dashboard/:steamID64" component={Dashboard} />
+          <Route path="/dashboard/:steamID" component={Dashboard} />
         </Switch>
       </Router>
     </>

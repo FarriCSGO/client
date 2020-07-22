@@ -4,17 +4,17 @@ import styled from "styled-components";
 
 import UserSteamDetailsCard from "../../components/core/dashboard/SteamDetailsCard";
 
-type TParams = { steamID64: string };
+type TParams = { steamID: string };
 
 const Dashboard = ({ match }: RouteComponentProps<TParams>) => {
-  const steamID64: string = match.params.steamID64;
+  const steamID: string = match.params.steamID;
 
   // FIXME: If a user directly go to a dashboard/steamID64 URL with an invalid
   // steamID64, the APP CRASHES.
   return (
     <PageContainer>
       <Heading>YOU'RE A BOT MATE</Heading>
-      <UserSteamDetailsCard steamID64={steamID64} />
+      <UserSteamDetailsCard steamID={steamID} />
       <LinkDiv>
         <Link to="/">
           <HomeButton>Home</HomeButton>
