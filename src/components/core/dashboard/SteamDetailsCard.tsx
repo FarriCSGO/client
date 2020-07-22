@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import API from "../../../utils/API";
+import { getUserSteamDetails } from "../../../utils/API";
 
 import Card from "../../ui/Card/SteamDetailsCard";
 
@@ -16,7 +16,7 @@ const SteamDetailsCard = (props: IProps) => {
 
   useEffect(() => {
     const getData = async () => {
-      const data = await API.getUserSteamDetails(props.steamID);
+      const data = await getUserSteamDetails(props.steamID);
 
       setName(data.name);
       setLevel(data.steamLevel);
