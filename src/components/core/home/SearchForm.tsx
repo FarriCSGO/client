@@ -3,7 +3,7 @@ import { RouteComponentProps, withRouter } from "react-router-dom";
 
 import SearchTextBox from "../../ui/SearchTextBox/SearchTextBox";
 
-import getSteamID from "../../../helpers/getSteamID";
+import parseSearchQuery from "../../../helpers/parseSearchQuery";
 
 interface IState {
   queryText: string;
@@ -20,13 +20,14 @@ class searchForm extends React.Component<RouteComponentProps> {
     const queryText: string = this.state.queryText;
 
     try {
-      const steamID64 = await getSteamID(queryText);
+      const steamID = await parseSearchQuery(queryText);
 
-      if (steamID64 === false) {
+      if (steamID === false) {
         // THIS MEANS THE "INVALID SEARCH" ALERT WAS SHOWN TO USER
         // We don't do anything. Just stay on this page for another query.
+        alert("INVALID SEARCH");
       } else {
-        this.props.history.push(`/dashboard/${steamID64}`);
+        this.props.history.push(`/dashboard/${steamID}`);
       }
     } catch (error) {
       alert("USER DOES NOT EXIST");
