@@ -1,6 +1,4 @@
-import { api } from "../utils/api";
-
-const API = new api();
+import { getSteamID, validateSteamID } from "../utils/API";
 
 const getSteamID64 = async (custom_id: string): Promise<any> => {
   // TODO: Use RegEx instead so that you can check for all the special chars
@@ -13,7 +11,7 @@ const getSteamID64 = async (custom_id: string): Promise<any> => {
   }
 
   try {
-    const steamID64 = await API.getSteamID64(custom_id);
+    const steamID64 = await getSteamID(custom_id);
     return steamID64;
   } catch (err) {
     throw new Error(err);
@@ -95,7 +93,7 @@ const validateQueryGetSteamID = async (
           ) {
             steamID64 = slicedPathName;
 
-            const validSteamID = await API.validateSteamID64(steamID64);
+            const validSteamID = await validateSteamID(steamID64);
 
             if (validSteamID === steamID64) {
               return steamID64;
@@ -117,7 +115,7 @@ const validateQueryGetSteamID = async (
           steamID64 = slicedQuery;
 
           // Validate if the given steamDI64 by the user is a valid steam id
-          const validSteamID = await API.validateSteamID64(steamID64);
+          const validSteamID = await validateSteamID(steamID64);
 
           if (validSteamID === steamID64) {
             return steamID64;
@@ -134,7 +132,7 @@ const validateQueryGetSteamID = async (
   if (queryText.startsWith("765611") && queryText.length === 17) {
     steamID64 = queryText;
 
-    const validSteamID = await API.validateSteamID64(steamID64);
+    const validSteamID = await validateSteamID(steamID64);
 
     if (validSteamID === steamID64) {
       return steamID64;

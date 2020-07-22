@@ -1,49 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 
 import SearchTextBox from "../../ui/SearchTextBox/SearchTextBox";
 
-import getSteamID from "../../../helpers/getSteamID";
+import parseSearchQuery from "../../../helpers/parseSearchQuery";
 
-interface IState {
-  queryText: string;
-}
+const SearchForm = ({ history }: RouteComponentProps) => {
+  const [query, setQuery] = useState("");
 
-class searchForm extends React.Component<RouteComponentProps> {
-  state: IState = {
-    queryText: ""
-  };
-
-  formSubmitHandler = async (event: any) => {
+  const formSubmitHandler = async (event: any) => {
     event.preventDefault();
 
-    const queryText: string = this.state.queryText;
+    const queryText: string = query;
 
     try {
-      const steamID64 = await getSteamID(queryText);
+      const steamID = await parseSearchQuery(queryText);
 
-      if (steamID64 === false) {
-        // THIS MEANS THE "INVALID SEARCH" ALERT WAS SHOWN TO USER
-        // We don't do anything. Just stay on this page for another query.
+      if (steamID === false) {
+        alert("INVALID SEARCH");
       } else {
-        this.props.history.push(`/dashboard/${steamID64}`);
+        history.push(`/dashboard/${steamID}`);
       }
     } catch (error) {
       alert("USER DOES NOT EXIST");
     }
   };
 
-  setQuery = (event: any) => {
-    this.setState({ queryText: event.target.value });
+  const handleQuery = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setQuery(event.target.value);
   };
 
-  render() {
-    return (
-      <form onSubmit={(event) => this.formSubmitHandler(event)}>
-        <SearchTextBox onChange={this.setQuery} />
-      </form>
-    );
-  }
-}
+  return (
+    <form onSubmit={(event) => formSubmitHandler(event)}>
+      <SearchTextBox onChange={handleQuery} />
+    </form>
+  );
+};
 
-export default withRouter(searchForm);
+export default withRouter(SearchForm);
