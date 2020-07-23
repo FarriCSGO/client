@@ -1,18 +1,47 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { getUserSteamDetails } from "../../../utils/api";
 import styled from "styled-components";
 
-import Loading from "../Animation/Loading";
+import Loading from "../../ui/Animation/Loading";
 
 interface IProps {
-  loading: boolean;
-  name: string;
-  level: string;
-  status: string;
-  avatarURL: string;
+  steamID: string;
 }
 
-const UserSteamDetailsCard = (props: IProps) => {
-  if (props.loading === true) {
+const SteamDetailsCard = (props: IProps) => {
+  const [loading, setLoading] = useState(true);
+  const [name, setName] = useState("");
+  const [level, setLevel] = useState("");
+  const [status, setStatus] = useState("");
+  const [avatarURL, setAvatarURL] = useState("");
+
+  useEffect(() => {
+    const getData = async () => {
+      const data = await getUserSteamDetails(props.steamID);
+
+      setName(data.name);
+      setLevel(data.steamLevel);
+      setAvatarURL(data.avatarImageURL);
+
+      if (data.onlineStatus === 0) {
+        setStatus("Offline");
+      }
+
+      if (data.onlineStatus === 1 && data.playingGame) {
+        setStatus(data.playingGame);
+      }
+
+      if (data.onlineStatus !== 0 && !data.playingGame) {
+        setStatus("Online");
+      }
+
+      setLoading(false);
+    };
+
+    getData();
+  }, [props]);
+
+  if (loading === true) {
     return (
       <CardContainer>
         <AnimationDiv>
@@ -25,15 +54,12 @@ const UserSteamDetailsCard = (props: IProps) => {
   return (
     <CardContainer>
       <CenterItems>
-        <SteamLevel>{props.level}</SteamLevel>
+        <SteamLevel>{level}</SteamLevel>
         <AvatarDiv>
-          <AvatarImage
-            src={props.avatarURL}
-            alt="steam profile avatar"
-          ></AvatarImage>
-          <Name>{props.name}</Name>
+          <AvatarImage src={avatarURL} alt="steam profile avatar"></AvatarImage>
+          <Name>{name}</Name>
         </AvatarDiv>
-        <Status>{props.status}</Status>
+        <Status>{status}</Status>
       </CenterItems>
     </CardContainer>
   );
@@ -112,5 +138,4 @@ const Status = styled.p`
     return "#39B924";
   }};
 `;
-
-export default UserSteamDetailsCard;
+export default SteamDetailsCard;
