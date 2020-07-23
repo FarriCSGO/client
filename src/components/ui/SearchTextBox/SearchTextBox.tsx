@@ -1,14 +1,20 @@
 import React from "react";
 import styled from "styled-components";
 
-const searchTextBox = (props: any) => {
+interface IProps {
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => {};
+}
+
+const searchTextBox = (props: IProps) => {
   return (
-    <TextBox
-      type="text"
-      placeholder="STEAM ID / STEAM PROFILE"
-      autoFocus
-      {...props}
-    />
+    <>
+      <TextBox
+        type="text"
+        placeholder="STEAM ID / STEAM PROFILE"
+        autoFocus
+        onChange={props.onChange}
+      />
+    </>
   );
 };
 
