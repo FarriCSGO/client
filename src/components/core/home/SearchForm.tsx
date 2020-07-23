@@ -2,27 +2,30 @@ import React, { useState } from "react";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 
 import SearchTextBox from "../../ui/SearchTextBox/SearchTextBox";
+import ErrorModal from "../../ui/Modal/ErrorModal";
 
 import parseSearchQuery from "../../../helpers/parseSearchQuery";
 
 const SearchForm = ({ history }: RouteComponentProps) => {
   const [query, setQuery] = useState("");
+  const [error, setError] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
   const formSubmitHandler = async (event: any) => {
     event.preventDefault();
 
-    const queryText: string = query;
-
     try {
-      const steamID = await parseSearchQuery(queryText);
+      const steamID = await parseSearchQuery(query);
 
       if (steamID === false) {
-        alert("INVALID SEARCH");
+        setError(true);
+        setErrorMsg("Invalid search query");
       } else {
         history.push(`/dashboard/${steamID}`);
       }
     } catch (error) {
-      alert("USER DOES NOT EXIST");
+      setError(true);
+      setErrorMsg("User does not exist in steam database");
     }
   };
 
@@ -30,10 +33,20 @@ const SearchForm = ({ history }: RouteComponentProps) => {
     setQuery(event.target.value);
   };
 
+  let errorModal;
+  if (error) {
+    errorModal = (
+      <ErrorModal message={errorMsg} onClose={(): any => setError(false)} />
+    );
+  }
+
   return (
-    <form onSubmit={(event) => formSubmitHandler(event)}>
-      <SearchTextBox onChange={handleQuery} />
-    </form>
+    <>
+      {errorModal}
+      <form onSubmit={(event) => formSubmitHandler(event)}>
+        <SearchTextBox onChange={handleQuery} />
+      </form>
+    </>
   );
 };
 

@@ -31,6 +31,10 @@ const TextBox = styled.input`
     border: 0.1rem solid ${(props) => props.theme.colors.orange};
     font-size: 0.85rem;
     padding-left: 1rem;
+
+    &:focus {
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    }
   }
 
   @media ${(props) => props.theme.size.medium} {

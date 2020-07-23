@@ -59,14 +59,18 @@ const MainWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   height: 5rem;
-}
+  padding: 0 2rem;
+
+  @media ${(props) => props.theme.size.small} {
+    padding: 0 0;
+    height: 3rem;
+  }
 `;
 
 const GithubLinkWrapper = styled.a`
   display: flex;
   height: fit-content;
   align-self: center;
-  margin-right: 2rem;
 
   @media ${(props) => props.theme.size.small} {
     svg {

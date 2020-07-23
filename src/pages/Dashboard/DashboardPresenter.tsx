@@ -2,7 +2,7 @@ import React from "react";
 import { RouteComponentProps, Link } from "react-router-dom";
 import styled from "styled-components";
 
-import UserSteamDetailsCard from "../../components/core/dashboard/SteamDetailsCard";
+import UserSteamDetailsCard from "../../components/core/dashboard/UserSteamDetailsCard";
 
 type TParams = { steamID: string };
 
