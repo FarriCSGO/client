@@ -29,11 +29,8 @@ export const GithubSVG = () => {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       className="icon icon-tabler icon-tabler-brand-github"
-      width="40"
-      height="40"
       viewBox="0 0 24 24"
       strokeWidth="1.5"
-      stroke="#f37335"
       fill="none"
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -46,7 +43,7 @@ export const GithubSVG = () => {
 
 const SVG = styled.i`
   svg {
-    stroke: ${(props) => props.theme.colors.dark};
+    stroke: ${(props) => props.theme.colors.onBackground};
     height: 32px;
   }
 
