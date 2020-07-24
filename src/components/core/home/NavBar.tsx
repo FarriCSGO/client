@@ -1,15 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 
-const navBar = () => {
-  const showAlert = () => {
-    alert("You clicked on SVG");
-  };
+import { ThemeContext } from "../../../contexts/ThemeContext";
+
+const NavBar = () => {
+  const { toggleTheme } = useContext(ThemeContext);
 
   return (
     <MainWrapper>
-      <ToggleMode onClick={showAlert}>
-        {/* <svg
+      <ToggleMode onClick={toggleTheme}>
+        <svg
           xmlns="http://www.w3.org/2000/svg"
           className="icon icon-tabler icon-tabler-sun"
           width="40"
@@ -24,9 +24,8 @@ const navBar = () => {
           <path stroke="none" d="M0 0h24v24H0z" />
           <circle cx="12" cy="12" r="4" />
           <path d="M3 12h1M12 3v1M20 12h1M12 20v1M5.6 5.6l.7 .7M18.4 5.6l-.7 .7M17.7 17.7l.7 .7M6.3 17.7l-.7 .7" />
-        </svg> */}
+        </svg>
       </ToggleMode>
-
       <GithubLinkWrapper
         href="https://github.com/FarriCSGO"
         target="_blank"
@@ -135,9 +134,12 @@ const ToggleMode = styled.i`
     cursor: pointer;
   }
 
+  svg {
+  }
+
   svg:hover {
     stroke: ${(props) => props.theme.colors.orange};
   }
 `;
 
-export default navBar;
+export default NavBar;
