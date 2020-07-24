@@ -51,8 +51,8 @@ const Heading = styled.h1`
 `;
 
 const HomeButton = styled.button`
-  background: ${(props) => props.theme.colors.orange};
-  color: ${(props) => props.theme.colors.light};
+  background: ${(props) => props.theme.colors.primary};
+  color: ${(props) => props.theme.colors.text};
   font-size: 1.25em;
   width: 7.5rem;
   height: 2.5rem;

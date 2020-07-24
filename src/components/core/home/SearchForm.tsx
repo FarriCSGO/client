@@ -11,7 +11,9 @@ const SearchForm = ({ history }: RouteComponentProps) => {
   const [error, setError] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
-  const formSubmitHandler = async (event: any) => {
+  const formSubmitHandler = async (
+    event: React.FormEvent<HTMLFormElement> | React.MouseEvent<SVGSVGElement>
+  ) => {
     event.preventDefault();
 
     try {
@@ -29,7 +31,7 @@ const SearchForm = ({ history }: RouteComponentProps) => {
     }
   };
 
-  const handleQuery = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleQuery = (event: React.ChangeEvent<HTMLInputElement>): any => {
     setQuery(event.target.value);
   };
 

@@ -79,8 +79,8 @@ const CardContainer = styled.div`
   left: 53px;
   top: 26px;
 
-  background: #ffffff;
-  box-shadow: 6px 0px 18px rgba(0, 0, 0, 0.12);
+  background: ${(props) => props.theme.colors.surface};
+  box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.12);
   border-radius: 8px;
 `;
 
@@ -94,7 +94,7 @@ const Name = styled.p`
   font-size: 1.5rem;
   margin: 0;
   margin-left: 1rem;
-  color: ${(props) => props.theme.colors.orange};
+  color: ${(props) => props.theme.colors.primary};
 `;
 
 const AvatarDiv = styled.div`
@@ -110,7 +110,7 @@ const AvatarImage = styled.img`
   height: 64px;
   padding: 0.1rem;
   border-radius: 50px;
-  border: 3px solid ${(props) => props.theme.colors.orange};
+  border: 3px solid ${(props) => props.theme.colors.primary};
 `;
 
 const SteamLevel = styled.p`
@@ -133,7 +133,7 @@ const Status = styled.p`
   margin: 0;
   margin-top: 0.75rem;
   color: ${(props) => {
-    if (props.children === "Offline") return "#999999";
+    if (props.children === "Offline") return "#888888";
     else if (props.children === "Online") return "#047DC4";
     return "#39B924";
   }};

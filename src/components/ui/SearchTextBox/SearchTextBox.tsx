@@ -1,29 +1,39 @@
 import React from "react";
 import styled from "styled-components";
 
-const searchTextBox = (props: any) => {
+interface IProps {
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => {};
+}
+
+const searchTextBox = (props: IProps) => {
   return (
-    <TextBox
-      type="text"
-      placeholder="STEAM ID / STEAM PROFILE"
-      autoFocus
-      {...props}
-    />
+    <>
+      <TextBox
+        type="text"
+        placeholder="STEAM ID / STEAM PROFILE"
+        autoFocus
+        onChange={props.onChange}
+      />
+    </>
   );
 };
 
 const TextBox = styled.input`
   width: 40rem;
   height: 3.25rem;
-  background: #ffffff;
-  border: 0.1875rem solid ${(props) => props.theme.colors.orange};
+  background: ${(props) => props.theme.colors.background2};
+  border: 0.1875rem solid ${(props) => props.theme.colors.primary};
   border-radius: 3.125rem;
   margin: 0 auto;
   font-size: 1.25rem;
   font-style: normal;
   font-weight: normal;
   padding-left: 1.5rem;
-  color: #0a0a0a;
+  color: ${(props) => props.theme.colors.text};
+
+  &:focus {
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.25);
+  }
 
   @media ${(props) => props.theme.size.small} {
     width: 90vw;

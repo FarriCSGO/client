@@ -30,7 +30,6 @@ const PageContainer = styled.div`
 
 const SearchBoxContainer = styled.main`
   align-items: center;
-  align-self: center;
   display: flex;
   flex-direction: column;
   padding: 1rem;
