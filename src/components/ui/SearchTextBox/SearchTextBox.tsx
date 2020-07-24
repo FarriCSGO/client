@@ -31,6 +31,10 @@ const TextBox = styled.input`
   padding-left: 1.5rem;
   color: #0a0a0a;
 
+  &:focus {
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.25);
+  }
+
   @media ${(props) => props.theme.size.small} {
     width: 90vw;
     height: 2.5rem;
