@@ -6,15 +6,16 @@ export const Light = {
     // Background
     background: "#f0f0f0",
     background2: "#ffffff",
+    onBackground: "#0a0a0a",
 
     // Surface
     surface: "#ffffff",
     surface2: "#ffffff",
+    onSurface: "#0a0a0a",
 
     // Text
-    textLight: "#ffffff",
-    textFaint: "#888888",
-    textDark: "#0a0a0a"
+    text: "#0a0a0a",
+    textFaint: "#888888"
   },
 
   size: {
@@ -31,15 +32,16 @@ export const Dark = {
     // Background
     background: "#121212",
     background2: "#0D0D0D",
+    onBackground: "#ffffff",
 
     // Surface
     surface: "#1B1B1B",
     surface2: "#202020",
+    onSurface: "#ffffff",
 
     // Text
-    textLight: "#ffffff",
-    textFaint: "#888888",
-    textDark: "#0a0a0a"
+    text: "#ffffff",
+    textFaint: "#888888"
   },
 
   size: {
