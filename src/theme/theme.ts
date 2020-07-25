@@ -2,6 +2,8 @@ export const Light = {
   colors: {
     // Primary
     primary: "#f37335",
+    onPrimary: "#ffffff",
+    onPrimary2: "#0a0a0a",
 
     // Background
     background: "#f0f0f0",
@@ -28,6 +30,8 @@ export const Dark = {
   colors: {
     // Primary
     primary: "#f37335",
+    onPrimary: "#ffffff",
+    onPrimary2: "#0a0a0a",
 
     // Background
     background: "#121212",
