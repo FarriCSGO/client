@@ -23,15 +23,19 @@ const SearchForm = ({ history, HomePage }: IProps) => {
     event.preventDefault();
 
     try {
+      setLoading(true);
       const steamID = await parseSearchQuery(query);
 
       if (steamID === false) {
         setError(true);
+        setLoading(false);
         setErrorMsg("Invalid search query");
       } else {
+        setLoading(false);
         history.push(`/dashboard/${steamID}`);
       }
     } catch (error) {
+      setLoading(false);
       setError(true);
       setErrorMsg("User does not exist in steam database");
     }
@@ -41,16 +45,21 @@ const SearchForm = ({ history, HomePage }: IProps) => {
     setQuery(event.target.value);
   };
 
-  let errorModal;
+  let errorModal, loadingBar;
   if (error) {
     errorModal = (
       <ErrorModal message={errorMsg} onClose={(): any => setError(false)} />
     );
   }
 
+  if (loading) {
+    loadingBar = <LoadingBar />;
+  }
+
   return (
     <>
       {errorModal}
+      {loadingBar}
       <form onSubmit={(event) => formSubmitHandler(event)}>
         <SearchTextBox onChange={handleQuery} HomePage={HomePage} />
       </form>

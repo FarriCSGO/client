@@ -28,7 +28,7 @@ const TextBox = styled.input<IProps>`
   background: ${(props) => props.theme.colors.background2};
   border: 0.1875rem solid ${(props) => props.theme.colors.primary};
   border-radius: 3.125rem;
-  margin: 0 auto;
+  margin: 0.5rem auto;
   font-size: 1.25rem;
   font-style: normal;
   font-weight: normal;

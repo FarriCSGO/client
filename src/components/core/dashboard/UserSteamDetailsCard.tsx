@@ -17,6 +17,7 @@ const SteamDetailsCard = (props: IProps) => {
 
   useEffect(() => {
     const getData = async () => {
+      setLoading(true);
       const data = await getUserSteamDetails(props.steamID);
 
       setName(data.name);
