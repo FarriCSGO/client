@@ -8,7 +8,7 @@ import SearchForm from "../../components/core/home/SearchForm";
 const HomePresenter = () => {
   return (
     <PageContainer>
-      <NavBar />
+      <NavBar onHomePage={true} />
       <Quotes />
       <SearchBoxContainer>
         <Title>Counter-Strike Global Offensive Statistics Tool</Title>

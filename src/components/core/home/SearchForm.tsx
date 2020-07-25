@@ -6,7 +6,11 @@ import ErrorModal from "../../ui/Modal/ErrorModal";
 
 import parseSearchQuery from "../../../helpers/parseSearchQuery";
 
-const SearchForm = ({ history }: RouteComponentProps) => {
+interface IProps extends RouteComponentProps {
+  onHomePage?: boolean;
+}
+
+const SearchForm = ({ history, onHomePage }: IProps) => {
   const [query, setQuery] = useState("");
   const [error, setError] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
@@ -46,7 +50,7 @@ const SearchForm = ({ history }: RouteComponentProps) => {
     <>
       {errorModal}
       <form onSubmit={(event) => formSubmitHandler(event)}>
-        <SearchTextBox onChange={handleQuery} />
+        <SearchTextBox onChange={handleQuery} onHomePage={false} />
       </form>
     </>
   );

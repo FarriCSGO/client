@@ -3,6 +3,7 @@ import { RouteComponentProps, Link } from "react-router-dom";
 import styled from "styled-components";
 
 import UserSteamDetailsCard from "../../components/core/dashboard/UserSteamDetailsCard";
+import NavBar from "../../components/core/home/NavBar";
 
 type TParams = { steamID: string };
 
@@ -15,7 +16,7 @@ const DashboardPresenter = ({ match }: RouteComponentProps<TParams>) => {
   // <UerSteamDetailsCard /> component.
   return (
     <PageContainer>
-      <Heading>YOU'RE A BOT MATE</Heading>
+      <NavBar />
       <UserSteamDetailsCard steamID={steamID} />
       <LinkDiv>
         <Link to="/">
@@ -39,15 +40,6 @@ const LinkDiv = styled.div`
   width: fit-content;
   height: fit-content;
   margin: 0 auto;
-`;
-
-const Heading = styled.h1`
-  text-align: center;
-  font-size: 2rem;
-
-  @media ${(props) => props.theme.size.small} {
-    font-size: 1.25rem;
-  }
 `;
 
 const HomeButton = styled.button`

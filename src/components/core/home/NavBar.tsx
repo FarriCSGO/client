@@ -5,13 +5,38 @@ import { ThemeContext } from "../../../contexts/ThemeContext";
 import { SunSVG } from "../../ui/Icon/SVGS";
 import Logo from "../../ui/Icon/Logo";
 
-const NavBar = () => {
+import SearchForm from "../home/SearchForm";
+
+interface IProps {
+  onHomePage?: boolean;
+}
+
+const NavBar = (props: IProps) => {
   const { toggleTheme } = useContext(ThemeContext);
+
+  if (props.onHomePage === true) {
+    return (
+      <MainWrapper>
+        <Left href="https://farri.netlify.app">
+          <Logo />
+        </Left>
+        <Right>
+          <ToggleMode onClick={toggleTheme}>
+            <SunSVG />
+          </ToggleMode>
+        </Right>
+      </MainWrapper>
+    );
+  }
+
   return (
     <MainWrapper>
       <Left href="https://farri.netlify.app">
         <Logo />
       </Left>
+      <Middle>
+        <SearchForm onHomePage={false} />
+      </Middle>
       <Right>
         <ToggleMode onClick={toggleTheme}>
           <SunSVG />
@@ -24,16 +49,20 @@ const NavBar = () => {
 const MainWrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  height: 5rem;
-  padding: 0 2rem;
+  height: 6rem;
+  padding: 0 1.5rem 1rem 1.5rem;
 
   @media ${(props) => props.theme.size.small} {
     padding: 0 0.5rem;
-    height: 3rem;
+    height: 4rem;
   }
 `;
 
 const Left = styled.a`
+  align-self: center;
+`;
+
+const Middle = styled.div`
   align-self: center;
 `;
 

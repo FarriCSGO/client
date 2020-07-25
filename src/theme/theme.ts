@@ -19,8 +19,8 @@ export const Light = {
   },
 
   size: {
-    medium: "only screen and (max-width: 876px) and (min-width: 648px)",
-    small: "only screen and (max-width: 647px)"
+    medium: "only screen and (max-width: 876px) and (min-width: 768px)",
+    small: "only screen and (max-width: 767px)"
   }
 };
 
@@ -45,8 +45,8 @@ export const Dark = {
   },
 
   size: {
-    medium: "only screen and (max-width: 876px) and (min-width: 648px)",
-    small: "only screen and (max-width: 647px)"
+    medium: "only screen and (max-width: 876px) and (min-width: 768px)",
+    small: "only screen and (max-width: 767px)"
   }
 };
 

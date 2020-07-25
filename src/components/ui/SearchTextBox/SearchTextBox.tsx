@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 interface IProps {
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => {};
+  onHomePage?: boolean;
 }
 
 const searchTextBox = (props: IProps) => {
@@ -13,12 +14,13 @@ const searchTextBox = (props: IProps) => {
         placeholder="STEAM ID / STEAM PROFILE"
         autoFocus
         onChange={props.onChange}
+        {...props.onHomePage}
       />
     </>
   );
 };
 
-const TextBox = styled.input`
+const TextBox = styled.input<IProps>`
   width: 40rem;
   height: 3.25rem;
   background: ${(props) => props.theme.colors.background2};
@@ -36,9 +38,10 @@ const TextBox = styled.input`
   }
 
   @media ${(props) => props.theme.size.small} {
+    display: ${(props) => (props.onHomePage ? "inherit" : "none")};
     width: 90vw;
     height: 2.5rem;
-    border: 0.1rem solid ${(props) => props.theme.colors.orange};
+    border: 0.1rem solid ${(props) => props.theme.colors.primary};
     font-size: 0.85rem;
     padding-left: 1rem;
 
@@ -50,7 +53,7 @@ const TextBox = styled.input`
   @media ${(props) => props.theme.size.medium} {
     width: 30rem;
     height: 2.5rem;
-    border: 0.1rem solid ${(props) => props.theme.colors.orange};
+    border: 0.1rem solid ${(props) => props.theme.colors.primary};
     font-size: 0.85rem;
     padding-left: 1rem;
   }
