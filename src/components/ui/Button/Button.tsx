@@ -20,12 +20,12 @@ const Button = (props: ButtonProps) => {
 const MyButton = styled.button`
   font-style: normal;
   font-weight: normal;
-  background-color: #fff;
-  color: ${(props) => props.theme.colors.dark};
-  border: 0.125rem solid ${(props) => props.theme.colors.orange};
+  background-color: ${(props) => props.theme.colors.primary};
+  color: ${(props) => props.theme.colors.onPrimary};
   border-radius: 50px;
   padding: 8px 32px;
-  box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.18);
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.25);
+  border: none;
 
   &:hover {
     cursor: pointer;

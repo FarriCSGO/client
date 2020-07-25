@@ -8,12 +8,12 @@ import SearchForm from "../../components/core/home/SearchForm";
 const HomePresenter = () => {
   return (
     <PageContainer>
-      <NavBar />
+      <NavBar HomePage={true} />
       <Quotes />
       <SearchBoxContainer>
         <Title>Counter-Strike Global Offensive Statistics Tool</Title>
         <MobileTitle>CSGO Statistics Tool</MobileTitle>
-        <SearchForm />
+        <SearchForm HomePage={true} />
       </SearchBoxContainer>
     </PageContainer>
   );

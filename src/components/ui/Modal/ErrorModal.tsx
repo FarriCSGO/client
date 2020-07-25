@@ -39,7 +39,7 @@ const ModalWrapper = styled.div`
   left: calc(50% - 15rem);
   width: 30rem;
   height: 15rem;
-  background: white;
+  background: ${(props) => props.theme.colors.surface};
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   z-index: 100;
   border-radius: 7px;
@@ -64,8 +64,8 @@ const Actions = styled.div`
 const MainText = styled.h2`
   margin: 0;
   padding: 1rem;
-  background: ${(props) => props.theme.colors.orange};
-  color: white;
+  background: ${(props) => props.theme.colors.primary};
+  color: ${(props) => props.theme.colors.onPrimary};
   border-radius: 7px 7px 0 0;
 `;
 
@@ -73,6 +73,7 @@ const Message = styled.p`
   margin: 0;
   padding: 1rem;
   height: 6rem;
+  color: ${(props) => props.theme.colors.onSurface};
 `;
 
 export default ErrorModal;

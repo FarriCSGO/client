@@ -2,6 +2,8 @@ export const Light = {
   colors: {
     // Primary
     primary: "#f37335",
+    onPrimary: "#ffffff",
+    onPrimary2: "#0a0a0a",
 
     // Background
     background: "#f0f0f0",
@@ -19,8 +21,8 @@ export const Light = {
   },
 
   size: {
-    medium: "only screen and (max-width: 876px) and (min-width: 648px)",
-    small: "only screen and (max-width: 647px)"
+    medium: "only screen and (max-width: 876px) and (min-width: 768px)",
+    small: "only screen and (max-width: 767px)"
   }
 };
 
@@ -28,6 +30,8 @@ export const Dark = {
   colors: {
     // Primary
     primary: "#f37335",
+    onPrimary: "#ffffff",
+    onPrimary2: "#0a0a0a",
 
     // Background
     background: "#121212",
@@ -45,8 +49,8 @@ export const Dark = {
   },
 
   size: {
-    medium: "only screen and (max-width: 876px) and (min-width: 648px)",
-    small: "only screen and (max-width: 647px)"
+    medium: "only screen and (max-width: 876px) and (min-width: 768px)",
+    small: "only screen and (max-width: 767px)"
   }
 };
 
