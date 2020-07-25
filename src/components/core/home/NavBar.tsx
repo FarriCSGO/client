@@ -64,6 +64,7 @@ const Left = styled.a`
 
 const Middle = styled.div`
   align-self: center;
+  margin: 0 auto;
 `;
 
 const Right = styled.div`
