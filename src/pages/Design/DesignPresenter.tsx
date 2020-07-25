@@ -1,7 +1,8 @@
 import React from "react";
+import LoadingBar from "../../components/ui/Animation/LoadingBar/LoadingBar";
 
 const Design = () => {
-  return <h1> DESIGN </h1>;
+  return <LoadingBar />;
 };
 
 export default Design;

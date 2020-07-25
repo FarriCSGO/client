@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { getUserSteamDetails } from "../../../utils/api";
 import styled from "styled-components";
 
-import Loading from "../../ui/Animation/Loading";
+import Loading from "../../ui/Animation/LoadingSpinner/LoadingSpinner";
 
 interface IProps {
   steamID: string;

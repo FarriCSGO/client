@@ -50,7 +50,7 @@ const SearchForm = ({ history, onHomePage }: IProps) => {
     <>
       {errorModal}
       <form onSubmit={(event) => formSubmitHandler(event)}>
-        <SearchTextBox onChange={handleQuery} onHomePage={false} />
+        <SearchTextBox onChange={handleQuery} onHomePage={onHomePage} />
       </form>
     </>
   );

@@ -13,7 +13,7 @@ const HomePresenter = () => {
       <SearchBoxContainer>
         <Title>Counter-Strike Global Offensive Statistics Tool</Title>
         <MobileTitle>CSGO Statistics Tool</MobileTitle>
-        <SearchForm />
+        <SearchForm onHomePage={true} />
       </SearchBoxContainer>
     </PageContainer>
   );
