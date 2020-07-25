@@ -59,8 +59,7 @@ const SteamDetailsCard = (props: IProps) => {
         <AvatarDiv>
           <a
             href={`http://steamcommunity.com/profiles/${props.steamID}`}
-            target="_blank"
-            rel="noopener noreferrer"
+            target="_blanl"
           >
             <AvatarImage
               src={avatarURL}
@@ -108,8 +107,7 @@ const Name = styled.p`
 `;
 
 const AvatarDiv = styled.div`
-  margin: 0 1rem;
-  margin-top: 0.75rem;
+  margin: 0.25rem 1rem;
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -125,14 +123,11 @@ const AvatarImage = styled.img`
 
 const SteamLevel = styled.p`
   font-weight: bold;
+  height: 1rem;
   font-size: 1rem;
-  height: fit-content;
-  width: fit-content;
-  position: relative;
-  margin: 0;
+  margin: 0.5rem 0.5rem 0 0;
   padding: 0;
-  top: 0.3rem;
-  right: -19.5rem;
+  text-align: right;
 `;
 
 const Status = styled.p`
@@ -141,7 +136,7 @@ const Status = styled.p`
   text-align: center;
   padding: 0;
   margin: 0;
-  margin-top: 0.75rem;
+  margin-top: -rem;
   color: ${(props) => {
     if (props.children === "Offline") return "#888888";
     else if (props.children === "Online") return "#047DC4";
