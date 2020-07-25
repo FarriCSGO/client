@@ -40,7 +40,7 @@ const SteamDetailsCard = (props: IProps) => {
     };
 
     getData();
-  }, [props]);
+  }, [props.steamID]);
 
   if (loading === true) {
     return (

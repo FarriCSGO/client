@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components";
 
 import Quotes from "../../components/core/home/Quotes";
-import NavBar from "../../components/core/home/NavBar";
-import SearchForm from "../../components/core/home/SearchForm";
+import NavBar from "../../components/shared/NavBar/NavBar";
+import SearchForm from "../../components/shared/SearchForm/SearchForm";
 
 const HomePresenter = () => {
   return (
@@ -13,7 +13,7 @@ const HomePresenter = () => {
       <SearchBoxContainer>
         <Title>Counter-Strike Global Offensive Statistics Tool</Title>
         <MobileTitle>CSGO Statistics Tool</MobileTitle>
-        <SearchForm HomePage={true} />
+        <SearchForm />
       </SearchBoxContainer>
     </PageContainer>
   );

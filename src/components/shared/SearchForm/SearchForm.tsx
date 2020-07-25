@@ -7,11 +7,7 @@ import LoadingBar from "../../ui/Animation/LoadingBar/LoadingBar";
 
 import parseSearchQuery from "../../../helpers/parseSearchQuery";
 
-interface IProps extends RouteComponentProps {
-  HomePage?: boolean;
-}
-
-const SearchForm = ({ history, HomePage }: IProps) => {
+const SearchForm = ({ history }: RouteComponentProps) => {
   const [query, setQuery] = useState("");
   const [error, setError] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
@@ -61,7 +57,7 @@ const SearchForm = ({ history, HomePage }: IProps) => {
       {errorModal}
       {loadingBar}
       <form onSubmit={(event) => formSubmitHandler(event)}>
-        <SearchTextBox onChange={handleQuery} HomePage={HomePage} />
+        <SearchTextBox onChange={handleQuery} />
       </form>
     </>
   );
