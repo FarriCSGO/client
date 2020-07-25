@@ -57,7 +57,16 @@ const SteamDetailsCard = (props: IProps) => {
       <CenterItems>
         <SteamLevel>{level}</SteamLevel>
         <AvatarDiv>
-          <AvatarImage src={avatarURL} alt="steam profile avatar"></AvatarImage>
+          <a
+            href={`http://steamcommunity.com/profiles/${props.steamID}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <AvatarImage
+              src={avatarURL}
+              alt="steam profile avatar"
+            ></AvatarImage>
+          </a>
           <Name>{name}</Name>
         </AvatarDiv>
         <Status>{status}</Status>
