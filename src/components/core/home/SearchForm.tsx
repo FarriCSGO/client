@@ -3,17 +3,19 @@ import { RouteComponentProps, withRouter } from "react-router-dom";
 
 import SearchTextBox from "../../ui/SearchTextBox/SearchTextBox";
 import ErrorModal from "../../ui/Modal/ErrorModal";
+import LoadingBar from "../../ui/Animation/LoadingBar/LoadingBar";
 
 import parseSearchQuery from "../../../helpers/parseSearchQuery";
 
 interface IProps extends RouteComponentProps {
-  onHomePage?: boolean;
+  HomePage?: boolean;
 }
 
-const SearchForm = ({ history, onHomePage }: IProps) => {
+const SearchForm = ({ history, HomePage }: IProps) => {
   const [query, setQuery] = useState("");
   const [error, setError] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const formSubmitHandler = async (
     event: React.FormEvent<HTMLFormElement> | React.MouseEvent<SVGSVGElement>
@@ -50,7 +52,7 @@ const SearchForm = ({ history, onHomePage }: IProps) => {
     <>
       {errorModal}
       <form onSubmit={(event) => formSubmitHandler(event)}>
-        <SearchTextBox onChange={handleQuery} onHomePage={onHomePage} />
+        <SearchTextBox onChange={handleQuery} HomePage={HomePage} />
       </form>
     </>
   );

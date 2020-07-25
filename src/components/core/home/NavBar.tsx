@@ -8,13 +8,13 @@ import Logo from "../../ui/Icon/Logo";
 import SearchForm from "../home/SearchForm";
 
 interface IProps {
-  onHomePage?: boolean;
+  HomePage?: boolean;
 }
 
 const NavBar = (props: IProps) => {
   const { toggleTheme } = useContext(ThemeContext);
 
-  if (props.onHomePage === true) {
+  if (props.HomePage === true) {
     return (
       <MainWrapper>
         <Left href="https://farri.netlify.app">
@@ -35,7 +35,7 @@ const NavBar = (props: IProps) => {
         <Logo />
       </Left>
       <Middle>
-        <SearchForm onHomePage={false} />
+        <SearchForm HomePage={false} />
       </Middle>
       <Right>
         <ToggleMode onClick={toggleTheme}>

@@ -3,10 +3,12 @@ import styled from "styled-components";
 
 interface IProps {
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => {};
-  onHomePage?: boolean;
+  HomePage?: boolean;
 }
 
 const searchTextBox = (props: IProps) => {
+  const myProps = Object.assign({}, props);
+  delete myProps.onChange;
   return (
     <>
       <TextBox
@@ -14,7 +16,7 @@ const searchTextBox = (props: IProps) => {
         placeholder="STEAM ID / STEAM PROFILE"
         autoFocus
         onChange={props.onChange}
-        {...props}
+        {...myProps}
       />
     </>
   );
@@ -38,7 +40,7 @@ const TextBox = styled.input<IProps>`
   }
 
   @media ${(props) => props.theme.size.small} {
-    display: ${(props) => (props.onHomePage ? "inherit" : "none")};
+    display: ${(props) => (props.HomePage ? "inherit" : "none")};
     width: 90vw;
     height: 2.5rem;
     border: 0.1rem solid ${(props) => props.theme.colors.primary};
