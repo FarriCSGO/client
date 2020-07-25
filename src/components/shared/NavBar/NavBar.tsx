@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 import { ThemeContext } from "../../../contexts/ThemeContext";
@@ -17,8 +18,10 @@ const NavBar = (props: IProps) => {
   if (props.HomePage === true) {
     return (
       <MainWrapper>
-        <Left href="https://farri.netlify.app">
-          <Logo />
+        <Left>
+          <Link to="/">
+            <Logo />
+          </Link>
         </Left>
         <Right>
           <ToggleMode onClick={toggleTheme}>
@@ -31,8 +34,10 @@ const NavBar = (props: IProps) => {
 
   return (
     <MainWrapper>
-      <Left href="https://farri.netlify.app">
-        <Logo />
+      <Left>
+        <Link to="/">
+          <Logo />
+        </Link>
       </Left>
       <Middle>
         <SearchForm />
@@ -58,7 +63,7 @@ const MainWrapper = styled.div`
   }
 `;
 
-const Left = styled.a`
+const Left = styled.div`
   align-self: center;
 `;
 
