@@ -5,7 +5,7 @@ import { ThemeContext } from "../../../contexts/ThemeContext";
 import { SunSVG } from "../../ui/Icon/SVGS";
 import Logo from "../../ui/Icon/Logo";
 
-import SearchForm from "../home/SearchForm";
+import SearchForm from "../SearchForm/SearchForm";
 
 interface IProps {
   HomePage?: boolean;
@@ -35,7 +35,7 @@ const NavBar = (props: IProps) => {
         <Logo />
       </Left>
       <Middle>
-        <SearchForm HomePage={false} />
+        <SearchForm />
       </Middle>
       <Right>
         <ToggleMode onClick={toggleTheme}>
@@ -64,6 +64,11 @@ const Left = styled.a`
 
 const Middle = styled.div`
   align-self: center;
+  margin: 0 auto;
+
+  @media ${(props) => props.theme.size.small} {
+    display: none;
+  }
 `;
 
 const Right = styled.div`

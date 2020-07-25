@@ -3,7 +3,8 @@ import { RouteComponentProps, Link } from "react-router-dom";
 import styled from "styled-components";
 
 import UserSteamDetailsCard from "../../components/core/dashboard/UserSteamDetailsCard";
-import NavBar from "../../components/core/home/NavBar";
+import NavBar from "../../components/shared/NavBar/NavBar";
+import SearchForm from "../../components/shared/SearchForm/SearchForm";
 
 type TParams = { steamID: string };
 
@@ -17,6 +18,9 @@ const DashboardPresenter = ({ match }: RouteComponentProps<TParams>) => {
   return (
     <PageContainer>
       <NavBar />
+      <SearchBarWrapper>
+        <SearchForm />
+      </SearchBarWrapper>
       <UserSteamDetailsCard steamID={steamID} />
       <LinkDiv>
         <Link to="/">
@@ -40,6 +44,15 @@ const LinkDiv = styled.div`
   width: fit-content;
   height: fit-content;
   margin: 0 auto;
+`;
+
+const SearchBarWrapper = styled.div`
+  display: none;
+  margin: 0 auto 1rem auto;
+
+  @media ${(props) => props.theme.size.small} {
+    display: block;
+  }
 `;
 
 const HomeButton = styled.button`
