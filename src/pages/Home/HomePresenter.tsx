@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 
 import Quotes from "../../components/core/home/Quotes";
@@ -6,6 +6,10 @@ import NavBar from "../../components/shared/NavBar/NavBar";
 import SearchForm from "../../components/shared/SearchForm/SearchForm";
 
 const HomePresenter = () => {
+  useEffect(() => {
+    document.title = "Farri - Check your CS:GO Statistics";
+  }, []);
+
   return (
     <PageContainer>
       <NavBar HomePage={true} />

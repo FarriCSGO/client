@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { RouteComponentProps } from "react-router-dom";
 import styled from "styled-components";
+import { getUserSteamDetails } from "../../utils/api";
 
 import UserSteamDetailsCard from "../../components/core/dashboard/UserSteamDetailsCard";
 import NavBar from "../../components/shared/NavBar/NavBar";
@@ -10,6 +11,16 @@ type TParams = { steamID: string };
 
 const DashboardPresenter = ({ match }: RouteComponentProps<TParams>) => {
   const steamID: string = match.params.steamID;
+
+  useEffect(() => {
+    const setDocTitle = async () => {
+      const data = await getUserSteamDetails(steamID);
+      const name = data.name;
+      document.title = "Dashboard - " + name;
+    };
+
+    setDocTitle();
+  }, [steamID]);
 
   // FIXME: If a user directly go to a dashboard/steamID64 URL with an invalid
   // steamID64, the APP CRASHES. We should seperate the logic to Container
