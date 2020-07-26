@@ -24,15 +24,6 @@ const HomePresenter = () => {
   );
 };
 
-const PageContainer = styled.div`
-  height: 100vh;
-  max-width: 100vw;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-`;
-
 const SearchBoxContainer = styled.main`
   align-items: center;
   display: flex;
