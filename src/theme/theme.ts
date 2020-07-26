@@ -1,4 +1,6 @@
 export const Light = {
+  name: "Light",
+
   colors: {
     // Primary
     primary: "#f37335",
@@ -27,6 +29,8 @@ export const Light = {
 };
 
 export const Dark = {
+  name: "Dark",
+
   colors: {
     // Primary
     primary: "#f37335",
