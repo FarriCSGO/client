@@ -1,40 +1,30 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 import QuotesData from "../../../data/quotesByPros.json";
 
-interface IState {
-  quote: string;
-  person: string;
-  error: boolean;
-}
+const Quotes = () => {
+  const [quote, setQuote] = useState("");
+  const [person, setPerson] = useState("");
 
-class Quotes extends React.Component {
-  state: IState = {
-    quote: "",
-    person: "",
-    error: false
-  };
-
-  componentDidMount = async () => {
+  useEffect(() => {
     const randomNumber: number = Math.floor(Math.random() * 22);
-    const Quote: string = QuotesData.quotes[randomNumber].quote;
-    const Person: string = QuotesData.quotes[randomNumber].person;
+    const quote: string = QuotesData.quotes[randomNumber].quote;
+    const person: string = QuotesData.quotes[randomNumber].person;
 
-    this.setState({ quote: Quote, person: Person });
-  };
+    setQuote(quote);
+    setPerson(person);
+  }, []);
 
-  render() {
-    return (
-      <MainWrapper>
-        <QuoteWrapper>
-          <Quote>"{this.state.quote}"</Quote>
-          <Person>{this.state.person}</Person>
-        </QuoteWrapper>
-      </MainWrapper>
-    );
-  }
-}
+  return (
+    <MainWrapper>
+      <QuoteWrapper>
+        <Quote>"{quote}"</Quote>
+        <Person>{person}</Person>
+      </QuoteWrapper>
+    </MainWrapper>
+  );
+};
 
 const MainWrapper = styled.div`
   height: 10rem;
@@ -70,7 +60,6 @@ const Person = styled.h3`
   @media ${(props) => props.theme.size.small} {
     font-size: 0.75rem;
   }
-}
 `;
 
 export default Quotes;
