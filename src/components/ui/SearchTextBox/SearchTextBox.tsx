@@ -20,7 +20,7 @@ const searchTextBox = (props: IProps) => {
 
 const TextBox = styled.input<IProps>`
   width: 40rem;
-  height: 3.25rem;
+  height: 3rem;
   background: ${(props) => props.theme.colors.background2};
   border: 0.1875rem solid ${(props) => props.theme.colors.primary};
   border-radius: 3.125rem;
