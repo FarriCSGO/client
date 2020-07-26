@@ -24,7 +24,7 @@
 .loader .bar {
   width: 100%;
   position: absolute;
-  height: 5px;
+  height: 3px;
   background-color: #f37335;
   animation-name: loader-animation;
   animation-duration: 3s;
