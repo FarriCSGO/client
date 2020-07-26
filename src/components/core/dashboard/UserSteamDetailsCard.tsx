@@ -91,11 +91,20 @@ const CardContainer = styled.div`
   background: ${(props) => props.theme.colors.surface};
   box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.12);
   border-radius: 8px;
+
+  @media ${(props) => props.theme.size.small} {
+    width: 300px;
+    height: 135px;
+  }
 `;
 
 const CenterItems = styled.div`
   width: 350px;
   // TODO: Instead of cuttin the name, append "..."
+
+  @media ${(props) => props.theme.size.small} {
+    width: 300px;
+  }
 `;
 
 const Name = styled.p`
@@ -104,6 +113,11 @@ const Name = styled.p`
   margin: 0;
   margin-left: 1rem;
   color: ${(props) => props.theme.colors.primary};
+
+  @media ${(props) => props.theme.size.small} {
+    font-size: 1.3rem;
+    margin-left: 0.75rem;
+  }
 `;
 
 const AvatarDiv = styled.div`
@@ -111,6 +125,10 @@ const AvatarDiv = styled.div`
   display: flex;
   align-items: center;
   overflow: hidden;
+
+  @media ${(props) => props.theme.size.small} {
+    margin: 0.15rem 0.75rem;
+  }
 `;
 
 const AvatarImage = styled.img`
@@ -119,6 +137,11 @@ const AvatarImage = styled.img`
   padding: 0.1rem;
   border-radius: 50px;
   border: 3px solid ${(props) => props.theme.colors.primary};
+
+  @media ${(props) => props.theme.size.small} {
+    width: 52px;
+    height: 52px;
+  }
 `;
 
 const SteamLevel = styled.p`
@@ -136,11 +159,15 @@ const Status = styled.p`
   text-align: center;
   padding: 0;
   margin: 0;
-  margin-top: -rem;
+  margin-top: 0.35rem;
   color: ${(props) => {
     if (props.children === "Offline") return "#888888";
     else if (props.children === "Online") return "#047DC4";
     return "#39B924";
   }};
+
+  @media ${(props) => props.theme.size.small} {
+    font-size: 0.95rem;
+  }
 `;
 export default SteamDetailsCard;
