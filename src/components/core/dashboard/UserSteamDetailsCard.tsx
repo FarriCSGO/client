@@ -141,6 +141,7 @@ const AvatarImage = styled.img`
   @media ${(props) => props.theme.size.small} {
     width: 52px;
     height: 52px;
+    border: 2px solid ${(props) => props.theme.colors.primary};
   }
 `;
 

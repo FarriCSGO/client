@@ -20,7 +20,7 @@ const Wrapper = styled.div`
     height: 56px;
 
     @media ${(props) => props.theme.size.small} {
-      height: 32px;
+      height: 42px;
     }
   }
 `;
