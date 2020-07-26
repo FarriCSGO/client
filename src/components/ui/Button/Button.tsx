@@ -6,10 +6,20 @@ interface ButtonProps {
   onClick?: () => {};
   style?: any;
   primary?: boolean;
+  autoFocus?: boolean;
 }
 
 const Button = (props: ButtonProps) => {
   let style = props.style || {};
+
+  if (props.autoFocus) {
+    return (
+      <MyButton style={style} onClick={props.onClick} autoFocus>
+        {props.text}
+      </MyButton>
+    );
+  }
+
   return (
     <MyButton style={style} onClick={props.onClick}>
       {props.text}
