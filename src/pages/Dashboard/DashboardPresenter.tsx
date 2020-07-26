@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { RouteComponentProps } from "react-router-dom";
 import styled from "styled-components";
-import { getUserSteamDetails, validateSteamID } from "../../utils/api";
+import { getUserSteamDetails } from "../../utils/api";
 
 import AppContainer from "../../components/ui/Layout/AppContainer";
 import UserSteamDetailsCard from "../../components/core/dashboard/UserSteamDetailsCard";
@@ -21,9 +21,9 @@ const DashboardPresenter = ({
   useEffect(() => {
     const validateID = async () => {
       try {
-        const id = await validateSteamID(steamID);
-        setValidID(id);
         const data = await getUserSteamDetails(steamID);
+        setValidID(data.steamID64);
+
         const name = data.name;
         document.title =
           name + " - Dashboard // Farri - Check your CS:GO Statistics";
