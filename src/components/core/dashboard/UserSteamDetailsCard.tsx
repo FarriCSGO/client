@@ -74,19 +74,11 @@ const SteamDetailsCard = (props: IProps) => {
   );
 };
 
-const AnimationDiv = styled.div`
-  display: flex;
-  margin: 0 auto;
-  align-items: center;
-`;
-
 const CardContainer = styled.div`
   display: flex;
   margin: 0 auto;
   width: 350px;
   height: 155px;
-  left: 53px;
-  top: 26px;
 
   background: ${(props) => props.theme.colors.surface};
   box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.12);
@@ -96,6 +88,12 @@ const CardContainer = styled.div`
     width: 300px;
     height: 135px;
   }
+`;
+
+const AnimationDiv = styled.div`
+  display: flex;
+  margin: 0 auto;
+  align-items: center;
 `;
 
 const CenterItems = styled.div`
