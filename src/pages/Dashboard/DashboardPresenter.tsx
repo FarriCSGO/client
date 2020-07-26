@@ -1,32 +1,52 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { RouteComponentProps } from "react-router-dom";
 import styled from "styled-components";
-import { getUserSteamDetails } from "../../utils/api";
+import { getUserSteamDetails, validateSteamID } from "../../utils/api";
 
 import AppContainer from "../../components/ui/Layout/AppContainer";
 import UserSteamDetailsCard from "../../components/core/dashboard/UserSteamDetailsCard";
 import NavBar from "../../components/shared/NavBar/NavBar";
 import SearchForm from "../../components/shared/SearchForm/SearchForm";
+import LoadingCube from "../../components/ui/Animation/LoadingCube/LoadingCube";
 
 type TParams = { steamID: string };
 
-const DashboardPresenter = ({ match }: RouteComponentProps<TParams>) => {
+const DashboardPresenter = ({
+  match,
+  history
+}: RouteComponentProps<TParams>) => {
+  const [validID, setValidID] = useState(null);
   const steamID: string = match.params.steamID;
 
   useEffect(() => {
-    const setDocTitle = async () => {
-      const data = await getUserSteamDetails(steamID);
-      const name = data.name;
-      document.title =
-        name + " - Dashboard // Farri - Check your CS:GO Statistics";
+    const validateID = async () => {
+      try {
+        const id = await validateSteamID(steamID);
+        setValidID(id);
+        const data = await getUserSteamDetails(steamID);
+        const name = data.name;
+        document.title =
+          name + " - Dashboard // Farri - Check your CS:GO Statistics";
+      } catch (err) {
+        history.push("/");
+      }
     };
-    setDocTitle();
-  }, [steamID]);
+    validateID();
+  });
 
-  // FIXME: If a user directly go to a dashboard/steamID64 URL with an invalid
-  // steamID64, the APP CRASHES. We should seperate the logic to Container
-  // NOTE: The app crashes because an invalid steamID is passed down to
-  // <UerSteamDetailsCard /> component.
+  if (validID === null)
+    return (
+      <AppContainer>
+        <NavBar />
+        <SearchBarWrapper>
+          <SearchForm />
+        </SearchBarWrapper>
+        <div style={{ textAlign: "center" }}>
+          <LoadingCube />
+        </div>
+      </AppContainer>
+    );
+
   return (
     <AppContainer>
       <NavBar />

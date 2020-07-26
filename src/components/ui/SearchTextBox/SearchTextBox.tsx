@@ -55,7 +55,7 @@ const TextBox = styled.input<IProps>`
   }
 
   &::placeholder {
-    color: #999;
+    color: ${(props) => props.theme.colors.textFaint};
   }
 
   &:focus {
