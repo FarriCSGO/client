@@ -1,18 +1,15 @@
 @keyframes loader-animation {
   0% {
-    width: 0%;
+    left: -100%;
   }
   49% {
-    width: 100%;
-    left: 0%;
+    left: 100%;
   }
   50% {
     left: 100%;
-    width: 0;
   }
   100% {
-    left: 0%;
-    width: 100%;
+    left: -100%;
   }
 }
 
@@ -25,7 +22,9 @@
 }
 
 .loader .bar {
-  height: 3px;
+  width: 100%;
+  position: absolute;
+  height: 5px;
   background-color: #f37335;
   animation-name: loader-animation;
   animation-duration: 3s;

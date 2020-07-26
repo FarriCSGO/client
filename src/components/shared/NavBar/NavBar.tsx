@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 import { ThemeContext } from "../../../contexts/ThemeContext";
-import { SunSVG } from "../../ui/Icon/SVGS";
+import { SunSVG, MoonSVG } from "../../ui/Icon/SVGS";
 import Logo from "../../ui/Icon/Logo";
 
 import SearchForm from "../SearchForm/SearchForm";
@@ -13,7 +13,7 @@ interface IProps {
 }
 
 const NavBar = (props: IProps) => {
-  const { toggleTheme } = useContext(ThemeContext);
+  const { theme, toggleTheme } = useContext(ThemeContext);
 
   if (props.HomePage === true) {
     return (
@@ -25,7 +25,7 @@ const NavBar = (props: IProps) => {
         </Left>
         <Right>
           <ToggleMode onClick={toggleTheme}>
-            <SunSVG />
+            {theme === "dark" ? <MoonSVG /> : <SunSVG />}
           </ToggleMode>
         </Right>
       </MainWrapper>
@@ -44,7 +44,7 @@ const NavBar = (props: IProps) => {
       </Middle>
       <Right>
         <ToggleMode onClick={toggleTheme}>
-          <SunSVG />
+          {theme === "dark" ? <MoonSVG /> : <SunSVG />}
         </ToggleMode>
       </Right>
     </MainWrapper>

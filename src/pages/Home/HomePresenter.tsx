@@ -1,13 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 
+import AppContainer from "../../components/ui/Layout/AppContainer";
 import Quotes from "../../components/core/home/Quotes";
 import NavBar from "../../components/shared/NavBar/NavBar";
 import SearchForm from "../../components/shared/SearchForm/SearchForm";
 
 const HomePresenter = () => {
+  useEffect(() => {
+    document.title = "Farri - Check your CS:GO Statistics";
+  }, []);
+
   return (
-    <PageContainer>
+    <AppContainer>
       <NavBar HomePage={true} />
       <Quotes />
       <SearchBoxContainer>
@@ -15,18 +20,9 @@ const HomePresenter = () => {
         <MobileTitle>CSGO Statistics Tool</MobileTitle>
         <SearchForm />
       </SearchBoxContainer>
-    </PageContainer>
+    </AppContainer>
   );
 };
-
-const PageContainer = styled.div`
-  height: 100vh;
-  max-width: 100vw;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-`;
 
 const SearchBoxContainer = styled.main`
   align-items: center;

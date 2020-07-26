@@ -20,11 +20,10 @@ const searchTextBox = (props: IProps) => {
 
 const TextBox = styled.input<IProps>`
   width: 40rem;
-  height: 3.25rem;
+  height: 3rem;
   background: ${(props) => props.theme.colors.background2};
   border: 0.1875rem solid ${(props) => props.theme.colors.primary};
   border-radius: 3.125rem;
-  margin: 0.5rem auto;
   font-size: 1.25rem;
   font-style: normal;
   font-weight: normal;
@@ -56,7 +55,7 @@ const TextBox = styled.input<IProps>`
   }
 
   &::placeholder {
-    color: #999;
+    color: ${(props) => props.theme.colors.textFaint};
   }
 
   &:focus {

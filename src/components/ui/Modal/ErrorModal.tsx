@@ -1,14 +1,31 @@
-import React from "react";
+import React, { useEffect, useCallback } from "react";
 import styled from "styled-components";
 
 import Button from "../Button/Button";
 
 interface ErrorModalProps {
   message: string;
-  onClose?: () => {};
+  onClose: () => {};
 }
 
 const ErrorModal = (props: ErrorModalProps) => {
+  const escFunction = useCallback(
+    (event) => {
+      if (event.keyCode === 27) {
+        props.onClose();
+      }
+    },
+    [props]
+  );
+
+  useEffect(() => {
+    document.addEventListener("keydown", escFunction, false);
+
+    return () => {
+      document.removeEventListener("keydown", escFunction, false);
+    };
+  }, [escFunction]);
+
   return (
     <>
       <Backdrop onClick={props.onClose} />
@@ -16,7 +33,7 @@ const ErrorModal = (props: ErrorModalProps) => {
         <MainText> Error Occurred! </MainText>
         <Message> {props.message} </Message>
         <Actions>
-          <Button text="Close" onClick={props.onClose} />
+          <Button text="Close" onClick={props.onClose} autoFocus={true} />
         </Actions>
       </ModalWrapper>
     </>
