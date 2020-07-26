@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 
+import AppContainer from "../../components/ui/Layout/AppContainer";
 import Quotes from "../../components/core/home/Quotes";
 import NavBar from "../../components/shared/NavBar/NavBar";
 import SearchForm from "../../components/shared/SearchForm/SearchForm";
@@ -11,7 +12,7 @@ const HomePresenter = () => {
   }, []);
 
   return (
-    <PageContainer>
+    <AppContainer>
       <NavBar HomePage={true} />
       <Quotes />
       <SearchBoxContainer>
@@ -19,7 +20,7 @@ const HomePresenter = () => {
         <MobileTitle>CSGO Statistics Tool</MobileTitle>
         <SearchForm />
       </SearchBoxContainer>
-    </PageContainer>
+    </AppContainer>
   );
 };
 

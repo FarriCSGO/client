@@ -3,6 +3,7 @@ import { RouteComponentProps } from "react-router-dom";
 import styled from "styled-components";
 import { getUserSteamDetails } from "../../utils/api";
 
+import AppContainer from "../../components/ui/Layout/AppContainer";
 import UserSteamDetailsCard from "../../components/core/dashboard/UserSteamDetailsCard";
 import NavBar from "../../components/shared/NavBar/NavBar";
 import SearchForm from "../../components/shared/SearchForm/SearchForm";
@@ -27,24 +28,15 @@ const DashboardPresenter = ({ match }: RouteComponentProps<TParams>) => {
   // NOTE: The app crashes because an invalid steamID is passed down to
   // <UerSteamDetailsCard /> component.
   return (
-    <PageContainer>
+    <AppContainer>
       <NavBar />
       <SearchBarWrapper>
         <SearchForm />
       </SearchBarWrapper>
       <UserSteamDetailsCard steamID={steamID} />
-    </PageContainer>
+    </AppContainer>
   );
 };
-
-const PageContainer = styled.div`
-  height: 100vh;
-  max-width: 100vw;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-`;
 
 const SearchBarWrapper = styled.div`
   display: none;
