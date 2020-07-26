@@ -16,9 +16,9 @@ const DashboardPresenter = ({ match }: RouteComponentProps<TParams>) => {
     const setDocTitle = async () => {
       const data = await getUserSteamDetails(steamID);
       const name = data.name;
-      document.title = "Dashboard - " + name;
+      document.title =
+        name + " - Dashboard // Farri - Check your CS:GO Statistics";
     };
-
     setDocTitle();
   }, [steamID]);
 
