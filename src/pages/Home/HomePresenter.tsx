@@ -107,21 +107,16 @@ const GithubText = styled.h3`
   font-size: 1rem;
   color: ${(props) => props.theme.colors.dark};
   margin-right: 0.5rem;
-
-  @media ${(props) => props.theme.size.small} {
-    font-size: 0.75rem;
-    margin-right: 0.35rem;
-  }
 `;
 
 const MyButton = styled.button`
   font-style: normal;
   font-weight: normal;
-  background-color: ${(props) => props.theme.colors.primary};
-  color: ${(props) => props.theme.colors.onPrimary};
+  background-color: ${(props) => props.theme.colors.surface2};
+  color: ${(props) => props.theme.colors.primary};
   border-radius: 50px;
-  padding: 2px 24px;
-  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.25);
+  padding: 3px 18px;
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.25);
   border: none;
   display: flex;
 
@@ -142,7 +137,7 @@ const MyButton = styled.button`
   align-items: center;
 
   svg {
-    stroke: ${(props) => props.theme.colors.onPrimary};
+    stroke: ${(props) => props.theme.colors.primary};
     height: 32px;
     width: 32px;
   }
@@ -153,8 +148,8 @@ const MyButton = styled.button`
 
   @media ${(props) => props.theme.size.small} {
     svg {
-      height: 24px;
-      width: 24px;
+      height: 32px;
+      width: 32px;
     }
   }
 `;
@@ -164,7 +159,7 @@ const Span = styled.span`
   font-size: 1rem;
 
   @media ${(props) => props.theme.size.small} {
-    font-size: 0.75rem;
+    font-size: 1rem;
   }
 `;
 
