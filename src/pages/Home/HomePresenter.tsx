@@ -136,6 +136,27 @@ const MyButton = styled.button`
   @media ${(props) => props.theme.size.small} {
     padding: 2px 14px;
   }
+
+  display: flex;
+  align-self: center;
+  align-items: center;
+
+  svg {
+    stroke: ${(props) => props.theme.colors.onPrimary};
+    height: 32px;
+    width: 32px;
+  }
+
+  svg:hover {
+    cursor: pointer;
+  }
+
+  @media ${(props) => props.theme.size.small} {
+    svg {
+      height: 24px;
+      width: 24px;
+    }
+  }
 `;
 
 const Span = styled.span`
