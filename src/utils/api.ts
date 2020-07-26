@@ -2,37 +2,39 @@
 
 import Axios from "../utils/Axios";
 
-export const getSteamID = async (profileID: string): Promise<string> => {
-  try {
-    const response = await Axios.get(`/api/steamID64/${profileID}`);
-    const steamID = response.data.steamID64;
+export class api {
+  getSteamID64 = async (profileID: string): Promise<string> => {
+    try {
+      const response = await Axios.get(`/api/steamID64/${profileID}`);
+      const steamID64 = response.data.steamID64;
 
-    return steamID;
-  } catch (error) {
-    throw new Error(error);
-  }
-};
+      return steamID64;
+    } catch (error) {
+      throw new Error(error);
+    }
+  };
 
-export const validateSteamID = async (steamID64: string) => {
-  try {
-    const response = await Axios.get(
-      `/api/userSteamDetails/profiles/${steamID64}`
-    );
-    const steamID = response.data.steamID64;
-    return steamID;
-  } catch (error) {
-    throw new Error(error);
-  }
-};
+  validateSteamID64 = async (steamID64: string) => {
+    try {
+      const response = await Axios.get(
+        `/api/userSteamDetails/profiles/${steamID64}`
+      );
+      const steamID = response.data.steamID64;
+      return steamID;
+    } catch (error) {
+      throw new Error(error);
+    }
+  };
 
-export const getUserSteamDetails = async (steamID: string) => {
-  try {
-    const response = await Axios.get(
-      `/api/userSteamDetails/profiles/${steamID}`
-    );
+  getUserSteamDetails = async (steamID64: string) => {
+    try {
+      const response = await Axios.get(
+        `/api/userSteamDetails/profiles/${steamID64}`
+      );
 
-    return response.data;
-  } catch (error) {
-    throw new Error(error);
-  }
-};
+      return response.data;
+    } catch (error) {
+      throw new Error(error);
+    }
+  };
+}

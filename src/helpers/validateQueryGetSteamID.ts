@@ -1,6 +1,8 @@
-import { getSteamID as getID, validateSteamID } from "../utils/api";
+import { api } from "../utils/api";
 
-const getSteamID = async (custom_id: string): Promise<any> => {
+const API = new api();
+
+const getSteamID64 = async (custom_id: string): Promise<any> => {
   // TODO: Use RegEx instead so that you can check for all the special chars
   if (
     custom_id.includes("/") ||
@@ -11,7 +13,7 @@ const getSteamID = async (custom_id: string): Promise<any> => {
   }
 
   try {
-    const steamID64 = await getID(custom_id);
+    const steamID64 = await API.getSteamID64(custom_id);
     return steamID64;
   } catch (err) {
     throw new Error(err);
@@ -19,7 +21,7 @@ const getSteamID = async (custom_id: string): Promise<any> => {
 };
 
 // TODO: BRUH YOU GOTTA FIX THIS MESS DOWN BELOW, THERE MUST BE A BETTER WAY!!
-const parseSearchQuery = async (
+const validateQueryGetSteamID = async (
   queryText: string
 ): Promise<string | boolean> => {
   let customID: string;
@@ -41,12 +43,12 @@ const parseSearchQuery = async (
           // triming the last "/"
           if (slicedPathName.endsWith("/")) {
             customID = slicedPathName.slice(0, -1);
-            steamID64 = getSteamID(customID);
+            steamID64 = getSteamID64(customID);
 
             return steamID64;
           } else {
             customID = slicedPathName;
-            steamID64 = getSteamID(customID);
+            steamID64 = getSteamID64(customID);
             return steamID64;
           }
         } else {
@@ -60,11 +62,11 @@ const parseSearchQuery = async (
         if (slicedQuery.endsWith("/")) {
           customID = slicedQuery.slice(0, -1);
 
-          steamID64 = getSteamID(customID);
+          steamID64 = getSteamID64(customID);
           return steamID64;
         } else {
           customID = slicedQuery;
-          steamID64 = getSteamID(customID);
+          steamID64 = getSteamID64(customID);
           return steamID64;
         }
       }
@@ -93,7 +95,7 @@ const parseSearchQuery = async (
           ) {
             steamID64 = slicedPathName;
 
-            const validSteamID = await validateSteamID(steamID64);
+            const validSteamID = await API.validateSteamID64(steamID64);
 
             if (validSteamID === steamID64) {
               return steamID64;
@@ -115,7 +117,7 @@ const parseSearchQuery = async (
           steamID64 = slicedQuery;
 
           // Validate if the given steamDI64 by the user is a valid steam id
-          const validSteamID = await validateSteamID(steamID64);
+          const validSteamID = await API.validateSteamID64(steamID64);
 
           if (validSteamID === steamID64) {
             return steamID64;
@@ -132,7 +134,7 @@ const parseSearchQuery = async (
   if (queryText.startsWith("765611") && queryText.length === 17) {
     steamID64 = queryText;
 
-    const validSteamID = await validateSteamID(steamID64);
+    const validSteamID = await API.validateSteamID64(steamID64);
 
     if (validSteamID === steamID64) {
       return steamID64;
@@ -148,11 +150,11 @@ const parseSearchQuery = async (
   if (queryText.includes(" ")) return false;
 
   try {
-    steamID64 = await getSteamID(queryText);
+    steamID64 = await getSteamID64(queryText);
     return steamID64;
   } catch (err) {
     throw new Error(err);
   }
 };
 
-export default parseSearchQuery;
+export default validateQueryGetSteamID;

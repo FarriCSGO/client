@@ -1,5 +1,5 @@
 import React from "react";
-import classes from "./LoadingSpinner.module.css";
+import classes from "./loadingAnimation.module.css";
 
 const loadingAnimation = () => {
   return (
