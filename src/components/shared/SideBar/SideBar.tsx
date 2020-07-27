@@ -17,14 +17,18 @@ import {
   SunSVG
 } from "../../ui/Icon/SVGS";
 
-const SideBar = () => {
+interface IProps {
+  steamID: string;
+}
+
+const SideBar = (props: IProps) => {
   const { theme, toggleTheme } = useContext(ThemeContext);
 
   return (
     <Main>
       <CardDiv>
         <div className="card">
-          <ProfileCard steamID="76561198893083379" />
+          <ProfileCard steamID={props.steamID} />
         </div>
       </CardDiv>
       <ItemList>
