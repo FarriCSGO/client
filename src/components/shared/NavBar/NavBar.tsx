@@ -33,21 +33,26 @@ const NavBar = (props: IProps) => {
   }
 
   return (
-    <MainWrapper>
-      <Left>
-        <Link to="/">
-          <Logo />
-        </Link>
-      </Left>
-      <Middle>
+    <>
+      <MainWrapper>
+        <Left>
+          <Link to="/">
+            <Logo />
+          </Link>
+        </Left>
+        <Middle>
+          <SearchForm />
+        </Middle>
+        <Right>
+          <ToggleMode onClick={toggleTheme}>
+            {theme === "dark" ? <MoonSVG /> : <SunSVG />}
+          </ToggleMode>
+        </Right>
+      </MainWrapper>
+      <SearchBarWrapper>
         <SearchForm />
-      </Middle>
-      <Right>
-        <ToggleMode onClick={toggleTheme}>
-          {theme === "dark" ? <MoonSVG /> : <SunSVG />}
-        </ToggleMode>
-      </Right>
-    </MainWrapper>
+      </SearchBarWrapper>
+    </>
   );
 };
 
@@ -88,4 +93,12 @@ const ToggleMode = styled.i`
   }
 `;
 
+const SearchBarWrapper = styled.div`
+  display: none;
+  margin: 0 auto 1rem auto;
+
+  @media ${(props) => props.theme.size.small} {
+    display: block;
+  }
+`;
 export default NavBar;
