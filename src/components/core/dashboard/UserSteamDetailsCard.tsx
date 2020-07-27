@@ -78,7 +78,7 @@ const CardContainer = styled.div`
   display: flex;
   margin: 0 auto;
 
-  background: ${(props) => props.theme.colors.surface};
+  background: ${(props) => props.theme.colors.surface2};
   box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.12);
   border-radius: 8px;
 
@@ -102,7 +102,7 @@ const Name = styled.p`
   margin: 0;
   color: ${(props) => props.theme.colors.primary};
   font-size: 1.3rem;
-  margin-left: 0.75rem;
+  margin-left: 0.5rem;
 `;
 
 const AvatarDiv = styled.div`
@@ -115,8 +115,8 @@ const AvatarDiv = styled.div`
 const AvatarImage = styled.img`
   padding: 0.1rem;
   border-radius: 50px;
-  width: 52px;
-  height: 52px;
+  width: 3rem;
+  height: 3rem;
   border: 2px solid ${(props) => props.theme.colors.primary};
 `;
 

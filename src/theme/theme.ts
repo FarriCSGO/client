@@ -16,6 +16,7 @@ export const Light = {
     surface: "#ffffff",
     surface2: "#ffffff",
     onSurface: "#0a0a0a",
+    hoverSurface: "#eaeaea",
 
     // Text
     text: "#0a0a0a",
@@ -46,6 +47,7 @@ export const Dark = {
     surface: "#1B1B1B",
     surface2: "#202020",
     onSurface: "#ffffff",
+    hoverSurface: "#0D0D0D",
 
     // Text
     text: "#ffffff",

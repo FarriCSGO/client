@@ -1,6 +1,29 @@
 import React from "react";
 import styled from "styled-components";
 
+const SVG = styled.i`
+  display: flex;
+  align-self: center;
+  align-items: center;
+
+  svg {
+    stroke: ${(props) => props.theme.colors.onBackground};
+    height: 32px;
+    width: 32px;
+  }
+
+  svg:hover {
+    cursor: pointer;
+  }
+
+  @media ${(props) => props.theme.size.small} {
+    svg {
+      height: 24px;
+      width: 24px;
+    }
+  }
+`;
+
 export const SunSVG = () => {
   return (
     <SVG>
@@ -63,25 +86,98 @@ export const GithubSVG = () => {
   );
 };
 
-const SVG = styled.i`
-  display: flex;
-  align-self: center;
-  align-items: center;
+export const DashboardSVG = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="icon icon-tabler icon-tabler-dashboard"
+      viewBox="0 0 24 24"
+      strokeWidth="1.5"
+      fill="none"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" />
+      <circle cx="12" cy="13" r="2" />
+      <line x1="13.45" y1="11.55" x2="15.5" y2="9.5" />
+      <path d="M6.4 20a9 9 0 1 1 11.2 0Z" />
+    </svg>
+  );
+};
 
-  svg {
-    stroke: ${(props) => props.theme.colors.onBackground};
-    height: 32px;
-    width: 32px;
-  }
+export const MatchesSVG = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="icon icon-tabler icon-tabler-calendar"
+      viewBox="0 0 24 24"
+      strokeWidth="1.5"
+      fill="none"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" />
+      <rect x="4" y="5" width="16" height="16" rx="2" />
+      <line x1="16" y1="3" x2="16" y2="7" />
+      <line x1="8" y1="3" x2="8" y2="7" />
+      <line x1="4" y1="11" x2="20" y2="11" />
+      <line x1="11" y1="15" x2="12" y2="15" />
+      <line x1="12" y1="15" x2="12" y2="18" />
+    </svg>
+  );
+};
 
-  svg:hover {
-    cursor: pointer;
-  }
+export const WeaponsSVG = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="icon icon-tabler icon-tabler-target"
+      viewBox="0 0 24 24"
+      strokeWidth="1.5"
+      fill="none"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" />
+      <circle cx="12" cy="12" r="1" />
+      <circle cx="12" cy="12" r="5" />
+      <circle cx="12" cy="12" r="9" />
+    </svg>
+  );
+};
 
-  @media ${(props) => props.theme.size.small} {
-    svg {
-      height: 24px;
-      width: 24px;
-    }
-  }
-`;
+export const MapsSVG = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="icon icon-tabler icon-tabler-compass"
+      viewBox="0 0 24 24"
+      strokeWidth="1.5"
+      fill="none"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" />
+      <polyline points="8 16 10 10 16 8 14 14 8 16" />
+      <circle cx="12" cy="12" r="9" />
+    </svg>
+  );
+};
+
+export const InventorySVG = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="icon icon-tabler icon-tabler-currency-rupee"
+      viewBox="0 0 24 24"
+      strokeWidth="1.5"
+      fill="none"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" />
+      <path d="M18 6h-11h3a4 4 0 0 1 0 8h-3l6 6" />
+      <line x1="7" y1="10" x2="18" y2="10" />
+    </svg>
+  );
+};
