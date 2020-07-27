@@ -13,6 +13,10 @@ const DashWrapper = styled.div`
   display: flex;
   flex-direction: column;
   overflow: hidden;
+
+  @media ${(props) => props.theme.size.small} {
+    padding-left: 0;
+  }
 `;
 
 export const AppContainer = (props: any) => {
