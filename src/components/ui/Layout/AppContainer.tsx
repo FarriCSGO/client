@@ -12,7 +12,6 @@ const DashWrapper = styled.div`
   padding-left: 7rem;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
 
   @media ${(props) => props.theme.size.small} {
     padding-left: 0;
@@ -29,5 +28,4 @@ const AppWrapper = styled.div`
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
 `;

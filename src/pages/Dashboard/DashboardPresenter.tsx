@@ -8,6 +8,7 @@ import SearchForm from "../../components/shared/SearchForm/SearchForm";
 import SideBar from "../../components/shared/SideBar/SideBar";
 import SideBarMobile from "../../components/shared/SideBar/SideBarMobile";
 import LoadingSpinner from "../../components/ui/Animation/LoadingSpinner/LoadingSpinner";
+import ProfileCard from "../../components/core/dashboard/UserSteamDetailsCard";
 
 type TParams = { steamID: string };
 
@@ -63,6 +64,10 @@ const DashboardPresenter = ({
           <SearchForm />
         </SearchBarWrapper>
         <h1> THIS IS YOUR DASHBOARD PAGE </h1>
+        <CardDiv>
+          <ProfileCard steamID={steamID} />
+        </CardDiv>
+
         <p>
           I'm baby kale chips affogato ennui lumbersexual, williamsburg paleo
           quinoa iceland normcore tumeric. Kitsch coloring book retro, seitan
@@ -142,6 +147,14 @@ const SearchBarWrapper = styled.div`
   display: flex;
   margin: 1rem auto;
   padding-left: -1rem;
+`;
+
+const CardDiv = styled.div`
+  display: none;
+
+  @media ${(props) => props.theme.size.small} {
+    display: inline-block;
+  }
 `;
 
 export default DashboardPresenter;
