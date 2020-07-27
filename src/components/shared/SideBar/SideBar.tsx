@@ -62,9 +62,9 @@ const SideBar = (props: IProps) => {
         </Item>
       </ItemList>
       <ToggleDiv>
-        <ToggleMode onClick={toggleTheme}>
+        <i onClick={toggleTheme}>
           {theme === "dark" ? <MoonSVG /> : <SunSVG />}
-        </ToggleMode>
+        </i>
       </ToggleDiv>
     </Main>
   );
@@ -167,11 +167,6 @@ const Item = styled.li`
 const ToggleDiv = styled.div`
   display: flex;
   margin: 1rem 0 1rem 1.75rem;
-`;
-
-const ToggleMode = styled.i`
-  /* display: flex;
-  margin: 1rem 0 1rem 1.75rem; */
 `;
 
 export default SideBar;

@@ -1,6 +1,29 @@
 import React from "react";
 import styled from "styled-components";
 
+const SVG = styled.i`
+  display: flex;
+  align-self: center;
+  align-items: center;
+
+  svg {
+    stroke: ${(props) => props.theme.colors.onBackground};
+    height: 32px;
+    width: 32px;
+  }
+
+  svg:hover {
+    cursor: pointer;
+  }
+
+  @media ${(props) => props.theme.size.small} {
+    svg {
+      height: 24px;
+      width: 24px;
+    }
+  }
+`;
+
 export const SunSVG = () => {
   return (
     <SVG>
@@ -158,26 +181,3 @@ export const InventorySVG = () => {
     </svg>
   );
 };
-
-const SVG = styled.i`
-  display: flex;
-  align-self: center;
-  align-items: center;
-
-  svg {
-    stroke: ${(props) => props.theme.colors.onBackground};
-    height: 32px;
-    width: 32px;
-  }
-
-  svg:hover {
-    cursor: pointer;
-  }
-
-  @media ${(props) => props.theme.size.small} {
-    svg {
-      height: 24px;
-      width: 24px;
-    }
-  }
-`;

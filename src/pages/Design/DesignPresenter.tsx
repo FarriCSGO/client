@@ -1,15 +1,27 @@
 import React from "react";
+import styled from "styled-components";
 
 // import LoadingBar from "../../components/ui/Animation/LoadingBar/LoadingBar";
 // import LoadingCube from "../../components/ui/Animation/LoadingCube/LoadingCube";
 import SideBar from "../../components/shared/SideBar/SideBar";
-import { AppContainer } from "../../components/ui/Layout/AppContainer";
+import SideBarMobile from "../../components/shared/SideBar/SideBarMobile";
+import SearchForm from "../../components/shared/SearchForm/SearchForm";
+import { DashContainer } from "../../components/ui/Layout/AppContainer";
+
+const SearchBarWrapper = styled.div`
+  display: flex;
+  margin: 1rem auto 1rem auto;
+`;
 
 const Design = () => {
   return (
     <>
-      <SideBar steamID="76561198893083379" />
-      {/* <AppContainer>
+      {/* <SideBar steamID="76561198893083379" /> */}
+      <SideBarMobile />
+      <DashContainer>
+        <SearchBarWrapper>
+          <SearchForm />
+        </SearchBarWrapper>
         <h1>CSS is Cool</h1>
 
         <p>
@@ -114,7 +126,7 @@ const Design = () => {
           gochujang street art normcore, edison bulb farm-to-table pour-over
           taxidermy brooklyn.
         </p>
-      </AppContainer> */}
+      </DashContainer>
     </>
   );
 };
