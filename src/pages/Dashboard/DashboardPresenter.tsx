@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { RouteComponentProps } from "react-router-dom";
-import styled from "styled-components";
 import { getUserSteamDetails } from "../../utils/api";
 
 import AppContainer from "../../components/ui/Layout/AppContainer";
 import UserSteamDetailsCard from "../../components/core/dashboard/UserSteamDetailsCard";
 import NavBar from "../../components/shared/NavBar/NavBar";
-import SearchForm from "../../components/shared/SearchForm/SearchForm";
-import LoadingCube from "../../components/ui/Animation/LoadingCube/LoadingCube";
+import LoadingSpinner from "../../components/ui/Animation/LoadingSpinner/LoadingSpinner";
 
 type TParams = { steamID: string };
 
@@ -38,11 +36,8 @@ const DashboardPresenter = ({
     return (
       <AppContainer>
         <NavBar />
-        <SearchBarWrapper>
-          <SearchForm />
-        </SearchBarWrapper>
         <div style={{ textAlign: "center" }}>
-          <LoadingCube />
+          <LoadingSpinner />
         </div>
       </AppContainer>
     );
@@ -50,21 +45,9 @@ const DashboardPresenter = ({
   return (
     <AppContainer>
       <NavBar />
-      <SearchBarWrapper>
-        <SearchForm />
-      </SearchBarWrapper>
       <UserSteamDetailsCard steamID={steamID} />
     </AppContainer>
   );
 };
-
-const SearchBarWrapper = styled.div`
-  display: none;
-  margin: 0 auto 1rem auto;
-
-  @media ${(props) => props.theme.size.small} {
-    display: block;
-  }
-`;
 
 export default DashboardPresenter;
