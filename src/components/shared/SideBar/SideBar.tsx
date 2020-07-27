@@ -96,6 +96,10 @@ const Main = styled.div`
       visibility: visible;
     }
   }
+
+  @media ${(props) => props.theme.size.small} {
+    display: none;
+  }
 `;
 
 const CardDiv = styled.div`
