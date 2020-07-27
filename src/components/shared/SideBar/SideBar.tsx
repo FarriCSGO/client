@@ -1,11 +1,9 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import classes from "./SideBar.module.css";
 import { ThemeContext } from "../../../contexts/ThemeContext";
 
 import ProfileCard from "../../core/dashboard/UserSteamDetailsCard";
-import Logo from "../../../assets/images/F_Logo.png";
 
 import {
   DashboardSVG,
