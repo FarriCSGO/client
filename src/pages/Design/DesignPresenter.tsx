@@ -16,7 +16,7 @@ const SearchBarWrapper = styled.div`
 const Design = () => {
   return (
     <>
-      {/* <SideBar steamID="76561198893083379" /> */}
+      <SideBar steamID="76561198893083379" />
       <SideBarMobile />
       <DashContainer>
         <SearchBarWrapper>
