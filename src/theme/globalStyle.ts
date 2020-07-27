@@ -34,6 +34,19 @@ body {
   font-family: "Poppins", sans-serif;
 }
 
+/**Scrollbar customization */
+body::-webkit-scrollbar {
+  width: 0.25rem;
+}
+
+body::-webkit-scrollbar-track {
+  background: ${(props) => props.theme.colors.background2} 
+}
+
+body::-webkit-scrollbar-thumb {
+  background: ${(props) => props.theme.colors.primary};
+}
+
 /**
  * Render the main element consistently in IE.
  */
