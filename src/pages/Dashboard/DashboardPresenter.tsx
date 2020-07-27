@@ -26,6 +26,8 @@ const DashboardPresenter = ({
         document.title =
           name + " - Dashboard // Farri - Check your CS:GO Statistics";
       } catch (err) {
+        // If the user enters an invalid steamID(anything) after /dashboard/{..}
+        // we redirect the user to "/" or else the App would crash.
         history.push("/");
       }
     };
