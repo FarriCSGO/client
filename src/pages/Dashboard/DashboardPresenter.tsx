@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { getUserSteamDetails } from "../../utils/api";
+import styled from "styled-components";
 
-import AppContainer from "../../components/ui/Layout/AppContainer";
-import UserSteamDetailsCard from "../../components/core/dashboard/UserSteamDetailsCard";
-import NavBar from "../../components/shared/NavBar/NavBar";
+import { DashContainer } from "../../components/ui/Layout/AppContainer";
+import SearchForm from "../../components/shared/SearchForm/SearchForm";
+import SideBar from "../../components/shared/SideBar/SideBar";
 import LoadingSpinner from "../../components/ui/Animation/LoadingSpinner/LoadingSpinner";
 
 type TParams = { steamID: string };
@@ -36,20 +37,38 @@ const DashboardPresenter = ({
 
   if (validID === null)
     return (
-      <AppContainer>
-        <NavBar />
-        <div style={{ textAlign: "center" }}>
-          <LoadingSpinner />
-        </div>
-      </AppContainer>
+      <>
+        <DashContainer>
+          <div
+            style={{
+              height: "100vh",
+              display: "flex",
+              alignSelf: "center",
+              alignItems: "center"
+            }}
+          >
+            <LoadingSpinner />
+          </div>
+        </DashContainer>
+      </>
     );
 
   return (
-    <AppContainer>
-      <NavBar />
-      <UserSteamDetailsCard steamID={steamID} />
-    </AppContainer>
+    <>
+      <SideBar steamID={steamID} />
+      <DashContainer>
+        <SearchBarWrapper>
+          <SearchForm />
+        </SearchBarWrapper>
+        <h1> THIS IS YOUR DASHBOARD PAGE </h1>
+      </DashContainer>
+    </>
   );
 };
+
+const SearchBarWrapper = styled.div`
+  display: flex;
+  margin: 1rem auto 1rem auto;
+`;
 
 export default DashboardPresenter;
