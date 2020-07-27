@@ -77,17 +77,13 @@ const SteamDetailsCard = (props: IProps) => {
 const CardContainer = styled.div`
   display: flex;
   margin: 0 auto;
-  width: 350px;
-  height: 155px;
 
   background: ${(props) => props.theme.colors.surface};
   box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.12);
   border-radius: 8px;
 
-  @media ${(props) => props.theme.size.small} {
-    width: 300px;
-    height: 135px;
-  }
+  width: 300px;
+  height: 135px;
 `;
 
 const AnimationDiv = styled.div`
@@ -97,50 +93,31 @@ const AnimationDiv = styled.div`
 `;
 
 const CenterItems = styled.div`
-  width: 350px;
   // TODO: Instead of cuttin the name, append "..."
-
-  @media ${(props) => props.theme.size.small} {
-    width: 300px;
-  }
+  width: 300px;
 `;
 
 const Name = styled.p`
   font-weight: bold;
-  font-size: 1.5rem;
   margin: 0;
-  margin-left: 1rem;
   color: ${(props) => props.theme.colors.primary};
-
-  @media ${(props) => props.theme.size.small} {
-    font-size: 1.3rem;
-    margin-left: 0.75rem;
-  }
+  font-size: 1.3rem;
+  margin-left: 0.75rem;
 `;
 
 const AvatarDiv = styled.div`
-  margin: 0.25rem 1rem;
   display: flex;
   align-items: center;
   overflow: hidden;
-
-  @media ${(props) => props.theme.size.small} {
-    margin: 0.15rem 0.75rem;
-  }
+  margin: 0.15rem 0.75rem;
 `;
 
 const AvatarImage = styled.img`
-  width: 64px;
-  height: 64px;
   padding: 0.1rem;
   border-radius: 50px;
-  border: 3px solid ${(props) => props.theme.colors.primary};
-
-  @media ${(props) => props.theme.size.small} {
-    width: 52px;
-    height: 52px;
-    border: 2px solid ${(props) => props.theme.colors.primary};
-  }
+  width: 52px;
+  height: 52px;
+  border: 2px solid ${(props) => props.theme.colors.primary};
 `;
 
 const SteamLevel = styled.p`
@@ -154,8 +131,8 @@ const SteamLevel = styled.p`
 
 const Status = styled.p`
   font-weight: normal;
-  font-size: 1.1rem;
   text-align: center;
+  font-size: 0.95rem;
   padding: 0;
   margin: 0;
   margin-top: 0.35rem;
@@ -164,9 +141,5 @@ const Status = styled.p`
     else if (props.children === "Online") return "#047DC4";
     return "#39B924";
   }};
-
-  @media ${(props) => props.theme.size.small} {
-    font-size: 0.95rem;
-  }
 `;
 export default SteamDetailsCard;
