@@ -1,11 +1,25 @@
 import React from "react";
 import styled from "styled-components";
 
-const AppContainer = (props: any) => {
-  return <Wrapper>{props.children}</Wrapper>;
+export const DashContainer = (props: any) => {
+  return <DashWrapper>{props.children}</DashWrapper>;
 };
 
-const Wrapper = styled.div`
+const DashWrapper = styled.div`
+  height: 100vh;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding-left: 7rem;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+`;
+
+export const AppContainer = (props: any) => {
+  return <AppWrapper>{props.children}</AppWrapper>;
+};
+
+const AppWrapper = styled.div`
   height: 100vh;
   max-width: 1440px;
   margin: 0 auto;
@@ -13,5 +27,3 @@ const Wrapper = styled.div`
   flex-direction: column;
   overflow: hidden;
 `;
-
-export default AppContainer;
