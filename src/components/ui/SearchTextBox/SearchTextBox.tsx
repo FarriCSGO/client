@@ -11,7 +11,6 @@ const searchTextBox = (props: IProps) => {
       <TextBox
         type="text"
         placeholder="STEAM ID / STEAM PROFILE"
-        autoFocus
         onChange={props.onChange}
       />
     </>
