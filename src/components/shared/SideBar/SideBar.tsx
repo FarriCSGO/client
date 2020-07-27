@@ -61,9 +61,11 @@ const SideBar = (props: IProps) => {
           </Link>
         </Item>
       </ItemList>
-      <ToggleMode onClick={toggleTheme}>
-        {theme === "dark" ? <MoonSVG /> : <SunSVG />}
-      </ToggleMode>
+      <ToggleDiv>
+        <ToggleMode onClick={toggleTheme}>
+          {theme === "dark" ? <MoonSVG /> : <SunSVG />}
+        </ToggleMode>
+      </ToggleDiv>
     </Main>
   );
 };
@@ -158,9 +160,14 @@ const Item = styled.li`
   }
 `;
 
-const ToggleMode = styled.i`
+const ToggleDiv = styled.div`
   display: flex;
   margin: 1rem 0 1rem 1.75rem;
+`;
+
+const ToggleMode = styled.i`
+  /* display: flex;
+  margin: 1rem 0 1rem 1.75rem; */
 `;
 
 export default SideBar;
