@@ -13,40 +13,40 @@ import {
   SunSVG
 } from "../../ui/Icon/SVGS";
 
-const SideBar = () => {
+const SideBar = (props: any) => {
   const { theme, toggleTheme } = useContext(ThemeContext);
 
   return (
     <Main>
       <ItemList>
         <Item>
-          <Link to="/" className="navLink">
+          <Link to={props.url} className="navLink">
             <DashboardSVG />
-            <span className="text"> Inventory</span>
+            <span className="text">Dashboard</span>
           </Link>
         </Item>
         <Item>
-          <Link to="/" className="navLink">
+          <Link to={`${props.url}/matches`} className="navLink">
             <MatchesSVG />
-            <span className="text"> Inventory</span>
+            <span className="text">Matches</span>
           </Link>
         </Item>
         <Item>
-          <Link to="/" className="navLink">
+          <Link to={`${props.url}/weapons`} className="navLink">
             <WeaponsSVG />
-            <span className="text"> Inventory</span>
+            <span className="text">Weapons</span>
           </Link>
         </Item>
         <Item>
-          <Link to="/" className="navLink">
+          <Link to={`${props.url}/maps`} className="navLink">
             <MapsSVG />
-            <span className="text"> Inventory</span>
+            <span className="text">Maps</span>
           </Link>
         </Item>
         <Item>
-          <Link to="/" className="navLink">
+          <Link to={`${props.url}/inventory`} className="navLink">
             <InventorySVG />
-            <span className="text"> Inventory</span>
+            <span className="text">Inventory</span>
           </Link>
         </Item>
       </ItemList>

@@ -16,13 +16,9 @@ import {
   SunSVG
 } from "../../ui/Icon/SVGS";
 
-interface IProps extends RouteComponentProps {
-  steamID: string;
-}
-
+// props - has steamID and match object
 const SideBar = (props: any) => {
   const { theme, toggleTheme } = useContext(ThemeContext);
-  console.log(props); // Has steamID and match object
 
   return (
     <Main>
