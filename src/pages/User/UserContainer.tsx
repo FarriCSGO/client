@@ -3,19 +3,24 @@ import { RouteComponentProps } from "react-router-dom";
 import { getUserSteamDetails } from "../../utils/api";
 import styled from "styled-components";
 
-import { DashContainer } from "../../components/ui/Layout/AppContainer";
+import {
+  DashContainer,
+  AppContainer
+} from "../../components/ui/Layout/AppContainer";
 import SearchForm from "../../components/shared/SearchForm/SearchForm";
 import SideBar from "../../components/shared/SideBar/SideBar";
 import SideBarMobile from "../../components/shared/SideBar/SideBarMobile";
 import LoadingSpinner from "../../components/ui/Animation/LoadingSpinner/LoadingSpinner";
-import ProfileCard from "../../components/core/dashboard/UserSteamDetailsCard";
+
+import Dashboard from "./Dashboard";
+import Matches from "./Matches";
+import Weapons from "./Weapons";
+import Maps from "./Maps";
+import Inventory from "./Inventory";
 
 type TParams = { steamID: string };
 
-const DashboardPresenter = ({
-  match,
-  history
-}: RouteComponentProps<TParams>) => {
+const UserContainer = ({ match, history }: RouteComponentProps<TParams>) => {
   const [validID, setValidID] = useState(null);
   const steamID: string = match.params.steamID;
 
@@ -40,7 +45,7 @@ const DashboardPresenter = ({
   if (validID === null)
     return (
       <>
-        <DashContainer>
+        <AppContainer>
           <div
             style={{
               height: "100vh",
@@ -51,10 +56,11 @@ const DashboardPresenter = ({
           >
             <LoadingSpinner />
           </div>
-        </DashContainer>
+        </AppContainer>
       </>
     );
 
+  const URL = history.location.pathname;
   return (
     <>
       <SideBar steamID={steamID} {...match} />
@@ -63,13 +69,18 @@ const DashboardPresenter = ({
         <SearchBarWrapper>
           <SearchForm />
         </SearchBarWrapper>
-        <h1> THIS IS YOUR DASHBOARD PAGE </h1>
-        <CardDiv>
-          <ProfileCard steamID={steamID} />
-        </CardDiv>
+        {UserPageContent(URL, steamID)}
       </DashContainer>
     </>
   );
+};
+
+const UserPageContent = (URL: string, steamID: string) => {
+  if (URL.endsWith("dashboard")) return <Dashboard steamID={steamID} />;
+  if (URL.endsWith("matches")) return <Matches />;
+  if (URL.endsWith("weapons")) return <Weapons />;
+  if (URL.endsWith("maps")) return <Maps />;
+  if (URL.endsWith("inventory")) return <Inventory />;
 };
 
 const SearchBarWrapper = styled.div`
@@ -78,12 +89,4 @@ const SearchBarWrapper = styled.div`
   padding-left: -1rem;
 `;
 
-const CardDiv = styled.div`
-  display: none;
-
-  @media ${(props) => props.theme.size.small} {
-    display: inline-block;
-  }
-`;
-
-export default DashboardPresenter;
+export default UserContainer;

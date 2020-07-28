@@ -28,7 +28,7 @@ const SideBar = (props: any) => {
       </CardDiv>
       <ItemList>
         <Item>
-          <Link to={props.url} className="navLink">
+          <Link to={`${props.url}/dashboard`} className="navLink">
             <DashboardSVG />
             <span className="text"> Dashboard </span>
           </Link>
