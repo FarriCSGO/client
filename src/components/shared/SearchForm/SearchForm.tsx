@@ -28,7 +28,7 @@ const SearchForm = ({ history }: RouteComponentProps) => {
         setErrorMsg("Invalid search query");
       } else {
         setLoading(false);
-        history.push(`/dashboard/${steamID}`);
+        history.push(`/user/${steamID}`);
       }
     } catch (error) {
       setLoading(false);
