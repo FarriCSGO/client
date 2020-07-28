@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { RouteComponentProps } from "react-router-dom";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { ThemeContext } from "../../../contexts/ThemeContext";
@@ -15,12 +16,13 @@ import {
   SunSVG
 } from "../../ui/Icon/SVGS";
 
-interface IProps {
+interface IProps extends RouteComponentProps {
   steamID: string;
 }
 
-const SideBar = (props: IProps) => {
+const SideBar = (props: any) => {
   const { theme, toggleTheme } = useContext(ThemeContext);
+  console.log(props); // Has steamID and match object
 
   return (
     <Main>
@@ -31,31 +33,31 @@ const SideBar = (props: IProps) => {
       </CardDiv>
       <ItemList>
         <Item>
-          <Link to="/" className="navLink">
+          <Link to={props.url} className="navLink">
             <DashboardSVG />
             <span className="text"> Dashboard </span>
           </Link>
         </Item>
         <Item>
-          <Link to="/" className="navLink">
+          <Link to={`${props.url}/matches`} className="navLink">
             <MatchesSVG />
             <span className="text"> Matches</span>
           </Link>
         </Item>
         <Item>
-          <Link to="/" className="navLink">
+          <Link to={`${props.url}/weapons`} className="navLink">
             <WeaponsSVG />
             <span className="text"> Weapons</span>
           </Link>
         </Item>
         <Item>
-          <Link to="/" className="navLink">
+          <Link to={`${props.url}/maps`} className="navLink">
             <MapsSVG />
             <span className="text"> Maps</span>
           </Link>
         </Item>
         <Item>
-          <Link to="/" className="navLink">
+          <Link to={`${props.url}/inventory`} className="navLink">
             <InventorySVG />
             <span className="text"> Inventory</span>
           </Link>
