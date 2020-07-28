@@ -72,7 +72,9 @@ const UserContainer = ({ match, history }: RouteComponentProps<TParams>) => {
       <SideBar steamID={steamID} {...match} />
       <SideBarMobile {...match} />
       <DashContainer>
-        <NavBar />
+        <MobileNav>
+          <NavBar />
+        </MobileNav>
         <SearchBarWrapper>
           <SearchForm />
         </SearchBarWrapper>
@@ -97,6 +99,15 @@ const SearchBarWrapper = styled.div`
 
   @media ${(props) => props.theme.size.small} {
     display: none;
+  }
+`;
+
+const MobileNav = styled.div`
+  display: none;
+
+  @media ${(props) => props.theme.size.small} {
+    display: flex;
+    flex-direction: column;
   }
 `;
 
