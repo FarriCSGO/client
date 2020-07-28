@@ -9,7 +9,7 @@ import { ThemeContext } from "./contexts/ThemeContext";
 // Pages
 import Home from "./pages/Home/HomePresenter";
 import Design from "./pages/Design/DesignPresenter";
-import Dashboard from "./pages/Dashboard/DashboardPresenter";
+import User from "./pages/User/UserContainer";
 import NotFound from "./pages/NotFound/NotFoundPresenter";
 
 const App = () => {
@@ -27,7 +27,7 @@ const App = () => {
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/design" component={Design} />
-          <Route path="/dashboard/:steamID" component={Dashboard} />
+          <Route path="/user/:steamID" component={User} />
           <Route component={NotFound} />
         </Switch>
       </Router>

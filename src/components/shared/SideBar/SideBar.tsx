@@ -15,11 +15,8 @@ import {
   SunSVG
 } from "../../ui/Icon/SVGS";
 
-interface IProps {
-  steamID: string;
-}
-
-const SideBar = (props: IProps) => {
+// props - has steamID and match object
+const SideBar = (props: any) => {
   const { theme, toggleTheme } = useContext(ThemeContext);
 
   return (
@@ -31,31 +28,31 @@ const SideBar = (props: IProps) => {
       </CardDiv>
       <ItemList>
         <Item>
-          <Link to="/" className="navLink">
+          <Link to={`${props.url}/dashboard`} className="navLink">
             <DashboardSVG />
             <span className="text"> Dashboard </span>
           </Link>
         </Item>
         <Item>
-          <Link to="/" className="navLink">
+          <Link to={`${props.url}/matches`} className="navLink">
             <MatchesSVG />
             <span className="text"> Matches</span>
           </Link>
         </Item>
         <Item>
-          <Link to="/" className="navLink">
+          <Link to={`${props.url}/weapons`} className="navLink">
             <WeaponsSVG />
             <span className="text"> Weapons</span>
           </Link>
         </Item>
         <Item>
-          <Link to="/" className="navLink">
+          <Link to={`${props.url}/maps`} className="navLink">
             <MapsSVG />
             <span className="text"> Maps</span>
           </Link>
         </Item>
         <Item>
-          <Link to="/" className="navLink">
+          <Link to={`${props.url}/inventory`} className="navLink">
             <InventorySVG />
             <span className="text"> Inventory</span>
           </Link>
