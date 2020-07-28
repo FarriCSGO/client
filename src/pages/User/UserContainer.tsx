@@ -7,6 +7,7 @@ import {
   DashContainer,
   AppContainer
 } from "../../components/ui/Layout/AppContainer";
+import NavBar from "../../components/shared/NavBar/NavBar";
 import SearchForm from "../../components/shared/SearchForm/SearchForm";
 import SideBar from "../../components/shared/SideBar/SideBar";
 import SideBarMobile from "../../components/shared/SideBar/SideBarMobile";
@@ -23,6 +24,12 @@ type TParams = { steamID: string };
 const UserContainer = ({ match, history }: RouteComponentProps<TParams>) => {
   const [validID, setValidID] = useState(null);
   const steamID: string = match.params.steamID;
+
+  const URL = history.location.pathname;
+
+  // Redirect user to dashboard page if the URL is like `/user/:steamid/`
+  if (URL.slice(23) === "/") history.push(`${URL}dashboard`);
+  if (URL.slice(23) === "") history.push(`${URL}/dashboard`);
 
   useEffect(() => {
     const validateID = async () => {
@@ -60,12 +67,14 @@ const UserContainer = ({ match, history }: RouteComponentProps<TParams>) => {
       </>
     );
 
-  const URL = history.location.pathname;
   return (
     <>
       <SideBar steamID={steamID} {...match} />
       <SideBarMobile {...match} />
       <DashContainer>
+        <MobileNav>
+          <NavBar />
+        </MobileNav>
         <SearchBarWrapper>
           <SearchForm />
         </SearchBarWrapper>
@@ -87,6 +96,19 @@ const SearchBarWrapper = styled.div`
   display: flex;
   margin: 1rem auto;
   padding-left: -1rem;
+
+  @media ${(props) => props.theme.size.small} {
+    display: none;
+  }
+`;
+
+const MobileNav = styled.div`
+  display: none;
+
+  @media ${(props) => props.theme.size.small} {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 export default UserContainer;

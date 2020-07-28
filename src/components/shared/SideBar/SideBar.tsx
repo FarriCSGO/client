@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { ThemeContext } from "../../../contexts/ThemeContext";
 
-import ProfileCard from "../../core/dashboard/UserSteamDetailsCard";
+import image from "../../../assets/images/logo.png";
 
 import {
   DashboardSVG,
@@ -21,11 +21,11 @@ const SideBar = (props: any) => {
 
   return (
     <Main>
-      <CardDiv>
-        <div className="card">
-          <ProfileCard steamID={props.steamID} />
-        </div>
-      </CardDiv>
+      <LogoDiv>
+        <Link to="/">
+          <img src={image} alt="farri logo" height="42px" />
+        </Link>
+      </LogoDiv>
       <ItemList>
         <Item>
           <Link to={`${props.url}/dashboard`} className="navLink">
@@ -99,11 +99,13 @@ const Main = styled.div`
   }
 `;
 
-const CardDiv = styled.div`
+const LogoDiv = styled.div`
   display: flex;
   margin: 1rem 0.5rem;
-  padding: 0;
-  height: 10rem;
+  padding: 0 0 2rem 0;
+  height: 5rem;
+  align-self: center;
+  align-items: center;
 
   .card {
     visibility: hidden;

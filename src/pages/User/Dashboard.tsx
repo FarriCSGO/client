@@ -16,11 +16,7 @@ const Dashboard = (props: IProps) => {
 };
 
 const CardDiv = styled.div`
-  display: none;
-
-  @media ${(props) => props.theme.size.small} {
-    display: inline-block;
-  }
+  display: inline-block;
 `;
 
 export default Dashboard;

@@ -3,10 +3,6 @@ import styled from "styled-components";
 
 import image from "../../../assets/images/logo.png";
 
-interface IProps {
-  height: string;
-}
-
 const Logo = () => {
   return (
     <Wrapper>
