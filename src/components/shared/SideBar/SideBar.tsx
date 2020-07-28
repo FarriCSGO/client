@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import { RouteComponentProps } from "react-router-dom";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { ThemeContext } from "../../../contexts/ThemeContext";
