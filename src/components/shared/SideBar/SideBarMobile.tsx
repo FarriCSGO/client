@@ -1,21 +1,16 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { ThemeContext } from "../../../contexts/ThemeContext";
 
 import {
   DashboardSVG,
   MatchesSVG,
   WeaponsSVG,
   MapsSVG,
-  InventorySVG,
-  MoonSVG,
-  SunSVG
+  InventorySVG
 } from "../../ui/Icon/SVGS";
 
 const SideBar = (props: any) => {
-  const { theme, toggleTheme } = useContext(ThemeContext);
-
   return (
     <Main>
       <ItemList>
@@ -50,11 +45,6 @@ const SideBar = (props: any) => {
           </Link>
         </Item>
       </ItemList>
-      <ToggleDiv>
-        <i onClick={toggleTheme}>
-          {theme === "dark" ? <MoonSVG /> : <SunSVG />}
-        </i>
-      </ToggleDiv>
     </Main>
   );
 };
@@ -84,7 +74,7 @@ const ItemList = styled.ul`
   align-items: center;
   justify-content: space-between;
   padding: 0;
-  margin: 0;
+  margin: 0 0.5rem;
   width: 100%;
 
   .text {
@@ -110,12 +100,6 @@ const Item = styled.li`
     align-items: center;
     text-decoration: none;
   }
-`;
-
-const ToggleDiv = styled.div`
-  display: flex;
-  align-items: center;
-  padding: 0 0.5rem 0 1rem;
 `;
 
 export default SideBar;
