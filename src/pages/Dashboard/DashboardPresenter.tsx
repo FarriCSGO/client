@@ -57,7 +57,7 @@ const DashboardPresenter = ({
 
   return (
     <>
-      <SideBar steamID={steamID} />
+      <SideBar steamID={steamID} {...match} />
       <SideBarMobile />
       <DashContainer>
         <SearchBarWrapper>
