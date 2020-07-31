@@ -27,19 +27,18 @@ const SteamDetailsCard = (props: IProps) => {
       if (data.onlineStatus === 0) {
         setStatus("Offline");
       }
-
       if (data.onlineStatus === 1 && data.playingGame) {
         setStatus(data.playingGame);
       }
-
       if (data.onlineStatus !== 0 && !data.playingGame) {
         setStatus("Online");
       }
-
       setLoading(false);
     };
 
     getData();
+
+    return () => setLoading(false);
   }, [props.steamID]);
 
   if (loading === true) {

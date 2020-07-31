@@ -22,6 +22,7 @@ const QuickStatsCard = (props: IProps) => {
 
   useEffect(() => {
     setLoading(true);
+
     const getData = async () => {
       const data = await getQuickStats(props.steamID);
       setWinrate(data.winrate.toFixed(2));
@@ -30,7 +31,10 @@ const QuickStatsCard = (props: IProps) => {
       setRate(data.hsRate.toFixed(2));
       setLoading(false);
     };
+
     getData();
+
+    return () => setLoading(false);
   }, [props.steamID]);
 
   if (loading === true) {
