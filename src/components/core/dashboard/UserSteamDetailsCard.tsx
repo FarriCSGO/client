@@ -79,7 +79,7 @@ const CardContainer = styled.div`
   display: flex;
   margin: 0 auto;
 
-  background: ${(props) => props.theme.colors.surface2};
+  background: ${(props) => props.theme.colors.surface};
   box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.12);
   border-radius: 8px;
 
