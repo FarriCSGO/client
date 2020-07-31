@@ -14,7 +14,8 @@ const DashWrapper = styled.div`
   flex-direction: column;
 
   @media ${(props) => props.theme.size.small} {
-    padding-left: 0;
+    padding: 0.5rem;
+    align-items: center;
   }
 `;
 

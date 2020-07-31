@@ -104,7 +104,6 @@ const LogoDiv = styled.div`
   margin: 1rem 0.5rem;
   padding: 0 0 2rem 0;
   height: 5rem;
-  align-self: center;
   align-items: center;
 
   .card {
