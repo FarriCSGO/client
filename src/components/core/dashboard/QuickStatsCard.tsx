@@ -102,6 +102,7 @@ const AnimationDiv = styled.div`
   display: flex;
   margin: 0 auto;
   align-items: center;
+  height: 100%;
 `;
 
 const StatDiv = styled.div`
