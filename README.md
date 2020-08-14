@@ -4,13 +4,13 @@
 
 ### Landing Page (dark mode)
 
-<img src="./landingPage.png" />
+<img src="./docs/images/landingPage.png" />
 
 ### Profile Dashboard (for Steam ID `divy4up`)
 
 - Sidebar expands on mouse hover. This is most recent alpha update, more content to come in future.
 
-<img src="./Dashboard.png" />
+<img src="./docs/images/Dashboard.png" />
 
 ## Prerequisites
 
