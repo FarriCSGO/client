@@ -1,8 +1,8 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { ThemeContext } from "../../../contexts/ThemeContext";
 
+import core from "../../../core";
 import image from "../../../assets/images/logo.png";
 
 import {
@@ -17,8 +17,6 @@ import {
 
 // props - has steamID and match object
 const SideBar = (props: any) => {
-  const { theme, toggleTheme } = useContext(ThemeContext);
-
   return (
     <Main>
       <LogoDiv>
@@ -59,8 +57,8 @@ const SideBar = (props: any) => {
         </Item>
       </ItemList>
       <ToggleDiv>
-        <i onClick={toggleTheme}>
-          {theme === "dark" ? <MoonSVG /> : <SunSVG />}
+        <i onClick={core.ui.actions.toggleTheme}>
+          {core.ui.state.THEME_TYPE.value === "dark" ? <MoonSVG /> : <SunSVG />}
         </i>
       </ToggleDiv>
     </Main>

@@ -1,8 +1,8 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-import { ThemeContext } from "../../../contexts/ThemeContext";
+import core from "../../../core";
 import { SunSVG, MoonSVG } from "../../ui/Icon/SVGS";
 import Logo from "../../ui/Icon/Logo";
 
@@ -13,8 +13,6 @@ interface IProps {
 }
 
 const NavBar = (props: IProps) => {
-  const { theme, toggleTheme } = useContext(ThemeContext);
-
   if (props.HomePage === true) {
     return (
       <MainWrapper>
@@ -24,8 +22,12 @@ const NavBar = (props: IProps) => {
           </Link>
         </Left>
         <Right>
-          <ToggleMode onClick={toggleTheme}>
-            {theme === "dark" ? <MoonSVG /> : <SunSVG />}
+          <ToggleMode onClick={core.ui.actions.toggleTheme}>
+            {core.ui.state.THEME_TYPE.value === "dark" ? (
+              <MoonSVG />
+            ) : (
+              <SunSVG />
+            )}
           </ToggleMode>
         </Right>
       </MainWrapper>
@@ -44,8 +46,12 @@ const NavBar = (props: IProps) => {
           <SearchForm />
         </Middle>
         <Right>
-          <ToggleMode onClick={toggleTheme}>
-            {theme === "dark" ? <MoonSVG /> : <SunSVG />}
+          <ToggleMode onClick={core.ui.actions.toggleTheme}>
+            {core.ui.state.THEME_TYPE.value === "dark" ? (
+              <MoonSVG />
+            ) : (
+              <SunSVG />
+            )}
           </ToggleMode>
         </Right>
       </MainWrapper>
