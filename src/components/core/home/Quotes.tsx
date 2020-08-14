@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
-import QuotesData from "../../../data/quotesByPros.json";
+import QuotesData from "../../../core/data/quotesByPros.json";
 
 const Quotes = () => {
   const [quote, setQuote] = useState("");
