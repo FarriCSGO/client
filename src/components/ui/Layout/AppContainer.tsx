@@ -13,7 +13,7 @@ const DashWrapper = styled.div`
   display: flex;
   flex-direction: column;
 
-  @media ${(props) => props.theme.size.small} {
+  @media ${(props) => props.theme.screen.small} {
     padding: 0.5rem;
     align-items: center;
   }

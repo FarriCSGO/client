@@ -30,8 +30,8 @@ const Button = (props: ButtonProps) => {
 const MyButton = styled.button`
   font-style: normal;
   font-weight: normal;
-  background-color: ${(props) => props.theme.colors.primary};
-  color: ${(props) => props.theme.colors.onPrimary};
+  background-color: ${(props) => props.theme.color.primary};
+  color: ${(props) => props.theme.color.onPrimary};
   border-radius: 50px;
   padding: 8px 32px;
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.25);

@@ -77,7 +77,7 @@ const SteamDetailsCard = (props: IProps) => {
 const CardContainer = styled.div`
   display: flex;
   margin: 0 auto;
-  background: ${(props) => props.theme.colors.surface};
+  background: ${(props) => props.theme.color.surface};
   box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.12);
   border-radius: 8px;
   width: 300px;
@@ -99,7 +99,7 @@ const CenterItems = styled.div`
 const Name = styled.p`
   font-weight: bold;
   margin: 0;
-  color: ${(props) => props.theme.colors.primary};
+  color: ${(props) => props.theme.color.primary};
   font-size: 1.3rem;
   margin-left: 0.5rem;
 `;
@@ -116,7 +116,7 @@ const AvatarImage = styled.img`
   border-radius: 50px;
   width: 3rem;
   height: 3rem;
-  border: 2px solid ${(props) => props.theme.colors.primary};
+  border: 2px solid ${(props) => props.theme.color.primary};
 `;
 
 const SteamLevel = styled.p`

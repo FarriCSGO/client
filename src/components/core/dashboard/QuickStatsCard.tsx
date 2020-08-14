@@ -95,7 +95,7 @@ const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  background: ${(props) => props.theme.colors.surface};
+  background: ${(props) => props.theme.color.surface};
   box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.12);
   border-radius: 8px;
   width: 300px;
@@ -124,14 +124,14 @@ const Icon = styled.div`
   height: 3.5rem;
   display: flex;
   align-items: center;
-  background: ${(props) => props.theme.colors.surface2};
+  background: ${(props) => props.theme.color.surface2};
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
   border-radius: 50%;
 
   svg {
     width: 36px;
     height: 36px;
-    fill: ${(props) => props.theme.colors.primary};
+    fill: ${(props) => props.theme.color.primary};
     margin: 0 auto;
   }
 
@@ -147,7 +147,7 @@ const Details = styled.div`
     margin: 0;
     font-size: 1.3rem;
     font-weight: bold;
-    color: ${(props) => props.theme.colors.primary};
+    color: ${(props) => props.theme.color.primary};
   }
 
   .statValue {
@@ -156,6 +156,6 @@ const Details = styled.div`
     font-family: "Montserrat", sans-serif;
     font-size: 2rem;
     font-weight: bold;
-    color: ${(props) => props.theme.colors.onSurface};
+    color: ${(props) => props.theme.color.onSurface};
   }
 `;

@@ -97,7 +97,7 @@ const SearchBarWrapper = styled.div`
   margin: 1rem auto;
   padding-left: -1rem;
 
-  @media ${(props) => props.theme.size.small} {
+  @media ${(props) => props.theme.screen.small} {
     display: none;
   }
 `;
@@ -105,7 +105,7 @@ const SearchBarWrapper = styled.div`
 const MobileNav = styled.div`
   display: none;
 
-  @media ${(props) => props.theme.size.small} {
+  @media ${(props) => props.theme.screen.small} {
     display: flex;
     flex-direction: column;
   }

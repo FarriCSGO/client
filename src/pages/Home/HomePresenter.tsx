@@ -58,19 +58,19 @@ const GithubContainer = styled.section`
     }
     &:visited {
       text-decoration: none;
-      color: ${(props) => props.theme.colors.dark};
+      color: ${(props) => props.theme.color.dark};
     }
     &:hover {
       text-decoration: none;
-      color: ${(props) => props.theme.colors.dark};
+      color: ${(props) => props.theme.color.dark};
     }
     &:active {
       text-decoration: none;
-      color: ${(props) => props.theme.colors.dark};
+      color: ${(props) => props.theme.color.dark};
     }
     &:hover {
       cursor: pointer;
-      color: ${(props) => props.theme.colors.dark};
+      color: ${(props) => props.theme.color.dark};
     }
   }
 `;
@@ -80,14 +80,14 @@ const Title = styled.h1`
   font-weight: bold;
   font-size: 2rem;
   text-align: center;
-  color: ${(props) => props.theme.colors.dark};
+  color: ${(props) => props.theme.color.dark};
 
-  @media ${(props) => props.theme.size.small} {
+  @media ${(props) => props.theme.screen.small} {
     font-size: 1rem;
     display: none;
   }
 
-  @media ${(props) => props.theme.size.medium} {
+  @media ${(props) => props.theme.screen.medium} {
     font-size: 1.5rem;
   }
 `;
@@ -95,9 +95,9 @@ const Title = styled.h1`
 const MobileTitle = styled.h1`
   font-size: 1.25rem;
   display: none;
-  color: ${(props) => props.theme.colors.dark};
+  color: ${(props) => props.theme.color.dark};
 
-  @media ${(props) => props.theme.size.small} {
+  @media ${(props) => props.theme.screen.small} {
     display: inline-block;
   }
 `;
@@ -105,15 +105,15 @@ const MobileTitle = styled.h1`
 const GithubText = styled.h3`
   font-weight: normal;
   font-size: 1rem;
-  color: ${(props) => props.theme.colors.dark};
+  color: ${(props) => props.theme.color.dark};
   margin-right: 0.5rem;
 `;
 
 const MyButton = styled.button`
   font-style: normal;
   font-weight: normal;
-  background-color: ${(props) => props.theme.colors.surface2};
-  color: ${(props) => props.theme.colors.primary};
+  background-color: ${(props) => props.theme.color.surface2};
+  color: ${(props) => props.theme.color.primary};
   border-radius: 50px;
   padding: 3px 18px;
   box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.25);
@@ -128,7 +128,7 @@ const MyButton = styled.button`
     outline: none;
   }
 
-  @media ${(props) => props.theme.size.small} {
+  @media ${(props) => props.theme.screen.small} {
     padding: 2px 14px;
   }
 
@@ -137,7 +137,7 @@ const MyButton = styled.button`
   align-items: center;
 
   svg {
-    stroke: ${(props) => props.theme.colors.primary};
+    stroke: ${(props) => props.theme.color.primary};
     height: 32px;
     width: 32px;
   }
@@ -146,7 +146,7 @@ const MyButton = styled.button`
     cursor: pointer;
   }
 
-  @media ${(props) => props.theme.size.small} {
+  @media ${(props) => props.theme.screen.small} {
     svg {
       height: 32px;
       width: 32px;
@@ -158,7 +158,7 @@ const Span = styled.span`
   margin: auto 0.2rem auto 0;
   font-size: 1rem;
 
-  @media ${(props) => props.theme.size.small} {
+  @media ${(props) => props.theme.screen.small} {
     font-size: 1rem;
   }
 `;

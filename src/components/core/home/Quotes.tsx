@@ -31,7 +31,7 @@ const MainWrapper = styled.div`
   text-align: center;
   padding: 1rem;
 
-  @media ${(props) => props.theme.size.small} {
+  @media ${(props) => props.theme.screen.small} {
     height: 7.5rem;
   }
 `;
@@ -48,7 +48,7 @@ const Quote = styled.h2`
   font-weight: normal;
   margin: 0;
 
-  @media ${(props) => props.theme.size.small} {
+  @media ${(props) => props.theme.screen.small} {
     font-size: 1rem;
   }
 `;
@@ -57,7 +57,7 @@ const Person = styled.h3`
   font-size: 1rem;
   font-weight: bold;
 
-  @media ${(props) => props.theme.size.small} {
+  @media ${(props) => props.theme.screen.small} {
     font-size: 0.75rem;
   }
 `;

@@ -1,7 +1,7 @@
 import { createGlobalStyle } from "styled-components";
-import { ThemeType } from "../theme/theme";
+import { ITheme } from "../core/controller/ui/ui.interface";
 
-export default createGlobalStyle<{ theme: ThemeType }>`
+export default createGlobalStyle<{ theme: ITheme }>`
 
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 
@@ -26,8 +26,8 @@ html {
  */
 
 body {
-  background-color: ${(props) => props.theme.colors.background};
-  color: ${(props) => props.theme.colors.onBackground};
+  background-color: ${(props) => props.theme.color.background};
+  color: ${(props) => props.theme.color.onBackground};
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -40,11 +40,11 @@ body::-webkit-scrollbar {
 }
 
 body::-webkit-scrollbar-track {
-  background: ${(props) => props.theme.colors.background2} 
+  background: ${(props) => props.theme.color.background2} 
 }
 
 body::-webkit-scrollbar-thumb {
-  background: ${(props) => props.theme.colors.primary};
+  background: ${(props) => props.theme.color.primary};
 }
 
 /**

@@ -62,7 +62,7 @@ const MainWrapper = styled.div`
   height: 6rem;
   padding: 0 1.5rem 1rem 1.5rem;
 
-  @media ${(props) => props.theme.size.small} {
+  @media ${(props) => props.theme.screen.small} {
     padding: 0 0.5rem;
     height: 4rem;
   }
@@ -76,7 +76,7 @@ const Middle = styled.div`
   align-self: center;
   margin: 0 auto;
 
-  @media ${(props) => props.theme.size.small} {
+  @media ${(props) => props.theme.screen.small} {
     display: none;
   }
 `;
@@ -88,7 +88,7 @@ const Right = styled.div`
 const ToggleMode = styled.i`
   align-self: center;
 
-  @media ${(props) => props.theme.size.small} {
+  @media ${(props) => props.theme.screen.small} {
     margin-left: 0.2rem;
   }
 `;
@@ -97,7 +97,7 @@ const SearchBarWrapper = styled.div`
   display: none;
   margin: 0 auto 1rem auto;
 
-  @media ${(props) => props.theme.size.small} {
+  @media ${(props) => props.theme.screen.small} {
     display: block;
   }
 `;
