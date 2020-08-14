@@ -21,8 +21,6 @@ export const setTheme = (themeName: string) => {
 };
 
 export const toggleTheme = () => {
-  console.log("TYPE:", THEME_TYPE);
-
   if (THEME_TYPE.value === "dark") {
     THEME.set(lightTheme);
     THEME_TYPE.set("light");

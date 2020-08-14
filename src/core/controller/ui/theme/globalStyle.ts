@@ -1,5 +1,5 @@
 import { createGlobalStyle } from "styled-components";
-import { ITheme } from "../core/controller/ui/ui.interface";
+import { ITheme } from "../ui.interface";
 
 export default createGlobalStyle<{ theme: ITheme }>`
 

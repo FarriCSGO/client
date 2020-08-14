@@ -3,7 +3,7 @@ import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import { usePulse } from "pulse-framework";
 import { ThemeProvider } from "styled-components";
 
-import GlobalStyle from "./theme/globalStyle";
+import GlobalStyle from "./core/controller/ui/theme/globalStyle";
 import { ITheme } from "./core/controller/ui/ui.interface";
 
 // Pages
