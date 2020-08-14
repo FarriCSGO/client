@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.validateNumber = exports.cleanse = exports.arrayFunctions = exports.normalizeMap = exports.isWatchableObject = exports.genId = exports.defineConfig = exports.shallowmerge = exports.normalizeGroups = exports.copy = exports.collectionFunctions = exports.normalizeDeps = exports.getInstance = exports.extractAll = exports.resetState = exports.cleanState = void 0;
 const _1 = require(".");
 const state_1 = require("./state");
 function cleanState(state) {
@@ -15,32 +14,49 @@ function cleanState(state) {
 }
 exports.cleanState = cleanState;
 function resetState(items) {
-    items.forEach((item) => {
+    for (const item of items) {
         if (item instanceof _1.Collection)
             item.reset();
         if (item instanceof state_1.default)
             return item.reset();
-        const stateSet = extractAll(item, state_1.default);
-        stateSet.forEach((state) => state.reset());
-    });
+        const stateSet = extractAll(state_1.default, item);
+        stateSet.forEach(state => state.reset());
+    }
 }
 exports.resetState = resetState;
-function extractAll(obj, instance) {
-    if (obj instanceof instance)
-        return new Set(obj);
+/**
+ * A helper function to extract all instances of a target instance from an object
+ * If this function fails, it will do so silently, so it can be safely used without much knowledge of `inObj`.
+ * @param findClass Class to extract instances of
+ * @param inObj Object to find all instances of `findType` within
+ */
+function extractAll(findClass, inObj) {
+    // safety net: object passed is not an obj, but rather an instance of the testClass in question, return that
+    if (inObj instanceof findClass)
+        return new Set([findClass]);
+    // safety net: if type passed is not iterable, return empty set
+    if (typeof inObj !== 'object')
+        return new Set();
+    // define return Set with typeof testClass
     const found = new Set();
-    let next = [obj];
+    // storage for the look function's state
+    let next = [inObj];
     function look() {
-        let _next = [...next];
-        next = [];
-        _next.forEach((o) => {
+        let _next = [...next]; // copy last state
+        next = []; // reset the original state
+        _next.forEach(o => {
+            const typelessObject = o;
+            // look at every property in object
             for (let property in o) {
-                if (o[property] instanceof instance)
-                    found.add(o[property]);
-                else if (isWatchableObject(o[property]))
-                    next.push(o[property]);
+                // check if instance type of class
+                if (o[property] instanceof findClass)
+                    found.add(typelessObject[property]);
+                // otherwise if object, store child object for next loop
+                else if (isWatchableObject(o[property]) && !(typelessObject[property] instanceof _1.default))
+                    next.push(typelessObject[property]);
             }
         });
+        // if next state has items, loop function
         if (next.length > 0)
             look();
     }
@@ -62,29 +78,7 @@ function normalizeDeps(deps) {
     return Array.isArray(deps) ? deps : [deps];
 }
 exports.normalizeDeps = normalizeDeps;
-exports.collectionFunctions = [
-    'collect',
-    'collectByKeys',
-    'replaceIndex',
-    'getGroup',
-    'newGroup',
-    'deleteGroup',
-    'removeFromGroup',
-    'update',
-    'increment',
-    'decrement',
-    'delete',
-    'purge',
-    'findById',
-    'put',
-    'move',
-    'watchData',
-    'cleanse',
-    // 'unsubscribe',
-    // deprecated
-    'remove'
-];
-exports.copy = (val) => {
+exports.copy = val => {
     if (isWatchableObject(val))
         val = Object.assign({}, val);
     else if (Array.isArray(val))
@@ -103,7 +97,7 @@ function normalizeGroups(groupsAsArray = []) {
 exports.normalizeGroups = normalizeGroups;
 function shallowmerge(source, changes) {
     let keys = Object.keys(changes);
-    keys.forEach((property) => {
+    keys.forEach(property => {
         source[property] = changes[property];
     });
     return source;
@@ -131,10 +125,9 @@ function isWatchableObject(value) {
 }
 exports.isWatchableObject = isWatchableObject;
 function normalizeMap(map) {
-    return Array.isArray(map) ? map.map((key) => ({ key, val: key })) : Object.keys(map).map((key) => ({ key, val: map[key] }));
+    return Array.isArray(map) ? map.map(key => ({ key, val: key })) : Object.keys(map).map(key => ({ key, val: map[key] }));
 }
 exports.normalizeMap = normalizeMap;
-exports.arrayFunctions = ['push', 'pop', 'shift', 'unshift', 'splice', 'sort', 'reverse'];
 function cleanse(object) {
     if (!isWatchableObject(object))
         return object;

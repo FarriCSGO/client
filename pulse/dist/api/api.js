@@ -9,7 +9,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getChannel = void 0;
 const ensureProperHeaders = headers => {
     let obj = {};
     Object.keys(headers).forEach(t => {
@@ -62,7 +61,7 @@ class API {
             config.options.method = method;
             if (!config.options.headers)
                 config.options.headers = {};
-            let originalType = config.options.headers['content-type'];
+            let originalType = config.options.headers['content-type'] || config.options.headers['Content-Type'];
             if (payload && payload._parts && payload.getParts) {
                 // inject body if not get method
                 config.options.body = payload;
@@ -86,17 +85,19 @@ class API {
             let timedout = false;
             if (this.config.timeout) {
                 let t;
-                const timeout = new Promise((resolve) => {
+                const timeout = new Promise(resolve => {
                     t = setTimeout(() => {
                         timedout = true;
                         resolve();
                     }, this.config.timeout);
                 });
                 const request = new Promise((resolve, reject) => {
-                    fetch(fullUrl, this.config.options).then((data) => {
+                    fetch(fullUrl, this.config.options)
+                        .then(data => {
                         clearTimeout(t);
                         resolve(data);
-                    }).catch(reject);
+                    })
+                        .catch(reject);
                 });
                 response = yield Promise.race([timeout, request]);
             }

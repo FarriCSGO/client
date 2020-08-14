@@ -80,7 +80,7 @@ export declare class Collection<DataType = DefaultDataItem, G = GroupObj, S = Se
     removeFromGroups(primaryKeys: PrimaryKey | Array<PrimaryKey>, groups: GroupName | Array<GroupName>): boolean;
     deleteData(primaryKeys: PrimaryKey | Array<PrimaryKey>, groups: GroupName | Array<GroupName>): boolean;
     private updateDataKey;
-    regenGroupsThatInclude(primarykey: PrimaryKey): void;
+    rebuildGroupsThatInclude(primarykey: PrimaryKey): void;
     reset(): void;
 }
 export default Collection;

@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.reset = exports.StateGroup = exports.State = void 0;
 const dep_1 = require("./dep");
 const utils_1 = require("./utils");
 const deepmerge_1 = require("./helpers/deepmerge");
@@ -17,7 +16,6 @@ class State {
         this.persistState = false;
         this.dep = new dep_1.default(deps);
         this.privateWrite(initalState);
-        this.nextState = utils_1.copy(initalState);
     }
     set value(val) {
         this._masterValue = val;
@@ -38,7 +36,7 @@ class State {
     }
     /**
      * Directly set state to a new value, if nothing is passed in State.nextState will be used as the next value
-     * @param {Object} newState - The new value for this state
+     * @param newState - The new value for this state
      */
     set(newState, options = {}) {
         // if newState not provided, just ingest update with existing value
@@ -74,10 +72,7 @@ class State {
     patch(targetWithChange, config = {}) {
         if (!(typeof this._masterValue === 'object'))
             return this;
-        this.nextState =
-            config.deep === false
-                ? utils_1.shallowmerge(this.nextState, targetWithChange)
-                : deepmerge_1.deepmerge(this.nextState, targetWithChange);
+        this.nextState = config.deep === false ? utils_1.shallowmerge(this.nextState, targetWithChange) : deepmerge_1.deepmerge(this.nextState, targetWithChange);
         this.set();
         return this;
     }
@@ -89,31 +84,7 @@ class State {
     }
     persist(key) {
         this.persistState = true;
-        if (!key && this.name) {
-            key = this.name;
-        }
-        else if (!key) {
-            console.warn('Pulse Persist Error: No key provided');
-        }
-        else {
-            this.name = key;
-        }
-        const storage = this.instance().storage;
-        storage.persistedState.add(this);
-        if (storage.isPromise) {
-            storage.get(this.name).then((val) => {
-                if (val === null)
-                    storage.set(this.name, this.value);
-                this.instance().runtime.ingest(this, val);
-            });
-        }
-        else {
-            let value = storage.get(this.name);
-            if (value === null)
-                storage.set(this.name, this.value);
-            else
-                this.instance().runtime.ingest(this, value);
-        }
+        persistValue.bind(this)(key);
         return this;
     }
     // this creates a watcher that will fire a callback then destroy itself after invoking
@@ -182,7 +153,7 @@ class State {
         this._masterValue = utils_1.copy(value);
         this.nextState = utils_1.copy(value);
         if (this.persistState)
-            this.instance().storage.set(this.name, value);
+            this.instance().storage.set(this.name, this.getPersistableValue());
     }
     isCorrectType(value) {
         let type = typeof value;
@@ -193,6 +164,9 @@ class State {
     destroy() {
         this.dep.deps.clear();
         this.dep.subs.clear();
+    }
+    getPersistableValue() {
+        return this.value;
     }
 }
 exports.State = State;
@@ -213,3 +187,34 @@ function reset(instance) {
         instance.instance().storage.remove(instance.name);
 }
 exports.reset = reset;
+// this function exists outside the state class so it can be imported into other classes such as selector for custom persist logic
+function persistValue(key) {
+    // validation
+    if (!key && this.name) {
+        key = this.name;
+    }
+    else if (!key) {
+        console.warn('Pulse Persist Error: No key provided');
+    }
+    else {
+        this.name = key;
+    }
+    const storage = this.instance().storage;
+    // add ref to this instance inside storage
+    storage.persistedState.add(this);
+    // handle the value
+    const handle = (storageVal) => {
+        if (storageVal === null)
+            storage.set(this.name, this.getPersistableValue());
+        else if (typeof this.select === 'function')
+            this.select(storageVal);
+        else
+            this.instance().runtime.ingest(this, storageVal);
+    };
+    // Check if promise, then handle value
+    if (storage.isPromise)
+        storage.get(this.name).then(handle);
+    else
+        handle(storage.get(this.name));
+}
+exports.persistValue = persistValue;

@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Collection = void 0;
 const state_1 = require("../state");
 const group_1 = require("./group");
 const utils_1 = require("../utils");
@@ -34,17 +33,19 @@ class Collection {
     initSubInstances(subInstanceType) {
         const subInstanceObj = {};
         // transform "groups" into "Group" so we can use Collection.Group, and same with selectors.
-        const subInstanceTypeGeneratorName = subInstanceType.charAt(0).toUpperCase() + subInstanceType.slice(1, -1);
-        // get keys from object, or array- depending on what the developer supplied
+        // You'll need the below code when you add support for arrays of group names ;)
+        // const subInstanceTypeGeneratorName = subInstanceType.charAt(0).toUpperCase() + subInstanceType.slice(1, -1);
         // const keys: Array<string> = Array.isArray(this.config[subInstanceType])
         //   ? (this.config[subInstanceType] as Array<string>)
         //   : Object.keys(this.config[subInstanceType]);
         const keys = Object.keys(this.config[subInstanceType]);
-        for (const subInstanceName in keys) {
+        for (const subInstanceName of keys) {
+            let value = this.config[subInstanceType][subInstanceName];
             // create the sub instance
-            subInstanceObj[subInstanceName] = this[subInstanceTypeGeneratorName]();
+            subInstanceObj[subInstanceName] = value;
             // assign sub instance to instance and inject key of the sub instance name
-            subInstanceObj[subInstanceName].key(subInstanceName);
+            if (!subInstanceObj[subInstanceName].name)
+                subInstanceObj[subInstanceName].key(subInstanceName);
         }
         this[subInstanceType] = subInstanceObj;
     }
@@ -59,7 +60,7 @@ class Collection {
     // create a group instance on this collection
     createGroup(groupName, initialIndex) {
         if (this.groups.hasOwnProperty(groupName))
-            console.error(`Pulse Collection: Group ${groupName} already exists`);
+            return this.groups[groupName];
         let group = new group_1.default(() => this, initialIndex);
         group.name = groupName;
         this.groups[groupName] = group;
@@ -91,20 +92,20 @@ class Collection {
             groups = 'default';
         groups = handy_1.normalizeArray(groups);
         // if any of the groups don't already exist, create them
-        groups.forEach((groupName) => !this.groups[groupName] && this.createGroup(groupName));
+        groups.forEach(groupName => !this.groups[groupName] && this.createGroup(groupName));
         _items.forEach((item, index) => {
             let key = this.saveData(item);
             if (config.forEachItem)
                 config.forEachItem(item, key, index);
             if (key === null)
                 return;
-            groups.forEach((groupName) => {
+            groups.forEach(groupName => {
                 let group = this.groups[groupName];
                 if (!group.nextState.includes(key))
                     group.nextState[config.method || 'push'](key);
             });
         });
-        groups.forEach((groupName) => this.instance().runtime.ingest(this.groups[groupName], this.groups[groupName].nextState));
+        groups.forEach(groupName => this.instance().runtime.ingest(this.groups[groupName], this.groups[groupName].nextState));
     }
     /**
      * Return an item from this collection by primaryKey as Data instance (extends State)
@@ -168,7 +169,7 @@ class Collection {
         // if the data key has changed move it internally and ammend groups
         if (updateDataKey)
             this.updateDataKey(currentData[primary], final[primary]);
-        this.regenGroupsThatInclude(final[primary]);
+        this.rebuildGroupsThatInclude(final[primary]);
         // return the Data instance
         return this.data[final[primary]];
     }
@@ -178,10 +179,10 @@ class Collection {
     put(primaryKeys, groupNames, options) {
         primaryKeys = handy_1.normalizeArray(primaryKeys);
         groupNames = handy_1.normalizeArray(groupNames);
-        groupNames.forEach((groupName) => {
+        groupNames.forEach(groupName => {
             if (!this.groups.hasOwnProperty(groupName))
                 return;
-            primaryKeys.forEach((key) => {
+            primaryKeys.forEach(key => {
                 this.groups[groupName].add(key, options);
             });
         });
@@ -199,8 +200,8 @@ class Collection {
     removeFromGroups(primaryKeys, groups) {
         primaryKeys = handy_1.normalizeArray(primaryKeys);
         groups = handy_1.normalizeArray(groups);
-        groups.forEach((groupName) => {
-            primaryKeys.forEach((primaryKey) => {
+        groups.forEach(groupName => {
+            primaryKeys.forEach(primaryKey => {
                 if (!this.groups[groupName])
                     return;
                 let group = this.getGroup(groupName);
@@ -212,13 +213,13 @@ class Collection {
     deleteData(primaryKeys, groups) {
         primaryKeys = handy_1.normalizeArray(primaryKeys);
         groups = handy_1.normalizeArray(groups);
-        primaryKeys.forEach((key) => {
+        primaryKeys.forEach(key => {
             delete this.data[key];
-            groups.forEach((groupName) => {
-                this.groups[groupName].nextState = this.groups[groupName].nextState.filter((id) => id !== key);
+            groups.forEach(groupName => {
+                this.groups[groupName].nextState = this.groups[groupName].nextState.filter(id => id !== key);
             });
         });
-        groups.forEach((groupName) => this.instance().runtime.ingest(this.groups[groupName], this.groups[groupName].nextState));
+        groups.forEach(groupName => this.instance().runtime.ingest(this.groups[groupName], this.groups[groupName].nextState));
         return true;
     }
     // public findGroupsToUpdate(primaryKeysChanged: Array<PrimaryKey>) {
@@ -245,7 +246,7 @@ class Collection {
             this.instance().runtime.ingest(group);
         }
     }
-    regenGroupsThatInclude(primarykey) {
+    rebuildGroupsThatInclude(primarykey) {
         for (let groupName in this.groups) {
             const group = this.getGroup(groupName);
             if (group.has(primarykey))
@@ -256,7 +257,7 @@ class Collection {
         this.data = {};
         this.size = 0;
         const groups = Object.keys(this.groups);
-        groups.forEach((groupName) => this.groups[groupName].reset());
+        groups.forEach(groupName => this.groups[groupName].reset());
     }
 }
 exports.Collection = Collection;

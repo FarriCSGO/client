@@ -18,14 +18,13 @@ export declare class State<ValueType = any> {
     name?: string;
     valueType?: string;
     sideEffects?: Function;
-    computeValue?: (newState?: ValueType) => ValueType;
     set bind(value: ValueType);
     get bind(): ValueType;
     get exists(): boolean;
     constructor(instance: () => Pulse, initalState: any, deps?: Array<Dep>);
     /**
      * Directly set state to a new value, if nothing is passed in State.nextState will be used as the next value
-     * @param {Object} newState - The new value for this state
+     * @param newState - The new value for this state
      */
     set(newState?: ValueType | SetFunc<ValueType>, options?: {
         background?: boolean;
@@ -51,6 +50,7 @@ export declare class State<ValueType = any> {
     privateWrite(value: any): void;
     private isCorrectType;
     destroy(): void;
+    protected getPersistableValue(): any;
 }
 export declare type StateGroupDefault = {
     [key: string]: State | any;
@@ -58,4 +58,5 @@ export declare type StateGroupDefault = {
 export declare const StateGroup: (instance: () => Pulse, stateGroup: Object) => any;
 export default State;
 export declare function reset(instance: State): void;
-declare type SetFunc<ValueType> = (state: ValueType) => ValueType;
+export declare type SetFunc<ValueType> = (state: ValueType) => ValueType;
+export declare function persistValue(key: string): void;

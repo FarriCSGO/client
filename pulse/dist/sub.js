@@ -2,7 +2,6 @@
 // Global Subscription Controller
 // This class handles external components subscribing to Pulse.
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CallbackContainer = exports.ComponentContainer = void 0;
 const _1 = require("./");
 class ComponentContainer {
     constructor(instance, subs) {

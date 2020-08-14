@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Group = void 0;
 const pulse_1 = require("../pulse");
 const state_1 = require("../state");
 const collection_1 = require("./collection");
@@ -20,6 +19,9 @@ class Group extends state_1.default {
         this.sideEffects = () => this.build();
         // initial build
         this.build();
+    }
+    get index() {
+        return this.value;
     }
     get output() {
         if (this.instance().runtime.trackState)

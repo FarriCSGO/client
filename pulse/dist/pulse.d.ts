@@ -6,30 +6,47 @@ import Runtime from './runtime';
 import Storage, { StorageMethods } from './storage';
 import API, { apiConfig } from './api/api';
 import Group from './collection/group';
-import { Intergration } from './intergrations/use';
+import { Integration } from './integrations/use';
 import { Controller, ControllerConfig, FuncObj, StateObj } from './controller';
 export interface PulseConfig {
-    storagePrefix?: string;
     computedDefault?: any;
     waitForMount?: boolean;
     framework?: any;
     frameworkConstructor?: any;
     storage?: StorageMethods;
+    storagePrefix?: string;
     logJobs?: boolean;
+    /**
+     * Typically, Pulse waits for a Core to be initialized before running any Computed functions.
+     * Set this `true` to bypass that functionality, and always do an initial computation.
+     */
+    noCore?: boolean;
+}
+export declare const defaultConfig: PulseConfig;
+interface ErrorObject {
+    code: number;
+    message: string;
+    action: Function;
+    raw: any;
 }
 export default class Pulse {
     config: PulseConfig;
+    ready: boolean;
     runtime: Runtime;
     storage: Storage;
     controllers: {
         [key: string]: any;
     };
     subController: SubController;
-    intergration: Intergration;
-    core: any;
+    errorHandlers: Set<(error: ErrorObject) => void>;
+    integration: Integration;
+    private computed;
+    private core;
     constructor(config?: PulseConfig);
-    initFrameworkIntergration(frameworkConstructor: any): void;
-    Controller: <S = StateObj, C = Collection<DefaultDataItem, GroupObj, SelectorObj>, A = FuncObj, H = FuncObj, R = FuncObj>(config: Partial<ControllerConfig<S, C, A, H, R>>, spreadToRoot: any) => Controller<S, C, A, H, R>;
+    initFrameworkIntegration(frameworkConstructor: any): void;
+    Controller: <S = StateObj, C = Collection<DefaultDataItem, GroupObj, SelectorObj>, A = FuncObj, H = FuncObj, R = FuncObj>(config: Partial<ControllerConfig<S, C, A, H, R>>, spreadToRoot?: any) => Controller<S, C, A, H, R>;
+    Core: <CoreType>(core?: CoreType) => CoreType;
+    private onInstanceReady;
     /**
      * Create Pulse API
      * @param config Object
@@ -37,7 +54,6 @@ export default class Pulse {
      * @param config.baseURL String - Url to prepend to endpoints (without trailing slash)
      * @param config.timeout Number - Time to wait for request before throwing error
      */
-    Core: <CoreType>(core?: CoreType) => CoreType;
     API: (config: apiConfig) => API;
     /**
      * Create Pulse state
@@ -54,20 +70,16 @@ export default class Pulse {
      * @param deps Array - An array of state items to depend on
      * @param func Function - A function where the return value is the state, ran every time a dep changes
      */
-    Computed: <T>(func: () => any, deps?: Array<any>) => Computed<T>;
-    /**
-     * Create a Pulse collection
-     * @param config object
-     * @param config.primaryKey The primary key for the collection.
-     * @param config.groups Define groups for this collection.
-     */
+    Computed: <T = any>(func: () => any, deps?: any[]) => Computed<T>;
+    onError(handler: (error: ErrorObject) => void): void;
+    Error(error: any, code?: string): void;
+    Action(func: Function): () => any;
     /**
      * Create a Pulse collection with automatic type inferring
      * @param config object | function returning object
      * @param config.primaryKey string - The primary key for the collection.
      * @param config.groups object - Define groups for this collection.
      */
-    Error(e: any, data?: any): void;
     Collection: <DataType = DefaultDataItem>() => <G = GroupObj, S = SelectorObj>(config: Config<DataType, G, S>) => Collection<DataType, G, S>;
     /**
      * Reset to initial state.
@@ -85,3 +97,4 @@ export default class Pulse {
     private globalBind;
 }
 export declare function persist(items: Array<State>): void;
+export {};

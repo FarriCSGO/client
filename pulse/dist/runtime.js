@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const _1 = require("./");
 const utils_1 = require("./utils");
 const sub_1 = require("./sub");
 class Runtime {
@@ -15,10 +16,13 @@ class Runtime {
     ingest(state, newState, perform = true) {
         let job = { state, newState };
         // grab nextState if newState not passed, compute if needed
-        if (arguments[1] === undefined) {
-            job.newState = job.state.computeValue
-                ? job.state.computeValue(job.state.nextState)
-                : job.state.nextState;
+        if (newState === undefined) {
+            job.newState =
+                job.state instanceof _1.Computed
+                    ? // if computed, recompute value
+                        job.state.computeValue()
+                    : // otherwise, default to nextState
+                        job.state.nextState;
         }
         this.queue.push(job);
         // if no current job, begin the next!
@@ -50,7 +54,7 @@ class Runtime {
     sideEffects(state) {
         let dep = state.dep;
         // cleanup dynamic deps
-        dep.dynamic.forEach(state => {
+        dep.dynamic.forEach((state) => {
             state.dep.deps.delete(dep);
         });
         dep.dynamic = new Set();
@@ -63,11 +67,11 @@ class Runtime {
                 state.watchers[watcher](state.getPublicValue());
         }
         // ingest dependents
-        dep.deps.forEach(state => this.ingest(state, undefined, false));
+        dep.deps.forEach((state) => this.ingest(state, undefined, false));
     }
     updateSubscribers() {
         let componentsToUpdate = new Set();
-        this.complete.forEach(job => job.state.dep.subs.forEach(cC => {
+        this.complete.forEach((job) => job.state.dep.subs.forEach((cC) => {
             // for containers that require props to be passed
             if (cC.passProps) {
                 let localKey;
@@ -82,7 +86,7 @@ class Runtime {
             componentsToUpdate.add(cC);
         }));
         // perform component or callback updates
-        componentsToUpdate.forEach(cC => {
+        componentsToUpdate.forEach((cC) => {
             // are we dealing with a CallbackContainer?
             if (cC instanceof sub_1.CallbackContainer) {
                 // just invoke the callback
@@ -90,15 +94,15 @@ class Runtime {
                 // is this a ComponentContainer
             }
             else if (cC instanceof sub_1.ComponentContainer) {
-                // call the current intergration's update method
-                this.instance().intergration.updateMethod(cC.instance, Runtime.assembleUpdatedValues(cC));
+                // call the current integration's update method
+                this.instance().integration.updateMethod(cC.instance, Runtime.assembleUpdatedValues(cC));
             }
         });
         if (this.instance().config.logJobs && componentsToUpdate.size > 0)
             console.log(`Rendered Components`, componentsToUpdate);
         this.complete = [];
         // run any tasks for next runtime
-        this.tasksOnceComplete.forEach(task => typeof task === 'function' && task());
+        this.tasksOnceComplete.forEach((task) => typeof task === 'function' && task());
         this.tasksOnceComplete = [];
     }
     getFoundState() {
@@ -112,7 +116,7 @@ class Runtime {
     }
     static assembleUpdatedValues(cC) {
         let returnObj = {};
-        cC.keysChanged.forEach(changedKey => {
+        cC.keysChanged.forEach((changedKey) => {
             // extract the value from State for changed keys
             returnObj[changedKey] = cC.mappedStates[changedKey].value;
         });

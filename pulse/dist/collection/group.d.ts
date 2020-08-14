@@ -10,6 +10,7 @@ export declare class Group<DataType = DefaultDataItem> extends State<Array<Prima
     missingPrimaryKeys: Array<PrimaryKey>;
     computedFunc?: (data: DataType) => DataType;
     collection: () => Collection<DataType>;
+    get index(): Array<PrimaryKey>;
     get output(): Array<DataType>;
     constructor(context: InstanceContext, initialIndex?: Array<PrimaryKey>, config?: {
         name?: string;

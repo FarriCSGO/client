@@ -1,17 +1,17 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.isServer = exports.loadServerState = exports.preserveServerState = void 0;
 const utils_1 = require("../utils");
 const __1 = require("..");
+const computed_1 = require("../computed");
 function preserveServerState(nextProps, core) {
-    const collections = utils_1.extractAll(core, __1.Collection);
-    const state = utils_1.extractAll(core, __1.State);
+    const collections = utils_1.extractAll(__1.Collection, core);
+    const state = utils_1.extractAll(__1.State, core);
     const PULSE_DATA = {
         collections: [],
         state: {}
     };
     state.forEach(stateItem => {
-        if (stateItem.name && stateItem.isSet)
+        if (stateItem.name && stateItem.isSet && !(stateItem instanceof computed_1.default))
             PULSE_DATA.state[stateItem.name] = stateItem._masterValue;
     });
     collections.forEach(collection => {
@@ -34,10 +34,10 @@ function loadServerState(core) {
         return;
     if ((_c = (_b = (_a = globalThis === null || globalThis === void 0 ? void 0 : globalThis.__NEXT_DATA__) === null || _a === void 0 ? void 0 : _a.props) === null || _b === void 0 ? void 0 : _b.pageProps) === null || _c === void 0 ? void 0 : _c.PULSE_DATA) {
         const pulseData = globalThis.__NEXT_DATA__.props.pageProps.PULSE_DATA;
-        const state = utils_1.extractAll(core, __1.State);
-        const collections = utils_1.extractAll(core, __1.Collection);
+        const state = utils_1.extractAll(__1.State, core);
+        const collections = utils_1.extractAll(__1.Collection, core);
         state.forEach(item => {
-            if (item.name && pulseData.state[item.name])
+            if (item.name && pulseData.state[item.name] && !(item instanceof computed_1.default))
                 item.set(pulseData.state[item.name]);
         });
     }
