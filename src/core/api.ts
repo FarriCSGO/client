@@ -8,5 +8,6 @@ process.env.NODE_ENV === "production"
 
 export const API = App.API({
   options: {},
-  baseURL: BASE_URL
+  baseURL: BASE_URL,
+  path: "api"
 });

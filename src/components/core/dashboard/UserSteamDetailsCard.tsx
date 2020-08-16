@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { getUserSteamDetails } from "../../../utils/api";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import { usePulse } from "pulse-framework";
 import core from "../../../core";
@@ -8,37 +7,18 @@ import Loading from "../../ui/Animation/LoadingSpinner/LoadingSpinner";
 
 const SteamDetailsCard = () => {
   const [loading, setLoading] = useState(true);
-  const [name, setName] = useState("");
-  const [level, setLevel] = useState("");
-  const [status, setStatus] = useState("");
-  const [avatarURL, setAvatarURL] = useState("");
+  const name = useRef("");
   const [steamID] = usePulse([core.user.state.STEAM_ID]);
+  const [userSteamDetails] = usePulse([core.user.state.USER_STEAM_DETAILS]);
 
   useEffect(() => {
-    const getData = async () => {
-      setLoading(true);
-      const data = await getUserSteamDetails(steamID);
+    setLoading(true);
 
-      setName(data.name);
-      setLevel(data.steamLevel);
-      setAvatarURL(data.avatarImageURL);
-
-      if (data.onlineStatus === 0) {
-        setStatus("Offline");
-      }
-      if (data.onlineStatus === 1 && data.playingGame) {
-        setStatus(data.playingGame);
-      }
-      if (data.onlineStatus !== 0 && !data.playingGame) {
-        setStatus("Online");
-      }
-      setLoading(false);
-    };
-
-    getData();
+    // Stop showing loading spinner once userSteamDetails are fetched
+    if (userSteamDetails) setLoading(false);
 
     return () => setLoading(false);
-  }, [steamID]);
+  }, [steamID, userSteamDetails]);
 
   if (loading === true) {
     return (
@@ -53,7 +33,7 @@ const SteamDetailsCard = () => {
   return (
     <CardContainer>
       <CenterItems>
-        <SteamLevel>{level}</SteamLevel>
+        <SteamLevel>{userSteamDetails.level}</SteamLevel>
         <AvatarDiv>
           <a
             href={`http://steamcommunity.com/profiles/${steamID}`}
@@ -61,13 +41,13 @@ const SteamDetailsCard = () => {
             rel="noopener noreferrer"
           >
             <AvatarImage
-              src={avatarURL}
+              src={userSteamDetails.avatarURL}
               alt="steam profile avatar"
             ></AvatarImage>
           </a>
-          <Name>{name}</Name>
+          <Name>{userSteamDetails.name}</Name>
         </AvatarDiv>
-        <Status>{status}</Status>
+        <Status>{userSteamDetails.status}</Status>
       </CenterItems>
     </CardContainer>
   );

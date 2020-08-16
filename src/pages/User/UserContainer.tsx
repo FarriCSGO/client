@@ -36,6 +36,7 @@ const UserContainer = ({ match, history }: RouteComponentProps<TParams>) => {
     const validateID = async () => {
       try {
         core.user.setSteamID(steamID);
+        core.user.setUserSteamDetails(steamID);
         const data = await getUserSteamDetails(steamID);
         setValidID(data.steamID64);
 
@@ -49,7 +50,7 @@ const UserContainer = ({ match, history }: RouteComponentProps<TParams>) => {
       }
     };
     validateID();
-  });
+  }, [history, steamID]);
 
   if (validID === null)
     return (
