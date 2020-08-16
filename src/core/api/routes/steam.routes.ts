@@ -1,4 +1,4 @@
-import { API } from "../../api";
+import { API } from "../../API";
 
 export const GET_USER_STEAM_DETAILS = async (steamID: string) => {
   const response = await API.get(`userSteamDetails/profiles/${steamID}`);
