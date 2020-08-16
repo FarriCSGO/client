@@ -15,7 +15,7 @@ const Wrapper = styled.div`
   img {
     height: 56px;
 
-    @media ${(props) => props.theme.size.small} {
+    @media ${(props) => props.theme.screen.small} {
       height: 42px;
     }
   }

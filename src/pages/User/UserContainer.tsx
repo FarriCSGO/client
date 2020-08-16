@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { RouteComponentProps } from "react-router-dom";
-import { getUserSteamDetails } from "../../utils/api";
 import styled from "styled-components";
+import core from "../../core";
 
 import {
   DashContainer,
@@ -34,20 +34,28 @@ const UserContainer = ({ match, history }: RouteComponentProps<TParams>) => {
   useEffect(() => {
     const validateID = async () => {
       try {
-        const data = await getUserSteamDetails(steamID);
+        const data = await core.api.steam.GET_USER_STEAM_DETAILS(steamID);
         setValidID(data.steamID64);
 
         const name = data.name;
         document.title =
           name + " - Dashboard // Farri - Check your CS:GO Statistics";
       } catch (err) {
+        console.log("ERROR ERRER");
+
         // If the user enters an invalid steamID(anything) after /dashboard/{..}
         // we redirect the user to "/" or else the App would crash.
         history.push("/");
       }
     };
+
     validateID();
-  });
+
+    // Setting App's State in Pulse Instance
+    core.user.setSteamID(steamID);
+    core.user.setUserSteamDetails(steamID);
+    core.user.setUserQuickStats(steamID);
+  }, [history, steamID]);
 
   if (validID === null)
     return (
@@ -69,7 +77,7 @@ const UserContainer = ({ match, history }: RouteComponentProps<TParams>) => {
 
   return (
     <>
-      <SideBar steamID={steamID} {...match} />
+      <SideBar {...match} />
       <SideBarMobile {...match} />
       <DashContainer>
         <MobileNav>
@@ -78,14 +86,14 @@ const UserContainer = ({ match, history }: RouteComponentProps<TParams>) => {
         <SearchBarWrapper>
           <SearchForm />
         </SearchBarWrapper>
-        {UserPageContent(URL, steamID)}
+        {UserPageContent(URL)}
       </DashContainer>
     </>
   );
 };
 
-const UserPageContent = (URL: string, steamID: string) => {
-  if (URL.endsWith("dashboard")) return <Dashboard steamID={steamID} />;
+const UserPageContent = (URL: string) => {
+  if (URL.endsWith("dashboard")) return <Dashboard />;
   if (URL.endsWith("matches")) return <Matches />;
   if (URL.endsWith("weapons")) return <Weapons />;
   if (URL.endsWith("maps")) return <Maps />;
@@ -97,7 +105,7 @@ const SearchBarWrapper = styled.div`
   margin: 1rem auto;
   padding-left: -1rem;
 
-  @media ${(props) => props.theme.size.small} {
+  @media ${(props) => props.theme.screen.small} {
     display: none;
   }
 `;
@@ -105,7 +113,7 @@ const SearchBarWrapper = styled.div`
 const MobileNav = styled.div`
   display: none;
 
-  @media ${(props) => props.theme.size.small} {
+  @media ${(props) => props.theme.screen.small} {
     display: flex;
     flex-direction: column;
   }

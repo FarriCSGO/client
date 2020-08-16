@@ -1,4 +1,4 @@
-import { getSteamID as getID, validateSteamID } from "../utils/api";
+import { getSteamID as getID, validateSteamID } from "../../utils/api";
 
 const getSteamID = async (custom_id: string): Promise<any> => {
   // TODO: Use RegEx instead so that you can check for all the special chars

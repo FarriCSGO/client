@@ -1,45 +1,23 @@
 import React, { useState, useEffect } from "react";
-import { getUserSteamDetails } from "../../../utils/api";
 import styled from "styled-components";
+import { usePulse } from "pulse-framework";
+import core from "../../../core";
 
 import Loading from "../../ui/Animation/LoadingSpinner/LoadingSpinner";
 
-interface IProps {
-  steamID: string;
-}
-
-const SteamDetailsCard = (props: IProps) => {
+const SteamDetailsCard = () => {
   const [loading, setLoading] = useState(true);
-  const [name, setName] = useState("");
-  const [level, setLevel] = useState("");
-  const [status, setStatus] = useState("");
-  const [avatarURL, setAvatarURL] = useState("");
+  const [steamID] = usePulse([core.user.state.STEAM_ID]);
+  const [userSteamDetails] = usePulse([core.user.state.USER_STEAM_DETAILS]);
 
   useEffect(() => {
-    const getData = async () => {
-      setLoading(true);
-      const data = await getUserSteamDetails(props.steamID);
+    setLoading(true);
 
-      setName(data.name);
-      setLevel(data.steamLevel);
-      setAvatarURL(data.avatarImageURL);
-
-      if (data.onlineStatus === 0) {
-        setStatus("Offline");
-      }
-      if (data.onlineStatus === 1 && data.playingGame) {
-        setStatus(data.playingGame);
-      }
-      if (data.onlineStatus !== 0 && !data.playingGame) {
-        setStatus("Online");
-      }
-      setLoading(false);
-    };
-
-    getData();
+    // Stop showing loading spinner once userSteamDetails are fetched
+    if (userSteamDetails.steamID === steamID) setLoading(false);
 
     return () => setLoading(false);
-  }, [props.steamID]);
+  }, [steamID, userSteamDetails]);
 
   if (loading === true) {
     return (
@@ -54,21 +32,21 @@ const SteamDetailsCard = (props: IProps) => {
   return (
     <CardContainer>
       <CenterItems>
-        <SteamLevel>{level}</SteamLevel>
+        <SteamLevel>{userSteamDetails.level}</SteamLevel>
         <AvatarDiv>
           <a
-            href={`http://steamcommunity.com/profiles/${props.steamID}`}
+            href={`http://steamcommunity.com/profiles/${steamID}`}
             target="_blank"
             rel="noopener noreferrer"
           >
             <AvatarImage
-              src={avatarURL}
+              src={userSteamDetails.avatarURL}
               alt="steam profile avatar"
             ></AvatarImage>
           </a>
-          <Name>{name}</Name>
+          <Name>{userSteamDetails.name}</Name>
         </AvatarDiv>
-        <Status>{status}</Status>
+        <Status>{userSteamDetails.status}</Status>
       </CenterItems>
     </CardContainer>
   );
@@ -77,7 +55,7 @@ const SteamDetailsCard = (props: IProps) => {
 const CardContainer = styled.div`
   display: flex;
   margin: 0 auto;
-  background: ${(props) => props.theme.colors.surface};
+  background: ${(props) => props.theme.color.surface};
   box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.12);
   border-radius: 8px;
   width: 300px;
@@ -99,7 +77,7 @@ const CenterItems = styled.div`
 const Name = styled.p`
   font-weight: bold;
   margin: 0;
-  color: ${(props) => props.theme.colors.primary};
+  color: ${(props) => props.theme.color.primary};
   font-size: 1.3rem;
   margin-left: 0.5rem;
 `;
@@ -116,7 +94,7 @@ const AvatarImage = styled.img`
   border-radius: 50px;
   width: 3rem;
   height: 3rem;
-  border: 2px solid ${(props) => props.theme.colors.primary};
+  border: 2px solid ${(props) => props.theme.color.primary};
 `;
 
 const SteamLevel = styled.p`

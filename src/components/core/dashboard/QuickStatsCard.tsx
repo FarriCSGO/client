@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-
-import { getQuickStats } from "../../../utils/api";
+import { usePulse } from "pulse-framework";
+import core from "../../../core";
 
 import Loading from "../../ui/Animation/LoadingSpinner/LoadingSpinner";
 import headshotImg from "../../../assets/images/quickStatsIcons/headshot.png";
@@ -9,33 +9,17 @@ import skullImg from "../../../assets/images/quickStatsIcons/skull_bones.png";
 import { ReactComponent as Kd } from "../../../assets/images/quickStatsIcons/kd.svg";
 import { ReactComponent as Trophy } from "../../../assets/images/quickStatsIcons/win_rate.svg";
 
-interface IProps {
-  steamID: string;
-}
-
-const QuickStatsCard = (props: IProps) => {
+const QuickStatsCard = () => {
   const [loading, setLoading] = useState(true);
-  const [winrate, setWinrate] = useState(null);
-  const [kdRatio, setRatio] = useState(null);
-  const [adr, setAdr] = useState(null);
-  const [hsRate, setRate] = useState(null);
+  const [steamID] = usePulse([core.user.state.STEAM_ID]);
+  const [quickStats] = usePulse([core.user.state.USER_QUICK_STATS]);
 
   useEffect(() => {
     setLoading(true);
+    if (quickStats.steamID === steamID) setLoading(false);
 
-    const getData = async () => {
-      const data = await getQuickStats(props.steamID);
-      setWinrate(data.winrate.toFixed(2));
-      setRatio(data.kdRatio.toFixed(2));
-      setAdr(data.adr.toFixed(2));
-      setRate(data.hsRate.toFixed(2));
-      setLoading(false);
-    };
-
-    getData();
-
-    return () => setLoading(false);
-  }, [props.steamID]);
+    return () => setLoading(true);
+  }, [steamID, quickStats]);
 
   if (loading === true) {
     return (
@@ -52,7 +36,7 @@ const QuickStatsCard = (props: IProps) => {
       <StatDiv>
         <Details>
           <h3 className="heading">Winrate</h3>
-          <p className="statValue">{winrate}%</p>
+          <p className="statValue">{quickStats.winrate}%</p>
         </Details>
         <Icon>
           <Trophy />
@@ -61,7 +45,7 @@ const QuickStatsCard = (props: IProps) => {
       <StatDiv>
         <Details>
           <h3 className="heading">K / D Ratio</h3>
-          <p className="statValue">{kdRatio}</p>
+          <p className="statValue">{quickStats.kdRatio}</p>
         </Details>
         <Icon>
           <Kd />
@@ -70,7 +54,7 @@ const QuickStatsCard = (props: IProps) => {
       <StatDiv>
         <Details>
           <h3 className="heading">ADR</h3>
-          <p className="statValue">{adr}</p>
+          <p className="statValue">{quickStats.adr}</p>
         </Details>
         <Icon>
           <img src={skullImg} alt="headshot icon" width="36px" />
@@ -79,7 +63,7 @@ const QuickStatsCard = (props: IProps) => {
       <StatDiv>
         <Details>
           <h3 className="heading">HS Rate</h3>
-          <p className="statValue">{hsRate}%</p>
+          <p className="statValue">{quickStats.hsRate}%</p>
         </Details>
         <Icon>
           <img src={headshotImg} alt="headshot icon" width="36px" />
@@ -95,7 +79,7 @@ const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  background: ${(props) => props.theme.colors.surface};
+  background: ${(props) => props.theme.color.surface};
   box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.12);
   border-radius: 8px;
   width: 300px;
@@ -124,14 +108,14 @@ const Icon = styled.div`
   height: 3.5rem;
   display: flex;
   align-items: center;
-  background: ${(props) => props.theme.colors.surface2};
+  background: ${(props) => props.theme.color.surface2};
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
   border-radius: 50%;
 
   svg {
     width: 36px;
     height: 36px;
-    fill: ${(props) => props.theme.colors.primary};
+    fill: ${(props) => props.theme.color.primary};
     margin: 0 auto;
   }
 
@@ -147,7 +131,7 @@ const Details = styled.div`
     margin: 0;
     font-size: 1.3rem;
     font-weight: bold;
-    color: ${(props) => props.theme.colors.primary};
+    color: ${(props) => props.theme.color.primary};
   }
 
   .statValue {
@@ -156,6 +140,6 @@ const Details = styled.div`
     font-family: "Montserrat", sans-serif;
     font-size: 2rem;
     font-weight: bold;
-    color: ${(props) => props.theme.colors.onSurface};
+    color: ${(props) => props.theme.color.onSurface};
   }
 `;

@@ -5,7 +5,7 @@ import SearchTextBox from "../../ui/SearchTextBox/SearchTextBox";
 import ErrorModal from "../../ui/Modal/ErrorModal";
 import LoadingBar from "../../ui/Animation/LoadingBar/LoadingBar";
 
-import parseSearchQuery from "../../../helpers/parseSearchQuery";
+import parseSearchQuery from "../../../core/helpers/parseSearchQuery";
 
 const SearchForm = ({ history }: RouteComponentProps) => {
   const [query, setQuery] = useState("");

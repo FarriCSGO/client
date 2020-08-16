@@ -61,7 +61,7 @@ const Main = styled.div`
   z-index: 1000;
   height: 4rem;
   width: 100vw;
-  background: ${(props) => props.theme.colors.surface2};
+  background: ${(props) => props.theme.color.surface2};
 
   @media only screen and (max-width: 548px) {
     height: 3rem;
@@ -78,7 +78,7 @@ const ItemList = styled.ul`
   width: 100%;
 
   .text {
-    color: ${(props) => props.theme.colors.onSurface};
+    color: ${(props) => props.theme.color.onSurface};
 
     @media only screen and (max-width: 548px) {
       display: none;
@@ -88,7 +88,7 @@ const ItemList = styled.ul`
 
 const Item = styled.li`
   svg {
-    stroke: ${(props) => props.theme.colors.primary};
+    stroke: ${(props) => props.theme.color.primary};
     height: 2rem;
     width: 2rem;
   }

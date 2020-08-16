@@ -1,8 +1,8 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { ThemeContext } from "../../../contexts/ThemeContext";
 
+import core from "../../../core";
 import image from "../../../assets/images/logo.png";
 
 import {
@@ -17,8 +17,6 @@ import {
 
 // props - has steamID and match object
 const SideBar = (props: any) => {
-  const { theme, toggleTheme } = useContext(ThemeContext);
-
   return (
     <Main>
       <LogoDiv>
@@ -59,8 +57,8 @@ const SideBar = (props: any) => {
         </Item>
       </ItemList>
       <ToggleDiv>
-        <i onClick={toggleTheme}>
-          {theme === "dark" ? <MoonSVG /> : <SunSVG />}
+        <i onClick={core.ui.toggleTheme}>
+          {core.ui.state.THEME_TYPE.value === "dark" ? <MoonSVG /> : <SunSVG />}
         </i>
       </ToggleDiv>
     </Main>
@@ -77,8 +75,8 @@ const Main = styled.div`
   z-index: 1000;
   height: 100vh;
   width: 6rem;
-  background: ${(props) => props.theme.colors.surface};
-  color: ${(props) => props.theme.colors.onSurface};
+  background: ${(props) => props.theme.color.surface};
+  color: ${(props) => props.theme.color.onSurface};
   transition: 200ms ease-out;
 
   &:hover {
@@ -86,7 +84,7 @@ const Main = styled.div`
 
     .text {
       display: inline;
-      color: ${(props) => props.theme.colors.onSurface};
+      color: ${(props) => props.theme.color.onSurface};
     }
 
     .card {
@@ -94,7 +92,7 @@ const Main = styled.div`
     }
   }
 
-  @media ${(props) => props.theme.size.small} {
+  @media ${(props) => props.theme.screen.small} {
     display: none;
   }
 `;
@@ -132,7 +130,7 @@ const Item = styled.li`
   width: 100%;
 
   svg {
-    stroke: ${(props) => props.theme.colors.primary};
+    stroke: ${(props) => props.theme.color.primary};
     height: 2.5rem;
     width: 2.5rem;
     padding-left: 1.75rem;
@@ -154,7 +152,7 @@ const Item = styled.li`
 
   .navLink:hover {
     filter: grayscale(0%) opacity(1);
-    background: ${(props) => props.theme.colors.hoverSurface};
+    background: ${(props) => props.theme.color.hoverSurface};
   }
 
   .text {

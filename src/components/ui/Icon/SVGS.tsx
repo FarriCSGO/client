@@ -7,7 +7,7 @@ const SVG = styled.i`
   align-items: center;
 
   svg {
-    stroke: ${(props) => props.theme.colors.onBackground};
+    stroke: ${(props) => props.theme.color.onBackground};
     height: 32px;
     width: 32px;
   }
@@ -16,7 +16,7 @@ const SVG = styled.i`
     cursor: pointer;
   }
 
-  @media ${(props) => props.theme.size.small} {
+  @media ${(props) => props.theme.screen.small} {
     svg {
       height: 24px;
       width: 24px;
