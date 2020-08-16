@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { RouteComponentProps } from "react-router-dom";
-import { getUserSteamDetails } from "../../utils/api";
 import styled from "styled-components";
 import core from "../../core";
 
@@ -34,10 +33,11 @@ const UserContainer = ({ match, history }: RouteComponentProps<TParams>) => {
 
   useEffect(() => {
     const validateID = async () => {
+      core.user.setSteamID(steamID);
+      core.user.setUserSteamDetails(steamID);
+      core.user.setUserQuickStats(steamID);
       try {
-        core.user.setSteamID(steamID);
-        core.user.setUserSteamDetails(steamID);
-        const data = await getUserSteamDetails(steamID);
+        const data = await core.api.steam.GET_USER_STEAM_DETAILS(steamID);
         setValidID(data.steamID64);
 
         const name = data.name;

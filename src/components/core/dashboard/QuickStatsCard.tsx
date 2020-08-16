@@ -3,8 +3,6 @@ import styled from "styled-components";
 import { usePulse } from "pulse-framework";
 import core from "../../../core";
 
-import { getQuickStats } from "../../../utils/api";
-
 import Loading from "../../ui/Animation/LoadingSpinner/LoadingSpinner";
 import headshotImg from "../../../assets/images/quickStatsIcons/headshot.png";
 import skullImg from "../../../assets/images/quickStatsIcons/skull_bones.png";
@@ -13,29 +11,15 @@ import { ReactComponent as Trophy } from "../../../assets/images/quickStatsIcons
 
 const QuickStatsCard = () => {
   const [loading, setLoading] = useState(true);
-  const [winrate, setWinrate] = useState(null);
-  const [kdRatio, setRatio] = useState(null);
-  const [adr, setAdr] = useState(null);
-  const [hsRate, setRate] = useState(null);
   const [steamID] = usePulse([core.user.state.STEAM_ID]);
+  const [quickStats] = usePulse([core.user.state.USER_QUICK_STATS]);
 
   useEffect(() => {
     setLoading(true);
-    console.log("ID", steamID);
-
-    const getData = async () => {
-      const data = await getQuickStats(steamID);
-      setWinrate(data.winrate.toFixed(2));
-      setRatio(data.kdRatio.toFixed(2));
-      setAdr(data.adr.toFixed(2));
-      setRate(data.hsRate.toFixed(2));
-      setLoading(false);
-    };
-
-    getData();
+    if (quickStats.steamID === steamID) setLoading(false);
 
     return () => setLoading(true);
-  }, [steamID]);
+  }, [steamID, quickStats]);
 
   if (loading === true) {
     return (
@@ -52,7 +36,7 @@ const QuickStatsCard = () => {
       <StatDiv>
         <Details>
           <h3 className="heading">Winrate</h3>
-          <p className="statValue">{winrate}%</p>
+          <p className="statValue">{quickStats.winrate}%</p>
         </Details>
         <Icon>
           <Trophy />
@@ -61,7 +45,7 @@ const QuickStatsCard = () => {
       <StatDiv>
         <Details>
           <h3 className="heading">K / D Ratio</h3>
-          <p className="statValue">{kdRatio}</p>
+          <p className="statValue">{quickStats.kdRatio}</p>
         </Details>
         <Icon>
           <Kd />
@@ -70,7 +54,7 @@ const QuickStatsCard = () => {
       <StatDiv>
         <Details>
           <h3 className="heading">ADR</h3>
-          <p className="statValue">{adr}</p>
+          <p className="statValue">{quickStats.adr}</p>
         </Details>
         <Icon>
           <img src={skullImg} alt="headshot icon" width="36px" />
@@ -79,7 +63,7 @@ const QuickStatsCard = () => {
       <StatDiv>
         <Details>
           <h3 className="heading">HS Rate</h3>
-          <p className="statValue">{hsRate}%</p>
+          <p className="statValue">{quickStats.hsRate}%</p>
         </Details>
         <Icon>
           <img src={headshotImg} alt="headshot icon" width="36px" />

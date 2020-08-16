@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { usePulse } from "pulse-framework";
 import core from "../../../core";
@@ -7,7 +7,6 @@ import Loading from "../../ui/Animation/LoadingSpinner/LoadingSpinner";
 
 const SteamDetailsCard = () => {
   const [loading, setLoading] = useState(true);
-  const name = useRef("");
   const [steamID] = usePulse([core.user.state.STEAM_ID]);
   const [userSteamDetails] = usePulse([core.user.state.USER_STEAM_DETAILS]);
 
@@ -15,7 +14,7 @@ const SteamDetailsCard = () => {
     setLoading(true);
 
     // Stop showing loading spinner once userSteamDetails are fetched
-    if (userSteamDetails) setLoading(false);
+    if (userSteamDetails.steamID === steamID) setLoading(false);
 
     return () => setLoading(false);
   }, [steamID, userSteamDetails]);

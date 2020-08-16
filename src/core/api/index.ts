@@ -1,5 +1,5 @@
 import * as steam from "./routes/steam.routes";
 
-export default {
+export const api = {
   steam
 };

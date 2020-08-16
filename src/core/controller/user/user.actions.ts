@@ -1,6 +1,6 @@
-import api from "../../api/index";
-import { IUserSteamDetails } from "./user.interface";
-import { STEAM_ID, USER_STEAM_DETAILS } from "./user.state";
+import { api } from "../../api/index";
+import { IUserSteamDetails, IQuickStats } from "./user.interface";
+import { STEAM_ID, USER_STEAM_DETAILS, USER_QUICK_STATS } from "./user.state";
 
 export const setSteamID = (steamID: string) => {
   STEAM_ID.set(steamID);
@@ -8,6 +8,7 @@ export const setSteamID = (steamID: string) => {
 
 export const setUserSteamDetails = async (steamID: string) => {
   const res = await api.steam.GET_USER_STEAM_DETAILS(steamID);
+
   const name = res.name;
   const level = res.steamLevel;
   const avatarURL = res.avatarImageURL;
@@ -24,6 +25,7 @@ export const setUserSteamDetails = async (steamID: string) => {
   }
 
   const data: IUserSteamDetails = {
+    steamID,
     name,
     level,
     avatarURL,
@@ -31,4 +33,23 @@ export const setUserSteamDetails = async (steamID: string) => {
   };
 
   USER_STEAM_DETAILS.set(data);
+};
+
+export const setUserQuickStats = async (steamID: string) => {
+  const res = await api.steam.GET_USER_QUICK_STATS(steamID);
+
+  const winrate = res.winrate.toFixed(2);
+  const kdRatio = res.kdRatio.toFixed(2);
+  const adr = res.adr.toFixed(2);
+  const hsRate = res.hsRate.toFixed(2);
+
+  const data: IQuickStats = {
+    steamID,
+    winrate,
+    kdRatio,
+    adr,
+    hsRate
+  };
+
+  USER_QUICK_STATS.set(data);
 };

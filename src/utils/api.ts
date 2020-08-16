@@ -24,25 +24,3 @@ export const validateSteamID = async (steamID64: string) => {
     throw new Error(error);
   }
 };
-
-export const getUserSteamDetails = async (steamID: string) => {
-  try {
-    const response = await Axios.get(
-      `/api/userSteamDetails/profiles/${steamID}`
-    );
-
-    return response.data;
-  } catch (error) {
-    throw new Error(error);
-  }
-};
-
-export const getQuickStats = async (steamID: string) => {
-  try {
-    const response = await Axios.get(`/api/quickStats/${steamID}`);
-
-    return response.data;
-  } catch (error) {
-    throw new Error(error);
-  }
-};
