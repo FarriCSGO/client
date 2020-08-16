@@ -33,9 +33,6 @@ const UserContainer = ({ match, history }: RouteComponentProps<TParams>) => {
 
   useEffect(() => {
     const validateID = async () => {
-      core.user.setSteamID(steamID);
-      core.user.setUserSteamDetails(steamID);
-      core.user.setUserQuickStats(steamID);
       try {
         const data = await core.api.steam.GET_USER_STEAM_DETAILS(steamID);
         setValidID(data.steamID64);
@@ -44,12 +41,20 @@ const UserContainer = ({ match, history }: RouteComponentProps<TParams>) => {
         document.title =
           name + " - Dashboard // Farri - Check your CS:GO Statistics";
       } catch (err) {
+        console.log("ERROR ERRER");
+
         // If the user enters an invalid steamID(anything) after /dashboard/{..}
         // we redirect the user to "/" or else the App would crash.
         history.push("/");
       }
     };
+
     validateID();
+
+    // Setting App's State in Pulse Instance
+    core.user.setSteamID(steamID);
+    core.user.setUserSteamDetails(steamID);
+    core.user.setUserQuickStats(steamID);
   }, [history, steamID]);
 
   if (validID === null)
