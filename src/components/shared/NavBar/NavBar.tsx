@@ -22,7 +22,7 @@ const NavBar = (props: IProps) => {
           </Link>
         </Left>
         <Right>
-          <ToggleMode onClick={core.ui.actions.toggleTheme}>
+          <ToggleMode onClick={core.ui.toggleTheme}>
             {core.ui.state.THEME_TYPE.value === "dark" ? (
               <MoonSVG />
             ) : (
@@ -46,7 +46,7 @@ const NavBar = (props: IProps) => {
           <SearchForm />
         </Middle>
         <Right>
-          <ToggleMode onClick={core.ui.actions.toggleTheme}>
+          <ToggleMode onClick={core.ui.toggleTheme}>
             {core.ui.state.THEME_TYPE.value === "dark" ? (
               <MoonSVG />
             ) : (

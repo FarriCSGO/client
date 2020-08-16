@@ -57,7 +57,7 @@ const SideBar = (props: any) => {
         </Item>
       </ItemList>
       <ToggleDiv>
-        <i onClick={core.ui.actions.toggleTheme}>
+        <i onClick={core.ui.toggleTheme}>
           {core.ui.state.THEME_TYPE.value === "dark" ? <MoonSVG /> : <SunSVG />}
         </i>
       </ToggleDiv>
