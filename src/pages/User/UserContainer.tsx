@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { getUserSteamDetails } from "../../utils/api";
 import styled from "styled-components";
+import core from "../../core";
 
 import {
   DashContainer,
@@ -34,6 +35,7 @@ const UserContainer = ({ match, history }: RouteComponentProps<TParams>) => {
   useEffect(() => {
     const validateID = async () => {
       try {
+        core.user.setSteamID(steamID);
         const data = await getUserSteamDetails(steamID);
         setValidID(data.steamID64);
 
@@ -69,7 +71,7 @@ const UserContainer = ({ match, history }: RouteComponentProps<TParams>) => {
 
   return (
     <>
-      <SideBar steamID={steamID} {...match} />
+      <SideBar {...match} />
       <SideBarMobile {...match} />
       <DashContainer>
         <MobileNav>
@@ -78,14 +80,14 @@ const UserContainer = ({ match, history }: RouteComponentProps<TParams>) => {
         <SearchBarWrapper>
           <SearchForm />
         </SearchBarWrapper>
-        {UserPageContent(URL, steamID)}
+        {UserPageContent(URL)}
       </DashContainer>
     </>
   );
 };
 
-const UserPageContent = (URL: string, steamID: string) => {
-  if (URL.endsWith("dashboard")) return <Dashboard steamID={steamID} />;
+const UserPageContent = (URL: string) => {
+  if (URL.endsWith("dashboard")) return <Dashboard />;
   if (URL.endsWith("matches")) return <Matches />;
   if (URL.endsWith("weapons")) return <Weapons />;
   if (URL.endsWith("maps")) return <Maps />;

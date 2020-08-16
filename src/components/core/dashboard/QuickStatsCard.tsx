@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { usePulse } from "pulse-framework";
+import core from "../../../core";
 
 import { getQuickStats } from "../../../utils/api";
 
@@ -9,22 +11,20 @@ import skullImg from "../../../assets/images/quickStatsIcons/skull_bones.png";
 import { ReactComponent as Kd } from "../../../assets/images/quickStatsIcons/kd.svg";
 import { ReactComponent as Trophy } from "../../../assets/images/quickStatsIcons/win_rate.svg";
 
-interface IProps {
-  steamID: string;
-}
-
-const QuickStatsCard = (props: IProps) => {
+const QuickStatsCard = () => {
   const [loading, setLoading] = useState(true);
   const [winrate, setWinrate] = useState(null);
   const [kdRatio, setRatio] = useState(null);
   const [adr, setAdr] = useState(null);
   const [hsRate, setRate] = useState(null);
+  const [steamID] = usePulse([core.user.state.STEAM_ID]);
 
   useEffect(() => {
     setLoading(true);
+    console.log("ID", steamID);
 
     const getData = async () => {
-      const data = await getQuickStats(props.steamID);
+      const data = await getQuickStats(steamID);
       setWinrate(data.winrate.toFixed(2));
       setRatio(data.kdRatio.toFixed(2));
       setAdr(data.adr.toFixed(2));
@@ -34,8 +34,8 @@ const QuickStatsCard = (props: IProps) => {
 
     getData();
 
-    return () => setLoading(false);
-  }, [props.steamID]);
+    return () => setLoading(true);
+  }, [steamID]);
 
   if (loading === true) {
     return (

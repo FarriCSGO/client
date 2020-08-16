@@ -4,19 +4,15 @@ import styled from "styled-components";
 import ProfileCard from "../../components/core/dashboard/UserSteamDetailsCard";
 import QuickStatsCard from "../../components/core/dashboard/QuickStatsCard";
 
-interface IProps {
-  steamID: string;
-}
-
-const Dashboard = (props: IProps) => {
+const Dashboard = () => {
   return (
     <>
       <div style={{ display: "flex" }}>
         <Left>
           <CardDiv>
-            <ProfileCard steamID={props.steamID} />
+            <ProfileCard />
             <Heading>Quick Stats</Heading>
-            <QuickStatsCard steamID={props.steamID} />
+            <QuickStatsCard />
           </CardDiv>
           <CardDiv></CardDiv>
         </Left>

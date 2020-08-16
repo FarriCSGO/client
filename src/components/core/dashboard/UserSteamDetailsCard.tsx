@@ -1,24 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { getUserSteamDetails } from "../../../utils/api";
 import styled from "styled-components";
+import { usePulse } from "pulse-framework";
+import core from "../../../core";
 
 import Loading from "../../ui/Animation/LoadingSpinner/LoadingSpinner";
 
-interface IProps {
-  steamID: string;
-}
-
-const SteamDetailsCard = (props: IProps) => {
+const SteamDetailsCard = () => {
   const [loading, setLoading] = useState(true);
   const [name, setName] = useState("");
   const [level, setLevel] = useState("");
   const [status, setStatus] = useState("");
   const [avatarURL, setAvatarURL] = useState("");
+  const [steamID] = usePulse([core.user.state.STEAM_ID]);
 
   useEffect(() => {
     const getData = async () => {
       setLoading(true);
-      const data = await getUserSteamDetails(props.steamID);
+      const data = await getUserSteamDetails(steamID);
 
       setName(data.name);
       setLevel(data.steamLevel);
@@ -39,7 +38,7 @@ const SteamDetailsCard = (props: IProps) => {
     getData();
 
     return () => setLoading(false);
-  }, [props.steamID]);
+  }, [steamID]);
 
   if (loading === true) {
     return (
@@ -57,7 +56,7 @@ const SteamDetailsCard = (props: IProps) => {
         <SteamLevel>{level}</SteamLevel>
         <AvatarDiv>
           <a
-            href={`http://steamcommunity.com/profiles/${props.steamID}`}
+            href={`http://steamcommunity.com/profiles/${steamID}`}
             target="_blank"
             rel="noopener noreferrer"
           >
